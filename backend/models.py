@@ -41,6 +41,15 @@ class BaseDocument(BaseModel):
 
 # ---------- Preferences ----------
 
+class GeoLocation(BaseModel):
+    latitude: float = Field(ge=-90, le=90)
+    longitude: float = Field(ge=-180, le=180)
+    city: str = ""
+    country: str = ""
+    country_code: str = ""
+    label: str = ""
+
+
 class Preferences(BaseModel):
     fitness_level: str = "beginner"           # beginner | intermediate | advanced
     health_goals: list[str] = Field(default_factory=list)
@@ -49,6 +58,9 @@ class Preferences(BaseModel):
     spiritual_level: str = "beginner"         # beginner | practicing | devoted
     preferred_challenge: str = "30_days"      # 30_days | 100_days | 1_year
     reminders_enabled: bool = True
+    prayer_method: int = 3                    # AlAdhan calculation method id
+    prayer_school: int = 0                    # 0 = Shafi'i, 1 = Hanafi
+    location: GeoLocation | None = None
 
 
 class User(BaseDocument):
@@ -69,6 +81,7 @@ class User(BaseDocument):
     current_streak: int = 0
     longest_streak: int = 0
     last_checkin_date: str | None = None
+    grace_used_dates: list[str] = Field(default_factory=list)
     prefs: Preferences = Field(default_factory=Preferences)
     created_at: datetime = Field(default_factory=utcnow)
 
@@ -90,6 +103,7 @@ class PublicUser(BaseModel):
     current_streak: int
     longest_streak: int
     last_checkin_date: str | None = None
+    grace_used_dates: list[str] = Field(default_factory=list)
     prefs: Preferences
 
     @classmethod
@@ -111,6 +125,7 @@ class PublicUser(BaseModel):
             current_streak=user.current_streak,
             longest_streak=user.longest_streak,
             last_checkin_date=user.last_checkin_date,
+            grace_used_dates=user.grace_used_dates,
             prefs=user.prefs,
         )
 
@@ -133,10 +148,25 @@ class DailyTask(BaseDocument):
     day_number: int
     scheduled_date: str
     scheduled_time: str = "07:00"
+    time_overridden: bool = False
     anchor: str = "anytime"
     duration_minutes: int = 5
     difficulty: int = 1
     points_reward: int = 10
+    completed: bool = False
+    completed_at: datetime | None = None
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class Milestone(BaseDocument):
+    user_id: PyObjectId
+    challenge_id: PyObjectId
+    kind: str = "weekly"                      # weekly | monthly
+    index: int = 1
+    template_key: str = ""
+    start_date: str = ""
+    end_date: str = ""
+    points_reward: int = 150
     completed: bool = False
     completed_at: datetime | None = None
     created_at: datetime = Field(default_factory=utcnow)
@@ -201,6 +231,12 @@ class ProfileUpdate(BaseModel):
     theme: str | None = None
     timezone: str | None = None
     prefs: Preferences | None = None
+
+
+class LocationUpdate(BaseModel):
+    location: GeoLocation
+    prayer_method: int | None = None
+    prayer_school: int | None = None
 
 
 class OnboardingBody(BaseModel):

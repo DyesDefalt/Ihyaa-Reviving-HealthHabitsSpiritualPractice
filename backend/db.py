@@ -23,5 +23,9 @@ async def ensure_indexes():
     await db.checkins.create_index([("user_id", 1), ("checkin_date", 1)], unique=True)
     await db.daily_bonuses.create_index(
         [("user_id", 1), ("bonus_date", 1), ("kind", 1)], unique=True)
+    await db.milestones.create_index([("challenge_id", 1), ("start_date", 1)])
+    await db.prayer_months.create_index(
+        [("latitude", 1), ("longitude", 1), ("method", 1), ("school", 1),
+         ("year", 1), ("month", 1)], unique=True)
     await db.point_transactions.create_index([("user_id", 1), ("created_at", -1)])
     await db.coach_messages.create_index([("user_id", 1), ("created_at", 1)])

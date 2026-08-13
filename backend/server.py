@@ -14,14 +14,17 @@ from fastapi.responses import PlainTextResponse, StreamingResponse
 from pymongo.errors import DuplicateKeyError
 
 import auth as A
+import prayer as P
 from content import KNOWLEDGE_CARDS, STORE_ITEMS, localize_card, localize_item
-from curriculum import TEMPLATES_BY_KEY, generate_plan, localize
+from curriculum import (TEMPLATES_BY_KEY, generate_plan, localize,
+                        phase_summary)
 from db import ensure_indexes, get_db
+from milestones import MILESTONE_TRACKS, build_milestones, localize_milestone
 from models import (Challenge, Checkin, CheckinBody, CoachBody, CoachMessage,
-                    CompleteTaskBody, DailyTask, ForgotBody, LoginBody,
-                    OnboardingBody, PointTransaction, Preferences, ProfileUpdate,
-                    PublicUser, RegisterBody, ResetBody, StartChallengeBody,
-                    TaskTimeBody, User, utcnow)
+                    CompleteTaskBody, DailyTask, ForgotBody, LocationUpdate,
+                    LoginBody, Milestone, OnboardingBody, PointTransaction,
+                    Preferences, ProfileUpdate, PublicUser, RegisterBody,
+                    ResetBody, StartChallengeBody, TaskTimeBody, User, utcnow)
 
 app = FastAPI(title="Ihyaa API")
 
@@ -42,6 +45,7 @@ CHECKIN_POINTS = 15
 ALL_TASKS_BONUS = 50
 STREAK_BONUS_EVERY = 7
 STREAK_BONUS_POINTS = 100
+GRACE_COOLDOWN_DAYS = 7          # one rescued day per week
 
 
 # ------------------------------------------------------------------ utilities
@@ -61,15 +65,24 @@ def lang_of(user: User, override: str | None) -> str:
     return override if override in ("en", "ar", "id") else user.language
 
 
-def serialize_task(task: DailyTask, lang: str) -> dict:
+def loc_dict(user: User) -> dict | None:
+    loc = user.prefs.location
+    return loc.model_dump() if loc else None
+
+
+def serialize_task(task: DailyTask, lang: str, timings: dict | None = None,
+                   sleep_habit: str = "moderate") -> dict:
     tpl = TEMPLATES_BY_KEY.get(task.template_key)
     content = localize(tpl, lang) if tpl else {}
+    when = (task.scheduled_time if task.time_overridden
+            else P.resolve_time(task.anchor, timings, sleep_habit, task.scheduled_time))
     return {
         "id": str(task.id),
         "challenge_id": str(task.challenge_id),
         "day_number": task.day_number,
         "scheduled_date": task.scheduled_date,
-        "scheduled_time": task.scheduled_time,
+        "scheduled_time": when,
+        "time_overridden": task.time_overridden,
         "anchor": task.anchor,
         "pillar": task.pillar,
         "duration_minutes": task.duration_minutes,
@@ -353,15 +366,20 @@ async def _create_challenge(user: User, challenge_type: str, start_date: str | N
     result = await db.challenges.insert_one(challenge.to_mongo())
     challenge.id = str(result.inserted_id)
 
-    plan = generate_plan(user.prefs.model_dump(), total, start)
+    plan = generate_plan(user.prefs.model_dump(), total, start, challenge_type)
     docs = [DailyTask(user_id=str(user.id), challenge_id=str(challenge.id), **row).to_mongo()
             for row in plan]
     if docs:
         await db.daily_tasks.insert_many(docs)
-    return _serialize_challenge(challenge)
+
+    stones = [Milestone(user_id=str(user.id), challenge_id=str(challenge.id), **row).to_mongo()
+              for row in build_milestones(challenge_type, total, start)]
+    if stones:
+        await db.milestones.insert_many(stones)
+    return _serialize_challenge(challenge, user.language)
 
 
-def _serialize_challenge(c: Challenge) -> dict:
+def _serialize_challenge(c: Challenge, lang: str = "en") -> dict:
     start = date.fromisoformat(c.start_date)
     current_day = max(1, min(c.total_days, (date.today() - start).days + 1))
     return {
@@ -372,6 +390,8 @@ def _serialize_challenge(c: Challenge) -> dict:
         "end_date": c.end_date,
         "total_days": c.total_days,
         "current_day": current_day,
+        "has_milestones": c.challenge_type in MILESTONE_TRACKS,
+        "phase": phase_summary(current_day, c.challenge_type, lang),
     }
 
 
@@ -381,9 +401,10 @@ async def start_challenge(body: StartChallengeBody, user: User = Depends(current
 
 
 @app.get("/api/challenges/active")
-async def get_active_challenge(user: User = Depends(current_user)) -> dict | None:
+async def get_active_challenge(lang: str | None = Query(None),
+                               user: User = Depends(current_user)) -> dict | None:
     c = await active_challenge(str(user.id))
-    return _serialize_challenge(c) if c else None
+    return _serialize_challenge(c, lang_of(user, lang)) if c else None
 
 
 @app.post("/api/challenges/regenerate")
@@ -400,7 +421,7 @@ async def regenerate(user: User = Depends(current_user)) -> dict:
     await db.daily_tasks.delete_many({"challenge_id": str(c.id), "scheduled_date": {"$gte": today},
                                       "completed": False})
     start = date.fromisoformat(c.start_date)
-    plan = generate_plan(user.prefs.model_dump(), c.total_days, start)
+    plan = generate_plan(user.prefs.model_dump(), c.total_days, start, c.challenge_type)
     kept = {(t["scheduled_date"], t["template_key"]) async for t in
             db.daily_tasks.find({"challenge_id": str(c.id)}, {"scheduled_date": 1, "template_key": 1})}
     docs = [DailyTask(user_id=str(user.id), challenge_id=str(c.id), **row).to_mongo()
@@ -408,7 +429,8 @@ async def regenerate(user: User = Depends(current_user)) -> dict:
             if row["scheduled_date"] >= today and (row["scheduled_date"], row["template_key"]) not in kept]
     if docs:
         await db.daily_tasks.insert_many(docs)
-    return {"ok": True, "regenerated_tasks": len(docs), "challenge": _serialize_challenge(c)}
+    return {"ok": True, "regenerated_tasks": len(docs),
+            "challenge": _serialize_challenge(c, user.language)}
 
 
 # ------------------------------------------------------------------ tasks
@@ -416,13 +438,26 @@ async def regenerate(user: User = Depends(current_user)) -> dict:
 @app.get("/api/tasks/today")
 async def tasks_today(lang: str | None = Query(None), user: User = Depends(current_user)) -> dict:
     db = get_db()
+    language = lang_of(user, lang)
     c = await active_challenge(str(user.id))
     if not c:
-        return {"challenge": None, "tasks": [], "date": today_str()}
-    cursor = db.daily_tasks.find({"challenge_id": str(c.id), "scheduled_date": today_str()})
-    tasks = [serialize_task(DailyTask.from_mongo(d), lang_of(user, lang)) async for d in cursor]
+        return {"challenge": None, "tasks": [], "date": today_str(), "prayer_times": {},
+                "milestones": []}
+    today = today_str()
+    timings = await P.timings_for_day(loc_dict(user), user.prefs.prayer_method,
+                                     user.prefs.prayer_school, today)
+    cursor = db.daily_tasks.find({"challenge_id": str(c.id), "scheduled_date": today})
+    tasks = [serialize_task(DailyTask.from_mongo(d), language, timings, user.prefs.sleep_habit)
+             async for d in cursor]
     tasks.sort(key=lambda t: (t["scheduled_time"], t["pillar"]))
-    return {"challenge": _serialize_challenge(c), "tasks": tasks, "date": today_str()}
+
+    stones = []
+    async for d in db.milestones.find({"challenge_id": str(c.id), "start_date": {"$lte": today},
+                                       "end_date": {"$gte": today}}).sort("kind", 1):
+        stones.append(localize_milestone(d, language))
+
+    return {"challenge": _serialize_challenge(c, language), "tasks": tasks, "date": today,
+            "prayer_times": timings, "milestones": stones}
 
 
 @app.get("/api/tasks")
@@ -434,7 +469,13 @@ async def tasks_range(date_from: str = Query(..., alias="from"), date_to: str = 
         return []
     cursor = db.daily_tasks.find({"challenge_id": str(c.id),
                                   "scheduled_date": {"$gte": date_from, "$lte": date_to}})
-    out = [serialize_task(DailyTask.from_mongo(d), lang_of(user, lang)) async for d in cursor]
+    rows = [DailyTask.from_mongo(d) async for d in cursor]
+    timings = await P.timings_for_dates(loc_dict(user), user.prefs.prayer_method,
+                                        user.prefs.prayer_school,
+                                        sorted({r.scheduled_date for r in rows}))
+    language = lang_of(user, lang)
+    out = [serialize_task(r, language, timings.get(r.scheduled_date), user.prefs.sleep_habit)
+           for r in rows]
     out.sort(key=lambda t: (t["scheduled_date"], t["scheduled_time"]))
     return out
 
@@ -485,10 +526,115 @@ async def complete_task(task_id: str, body: CompleteTaskBody,
 async def set_task_time(task_id: str, body: TaskTimeBody, user: User = Depends(current_user)) -> dict:
     res = await get_db().daily_tasks.update_one(
         {"_id": oid(task_id), "user_id": str(user.id)},
-        {"$set": {"scheduled_time": body.scheduled_time}})
+        {"$set": {"scheduled_time": body.scheduled_time, "time_overridden": True}})
     if res.matched_count == 0:
         raise HTTPException(status_code=404, detail="Task not found")
-    return {"ok": True, "scheduled_time": body.scheduled_time}
+    return {"ok": True, "scheduled_time": body.scheduled_time, "time_overridden": True}
+
+
+@app.delete("/api/tasks/{task_id}/time")
+async def reset_task_time(task_id: str, user: User = Depends(current_user)) -> dict:
+    """Drop a manual override so the habit follows the adhan again."""
+    res = await get_db().daily_tasks.update_one(
+        {"_id": oid(task_id), "user_id": str(user.id)},
+        {"$set": {"time_overridden": False}})
+    if res.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"ok": True, "time_overridden": False}
+
+
+# ------------------------------------------------------------------ prayer times
+
+@app.get("/api/prayer/today")
+async def prayer_today(day: str | None = Query(None), user: User = Depends(current_user)) -> dict:
+    loc = loc_dict(user)
+    timings = await P.timings_for_day(loc, user.prefs.prayer_method,
+                                      user.prefs.prayer_school, day)
+    return {
+        "date": day or today_str(),
+        "timings": timings,
+        "location": loc,
+        "method": user.prefs.prayer_method,
+        "method_name": P.METHODS.get(user.prefs.prayer_method, "Muslim World League"),
+        "school": user.prefs.prayer_school,
+        "using_real_times": bool(timings),
+    }
+
+
+@app.get("/api/prayer/methods")
+async def prayer_methods() -> dict:
+    return {"methods": [{"id": k, "name": v} for k, v in sorted(P.METHODS.items())],
+            "schools": [{"id": 0, "name": "Shafi'i / Maliki / Hanbali"},
+                        {"id": 1, "name": "Hanafi"}]}
+
+
+@app.get("/api/cities/search")
+async def cities_search(q: str = Query(..., min_length=2), _: User = Depends(current_user)) -> list[dict]:
+    return await P.search_city(q)
+
+
+@app.put("/api/profile/location")
+async def set_location(body: LocationUpdate, user: User = Depends(current_user)) -> dict:
+    prefs = user.prefs.model_copy()
+    prefs.location = body.location
+    prefs.prayer_method = (body.prayer_method if body.prayer_method is not None
+                           else P.default_method(body.location.country_code))
+    if body.prayer_school is not None:
+        prefs.prayer_school = body.prayer_school
+    await get_db().users.update_one({"_id": oid(str(user.id))},
+                                    {"$set": {"prefs": prefs.model_dump()}})
+    fresh = User.from_mongo(await get_db().users.find_one({"_id": oid(str(user.id))}))
+    timings = await P.timings_for_day(prefs.location.model_dump(), prefs.prayer_method,
+                                      prefs.prayer_school)
+    return {"user": PublicUser.of(fresh).model_dump(), "timings": timings}
+
+
+# ------------------------------------------------------------------ milestones
+
+@app.get("/api/milestones")
+async def list_milestones(lang: str | None = Query(None),
+                          user: User = Depends(current_user)) -> dict:
+    db = get_db()
+    c = await active_challenge(str(user.id))
+    if not c:
+        return {"current": [], "upcoming": [], "past": []}
+    language = lang_of(user, lang)
+    today = today_str()
+    current, upcoming, past = [], [], []
+    async for d in db.milestones.find({"challenge_id": str(c.id)}).sort("start_date", 1):
+        row = localize_milestone(d, language)
+        if row["start_date"] <= today <= row["end_date"]:
+            current.append(row)
+        elif row["start_date"] > today:
+            upcoming.append(row)
+        else:
+            past.append(row)
+    return {"current": current, "upcoming": upcoming[:6], "past": past[-8:]}
+
+
+@app.post("/api/milestones/{milestone_id}/complete")
+async def complete_milestone(milestone_id: str, body: CompleteTaskBody,
+                             user: User = Depends(current_user)) -> dict:
+    db = get_db()
+    doc = await db.milestones.find_one({"_id": oid(milestone_id), "user_id": str(user.id)})
+    if doc is None:
+        raise HTTPException(status_code=404, detail="Milestone not found")
+    if bool(doc.get("completed")) == body.completed:
+        fresh = User.from_mongo(await db.users.find_one({"_id": oid(str(user.id))}))
+        return {"milestone": localize_milestone(doc, user.language),
+                "user": PublicUser.of(fresh).model_dump(), "awarded": 0}
+
+    await db.milestones.update_one(
+        {"_id": oid(milestone_id)},
+        {"$set": {"completed": body.completed,
+                  "completed_at": utcnow() if body.completed else None}})
+    awarded = doc["points_reward"] if body.completed else -doc["points_reward"]
+    await award_points(user, awarded, "milestone",
+                       f"{'Completed' if body.completed else 'Undone'} milestone: {doc['template_key']}")
+    doc["completed"] = body.completed
+    fresh = User.from_mongo(await db.users.find_one({"_id": oid(str(user.id))}))
+    return {"milestone": localize_milestone(doc, user.language),
+            "user": PublicUser.of(fresh).model_dump(), "awarded": awarded}
 
 
 @app.get("/api/tasks/calendar.ics")
@@ -502,14 +648,17 @@ async def calendar_ics(days: int = Query(30, ge=1, le=365), lang: str | None = Q
     end = (date.today() + timedelta(days=days)).isoformat()
     cursor = db.daily_tasks.find({"challenge_id": str(c.id),
                                   "scheduled_date": {"$gte": start, "$lte": end}})
+    rows = [DailyTask.from_mongo(d) async for d in cursor]
+    timings = await P.timings_for_dates(loc_dict(user), user.prefs.prayer_method,
+                                        user.prefs.prayer_school,
+                                        sorted({r.scheduled_date for r in rows}))
     language = lang_of(user, lang)
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Ihyaa//Revival//EN",
              "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:Ihyaa"]
     stamp = utcnow().strftime("%Y%m%dT%H%M%SZ")
-    async for d in cursor:
-        task = DailyTask.from_mongo(d)
-        s = serialize_task(task, language)
-        hh, mm = (int(x) for x in task.scheduled_time.split(":"))
+    for task in rows:
+        s = serialize_task(task, language, timings.get(task.scheduled_date), user.prefs.sleep_habit)
+        hh, mm = (int(x) for x in s["scheduled_time"].split(":"))
         begin = datetime.fromisoformat(task.scheduled_date).replace(hour=hh, minute=mm)
         finish = begin + timedelta(minutes=task.duration_minutes)
         summary = f"Ihyaa Day {task.day_number}: {s['title']}"
@@ -562,7 +711,22 @@ async def create_checkin(body: CheckinBody, user: User = Depends(current_user)) 
             {"challenge_id": str(c.id), "scheduled_date": today, "completed": True})
 
     yesterday = (date.today() - timedelta(days=1)).isoformat()
-    streak = user.current_streak + 1 if user.last_checkin_date == yesterday else 1
+    two_days_ago = (date.today() - timedelta(days=2)).isoformat()
+    grace_dates = list(user.grace_used_dates or [])
+    grace_cutoff = (date.today() - timedelta(days=GRACE_COOLDOWN_DAYS)).isoformat()
+    grace_available = not any(d > grace_cutoff for d in grace_dates)
+
+    rescued = False
+    if user.last_checkin_date == yesterday:
+        streak = user.current_streak + 1
+    elif (user.last_checkin_date == two_days_ago and user.current_streak > 0
+            and grace_available):
+        # Streak Rescue: exactly one missed day is forgiven, once a week.
+        streak = user.current_streak + 1
+        rescued = True
+        grace_dates.append(yesterday)
+    else:
+        streak = 1
     longest = max(user.longest_streak, streak)
 
     points = CHECKIN_POINTS
@@ -576,14 +740,22 @@ async def create_checkin(body: CheckinBody, user: User = Depends(current_user)) 
     await db.checkins.insert_one(checkin.to_mongo())
     await db.users.update_one({"_id": oid(str(user.id))},
                               {"$set": {"current_streak": streak, "longest_streak": longest,
-                                        "last_checkin_date": today}})
+                                        "last_checkin_date": today,
+                                        "grace_used_dates": grace_dates[-12:]}})
     await award_points(user, points, "checkin", f"Daily check-in {today}")
     if streak_bonus:
         await award_points(user, streak_bonus, "streak_bonus", f"{streak}-day streak")
 
     fresh = User.from_mongo(await db.users.find_one({"_id": oid(str(user.id))}))
+    next_grace = None
+    if rescued:
+        next_grace = (date.today() + timedelta(days=GRACE_COOLDOWN_DAYS)).isoformat()
+    elif not grace_available and grace_dates:
+        used = max(grace_dates)
+        next_grace = (date.fromisoformat(used) + timedelta(days=GRACE_COOLDOWN_DAYS)).isoformat()
     return {"points_earned": points + streak_bonus, "streak_bonus": streak_bonus,
             "streak": streak, "tasks_completed": done, "tasks_total": total,
+            "streak_rescued": rescued, "grace_available_on": next_grace,
             "user": PublicUser.of(fresh).model_dump()}
 
 
@@ -619,8 +791,15 @@ async def progress_summary(user: User = Depends(current_user)) -> dict:
             last7.append({"date": day, "total": slot["total"], "done": slot["done"], "rate": rate})
 
     checkins = await db.checkins.count_documents({"user_id": str(user.id)})
+    grace_cutoff = (date.today() - timedelta(days=GRACE_COOLDOWN_DAYS)).isoformat()
+    recent_grace = [d for d in (user.grace_used_dates or []) if d > grace_cutoff]
+    milestones_done = milestones_total = 0
+    if c:
+        milestones_total = await db.milestones.count_documents({"challenge_id": str(c.id)})
+        milestones_done = await db.milestones.count_documents(
+            {"challenge_id": str(c.id), "completed": True})
     return {
-        "challenge": _serialize_challenge(c) if c else None,
+        "challenge": _serialize_challenge(c, user.language) if c else None,
         "points_balance": user.points_balance,
         "lifetime_points": user.lifetime_points,
         "current_streak": user.current_streak,
@@ -631,6 +810,13 @@ async def progress_summary(user: User = Depends(current_user)) -> dict:
         "pillars": pillars,
         "last_7_days": last7,
         "total_checkins": checkins,
+        "milestones_total": milestones_total,
+        "milestones_done": milestones_done,
+        "grace_available": len(recent_grace) == 0,
+        "grace_available_on": (
+            (date.fromisoformat(max(recent_grace)) + timedelta(days=GRACE_COOLDOWN_DAYS)).isoformat()
+            if recent_grace else None),
+        "grace_used_dates": user.grace_used_dates or [],
     }
 
 
@@ -748,8 +934,15 @@ async def _coach_context(user: User) -> str:
         f"Points: {user.points_balance}",
     ]
     if c:
-        s = _serialize_challenge(c)
+        s = _serialize_challenge(c, "en")
         parts.append(f"Challenge: {s['challenge_type']}, on day {s['current_day']} of {s['total_days']}")
+        parts.append(f"Current phase: {s['phase']['name']} (phase {s['phase']['index']} of {s['phase']['total']})")
+        timings = await P.timings_for_day(loc_dict(user), user.prefs.prayer_method,
+                                         user.prefs.prayer_school)
+        if timings:
+            city = (user.prefs.location.city if user.prefs.location else "") or "their city"
+            parts.append(f"Today's prayer times in {city}: " +
+                         ", ".join(f"{k} {v}" for k, v in timings.items()))
         cursor = db.daily_tasks.find({"challenge_id": str(c.id), "scheduled_date": today_str()})
         todays = []
         async for d in cursor:

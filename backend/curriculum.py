@@ -6,6 +6,8 @@ riba, or practices outside mainstream Sunni fiqh.
 """
 from datetime import date, timedelta
 
+from templates_advanced import ADVANCED_TEMPLATES
+
 PILLARS = ["spiritual", "physical", "nutrition", "mental"]
 
 LEVELS = {"beginner": 1, "practicing": 2, "devoted": 3,
@@ -684,10 +686,128 @@ TEMPLATES: list[dict] = [
     },
 ]
 
+TEMPLATES += ADVANCED_TEMPLATES
+for _t in TEMPLATES:
+    _t.setdefault("min_phase", 1)
+
 TEMPLATES_BY_KEY = {t["key"]: t for t in TEMPLATES}
 TEMPLATES_BY_PILLAR: dict[str, list[dict]] = {p: [] for p in PILLARS}
-for _t in TEMPLATES:
+for _t in sorted(TEMPLATES, key=lambda x: (x["min_phase"], x["level"])):
     TEMPLATES_BY_PILLAR[_t["pillar"]].append(_t)
+
+
+# --------------------------------------------------------------------- phases
+
+PHASE_DEFS: dict[str, list[dict]] = {
+    "30_days": [
+        {"days": 30,
+         "name": T("Foundation", "Fondasi", "التأسيس"),
+         "desc": T("Two-minute habits until they stop feeling like effort.",
+                   "Kebiasaan dua menit sampai tidak lagi terasa berat.",
+                   "عادات من دقيقتين حتى تزول عنها المشقّة.")},
+    ],
+    "100_days": [
+        {"days": 25,
+         "name": T("Foundation", "Fondasi", "التأسيس"),
+         "desc": T("Small and daily. We are building the floor you will stand on.",
+                   "Kecil dan harian. Kita sedang membangun lantai tempat Anda berdiri.",
+                   "صغير ويومي؛ نبني الأرض التي ستقف عليها.")},
+        {"days": 25,
+         "name": T("Depth", "Kedalaman", "العمق"),
+         "desc": T("The same habits, but now with understanding — meaning before quantity.",
+                   "Kebiasaan yang sama, kini dengan pemahaman — makna sebelum jumlah.",
+                   "العادات نفسها لكن بفهم؛ المعنى قبل الكم.")},
+        {"days": 25,
+         "name": T("Strength", "Kekuatan", "القوّة"),
+         "desc": T("Load increases: real training, real fasting, real discipline.",
+                   "Beban meningkat: latihan sungguhan, puasa sungguhan, disiplin sungguhan.",
+                   "يزيد الحمل: تدريب حقيقي وصيام حقيقي وانتظام حقيقي.")},
+        {"days": 25,
+         "name": T("Istiqamah", "Istiqamah", "الاستقامة"),
+         "desc": T("Nothing new. Just proof that it holds without motivation.",
+                   "Tidak ada yang baru. Hanya bukti bahwa ia bertahan tanpa motivasi.",
+                   "لا جديد؛ فقط إثبات أنها تثبت بلا حماسة.")},
+    ],
+    "1_year": [
+        {"days": 30, "name": T("Foundation", "Fondasi", "التأسيس"),
+         "desc": T("Start absurdly small. Show up, that is all.",
+                   "Mulai sangat kecil. Cukup hadir, itu saja.",
+                   "ابدأ صغيرًا جدًّا؛ يكفي أن تحضر.")},
+        {"days": 30, "name": T("Discipline", "Kedisiplinan", "الالتزام"),
+         "desc": T("Fixed times, fixed places. Remove every decision.",
+                   "Waktu tetap, tempat tetap. Hilangkan setiap keputusan.",
+                   "أوقات ثابتة وأماكن ثابتة؛ أزل كل قرار.")},
+        {"days": 30, "name": T("Purity", "Kesucian", "الطهارة"),
+         "desc": T("Clean your intake — food, screens, speech, company.",
+                   "Bersihkan asupan Anda — makanan, layar, ucapan, pergaulan.",
+                   "طهّر ما يدخلك: طعامًا وشاشة وكلامًا وصحبة.")},
+        {"days": 30, "name": T("Strength", "Kekuatan", "القوّة"),
+         "desc": T("Build a body that can carry long qiyam and long walks.",
+                   "Bangun tubuh yang mampu menopang qiyam dan perjalanan panjang.",
+                   "ابنِ جسدًا يحمل قيامًا طويلًا ومشيًا طويلًا.")},
+        {"days": 30, "name": T("Stillness", "Ketenangan", "السكينة"),
+         "desc": T("Learn to sit with silence without reaching for the phone.",
+                   "Belajar duduk dalam sunyi tanpa meraih ponsel.",
+                   "تعلّم الجلوس مع الصمت دون أن تمتدّ يدك للهاتف.")},
+        {"days": 30, "name": T("Generosity", "Kedermawanan", "الكرم"),
+         "desc": T("Give until giving becomes reflex rather than decision.",
+                   "Memberi sampai memberi menjadi refleks, bukan keputusan.",
+                   "أعطِ حتى يصير العطاء طبعًا لا قرارًا.")},
+        {"days": 30, "name": T("Knowledge", "Ilmu", "العلم"),
+         "desc": T("Twenty minutes a day of something beneficial, every day.",
+                   "Dua puluh menit sehari untuk sesuatu yang bermanfaat, setiap hari.",
+                   "عشرون دقيقة يوميًا في علم نافع، كل يوم.")},
+        {"days": 30, "name": T("Patience", "Kesabaran", "الصبر"),
+         "desc": T("The hard middle. This phase is deliberately unglamorous.",
+                   "Bagian tengah yang berat. Fase ini memang tidak menarik.",
+                   "الوسط الشاقّ؛ هذه المرحلة غير برّاقة بقصد.")},
+        {"days": 30, "name": T("Gratitude", "Syukur", "الشكر"),
+         "desc": T("Count what you were given before you count what is missing.",
+                   "Hitung yang telah diberikan sebelum menghitung yang belum ada.",
+                   "عُدّ ما أُعطيت قبل أن تعدّ ما فقدت.")},
+        {"days": 30, "name": T("Service", "Pengabdian", "الخدمة"),
+         "desc": T("Turn your health outward: be useful to people.",
+                   "Arahkan kesehatan Anda ke luar: bermanfaat bagi orang lain.",
+                   "وجّه صحّتك للخارج: كن نافعًا للناس.")},
+        {"days": 30, "name": T("Depth", "Kedalaman", "العمق"),
+         "desc": T("Tahajjud, i'tikaf, long fasts. Only if the base is solid.",
+                   "Tahajud, i'tikaf, puasa panjang. Hanya jika fondasinya kuat.",
+                   "تهجّد واعتكاف وصيام أطول، بشرط ثبات الأساس.")},
+        {"days": 35, "name": T("Istiqamah", "Istiqamah", "الاستقامة"),
+         "desc": T("A whole year in. Now it is simply who you are.",
+                   "Satu tahun penuh. Sekarang ini memang siapa diri Anda.",
+                   "سنة كاملة؛ الآن هذه هي هُويّتك.")},
+    ],
+}
+
+
+def phase_of(day: int, challenge_type: str) -> tuple[int, dict, int, int]:
+    """Return (1-based phase index, phase def, phase start day, phase end day)."""
+    defs = PHASE_DEFS.get(challenge_type) or PHASE_DEFS["30_days"]
+    cursor = 0
+    for i, ph in enumerate(defs):
+        start = cursor + 1
+        end = cursor + ph["days"]
+        if day <= end or i == len(defs) - 1:
+            return i + 1, ph, start, end
+        cursor = end
+    return 1, defs[0], 1, defs[0]["days"]
+
+
+def phase_summary(day: int, challenge_type: str, lang: str) -> dict:
+    lang = lang if lang in ("en", "id", "ar") else "en"
+    defs = PHASE_DEFS.get(challenge_type) or PHASE_DEFS["30_days"]
+    index, ph, start, end = phase_of(day, challenge_type)
+    return {
+        "index": index,
+        "total": len(defs),
+        "name": ph["name"].get(lang) or ph["name"]["en"],
+        "description": ph["desc"].get(lang) or ph["desc"]["en"],
+        "start_day": start,
+        "end_day": end,
+        "day_in_phase": max(1, day - start + 1),
+        "phase_days": end - start + 1,
+    }
 
 
 # --------------------------------------------------------------------- helpers
@@ -740,7 +860,9 @@ def tasks_for_day(day: int) -> int:
         return 2
     if day <= 10:
         return 3
-    return 4
+    if day <= 40:
+        return 4
+    return 5
 
 
 def ramp(day: int, total_days: int) -> float:
@@ -765,8 +887,9 @@ def anchor_time(anchor: str, sleep_habit: str) -> str:
     return base
 
 
-def generate_plan(prefs: dict, total_days: int, start: date) -> list[dict]:
-    """Deterministic, personalised 1%-better plan."""
+def generate_plan(prefs: dict, total_days: int, start: date,
+                  challenge_type: str = "30_days") -> list[dict]:
+    """Deterministic, personalised 1%-better plan with phase-gated depth."""
     goals = prefs.get("health_goals") or []
     order = pillar_priority(goals)
     fit_level = LEVELS.get(prefs.get("fitness_level", "beginner"), 1)
@@ -783,24 +906,44 @@ def generate_plan(prefs: dict, total_days: int, start: date) -> list[dict]:
             return t["level"] <= max(fit_level, 2 if "sunnah_diet" in dietary else 1)
         return t["level"] <= fit_level
 
-    pools: dict[str, list[dict]] = {}
-    for p in PILLARS:
-        pool = [t for t in TEMPLATES_BY_PILLAR[p] if allowed(t)]
-        pools[p] = pool or TEMPLATES_BY_PILLAR[p][:3]
+    # Longer tracks are allowed to reach deeper practices as they progress.
+    def level_cap(phase: int) -> int:
+        return min(3, 1 + phase) if challenge_type != "30_days" else 3
+
+    pool_cache: dict[tuple[str, int], list[dict]] = {}
+
+    def pool_for(pillar: str, phase: int) -> list[dict]:
+        key = (pillar, phase)
+        if key not in pool_cache:
+            cap = level_cap(phase)
+            pool = [t for t in TEMPLATES_BY_PILLAR[pillar]
+                    if t["min_phase"] <= phase and allowed(t) and t["level"] <= cap]
+            pool_cache[key] = pool or TEMPLATES_BY_PILLAR[pillar][:3]
+        return pool_cache[key]
 
     counters = {p: 0 for p in PILLARS}
     out: list[dict] = []
+    last_phase = 1
 
     for day in range(1, total_days + 1):
+        phase, _, _, _ = phase_of(day, challenge_type)
+        if phase != last_phase:
+            # Jump straight to whatever this phase just unlocked, so a new phase
+            # genuinely feels new instead of replaying the same rotation.
+            for p in PILLARS:
+                unlocked_before = len([t for t in pool_for(p, phase) if t["min_phase"] < phase])
+                counters[p] = unlocked_before
+            last_phase = phase
+
         n = tasks_for_day(day)
-        day_pillars = order[:n]
+        day_pillars = [order[i % len(order)] for i in range(n)]
         scheduled = (start + timedelta(days=day - 1)).isoformat()
         difficulty = max(1, min(10, round(day / total_days * 10)))
         base_points = 8 + round(day / total_days * 14)
         mult = ramp(day, total_days)
 
         for pillar in day_pillars:
-            pool = pools[pillar]
+            pool = pool_for(pillar, phase)
             tpl = pool[counters[pillar] % len(pool)]
             counters[pillar] += 1
             minutes = max(2, round(tpl["minutes"] * mult))

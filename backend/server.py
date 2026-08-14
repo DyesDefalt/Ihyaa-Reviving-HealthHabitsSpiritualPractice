@@ -145,9 +145,9 @@ async def current_user(request: Request) -> User:
 async def startup() -> None:
     await ensure_indexes()
     db = get_db()
-    for email_key, pass_key, name, role in (
-        ("ADMIN_EMAIL", "ADMIN_PASSWORD", "Ihyaa Admin", "admin"),
-        ("DEMO_EMAIL", "DEMO_PASSWORD", "Demo User", "user"),
+    for email_key, pass_key, name, role, is_pro in (
+        ("ADMIN_EMAIL", "ADMIN_PASSWORD", "Ihyaa Admin", "admin", True),
+        ("DEMO_EMAIL", "DEMO_PASSWORD", "Demo User", "user", False),
     ):
         email = os.environ.get(email_key)
         password = os.environ.get(pass_key)
@@ -155,12 +155,14 @@ async def startup() -> None:
             continue
         existing = await db.users.find_one({"email": email.lower()})
         if existing is None:
-            user = User(email=email.lower(), name=name, role=role,
+            user = User(email=email.lower(), name=name, role=role, is_pro=is_pro,
                         password_hash=A.hash_password(password))
             await db.users.insert_one(user.to_mongo())
-        elif not A.verify_password(password, existing.get("password_hash") or ""):
-            await db.users.update_one({"_id": existing["_id"]},
-                                      {"$set": {"password_hash": A.hash_password(password)}})
+        else:
+            updates = {"role": role, "is_pro": is_pro}
+            if not A.verify_password(password, existing.get("password_hash") or ""):
+                updates["password_hash"] = A.hash_password(password)
+            await db.users.update_one({"_id": existing["_id"]}, {"$set": updates})
 
 
 @app.get("/api/health")

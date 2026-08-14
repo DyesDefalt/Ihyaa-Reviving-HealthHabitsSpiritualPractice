@@ -50,6 +50,32 @@ class GeoLocation(BaseModel):
     label: str = ""
 
 
+class HealthProfile(BaseModel):
+    """Screening data used to withhold habits that are contraindicated.
+
+    The app prescribes fasting, training and botanicals, several of which are
+    genuinely unsafe for some people - IDF-DAR places CKD stage 4-5, dialysis and
+    diabetic pregnancy in a group advised not to fast at all. Before this existed
+    the app had no way to know. Everything is optional; safety.py fails closed and
+    withholds rather than assumes when a field is missing.
+    """
+    age: int | None = None
+    sex: str | None = None                    # male | female | unspecified
+    conditions: list[str] = Field(default_factory=list)
+    medications: list[str] = Field(default_factory=list)
+    pregnancy_trimester: int | None = None    # 1 | 2 | 3
+    breastfeeding: bool = False
+    severe_hypo_last_3_months: bool = False
+    disclaimer_acknowledged: bool = False
+
+    @field_validator("pregnancy_trimester")
+    @classmethod
+    def _valid_trimester(cls, v: int | None) -> int | None:
+        if v is not None and v not in (1, 2, 3):
+            raise ValueError("pregnancy_trimester must be 1, 2 or 3")
+        return v
+
+
 class Preferences(BaseModel):
     fitness_level: str = "beginner"           # beginner | intermediate | advanced
     health_goals: list[str] = Field(default_factory=list)
@@ -57,10 +83,15 @@ class Preferences(BaseModel):
     sleep_habit: str = "moderate"             # early_bird | moderate | night_owl
     spiritual_level: str = "beginner"         # beginner | practicing | devoted
     preferred_challenge: str = "30_days"      # 30_days | 100_days | 1_year
+    # Body first: physical and nutrition lead, mind and soul are opt-in.
+    focus: str = "body"                       # body | body_mind | all
     reminders_enabled: bool = True
     prayer_method: int = 3                    # AlAdhan calculation method id
     prayer_school: int = 0                    # 0 = Shafi'i, 1 = Hanafi
     location: GeoLocation | None = None
+    health_profile: HealthProfile | None = None
+    # Fixes the plan's shuffle so it can be regenerated identically.
+    plan_seed: str = "ihyaa"
 
 
 class User(BaseDocument):
@@ -70,7 +101,7 @@ class User(BaseDocument):
     auth_provider: str = "password"           # password | google
     picture: str | None = None
     role: str = "user"
-    language: str = "en"                      # en | ar | id
+    language: str = "en"                      # en | id (ar data/infra kept, not offered in UI for now)
     theme: str = "light"
     timezone: str = "UTC"
     onboarding_completed: bool = False

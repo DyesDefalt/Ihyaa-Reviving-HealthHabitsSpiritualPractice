@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ihyaa — Habit detail with citation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+  :root {
+    --bg:#F7F5F0; --surface:#FFFFFF; --surface-alt:#F0EBE1;
+    --primary:#1B3B36; --on-primary:#FFFFFF; --secondary:#B5653E;
+    --text-primary:#1A1A1A; --text-secondary:#5C5F5E; --border:#E8E4DB;
+    --physical:#B5653E; --spiritual:#2A9D8F;
+    --strong:#2A9D8F; --strong-bg:#E3F2EF;
+    --r-sm:8px; --r-md:16px; --r-lg:24px; --r-full:999px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; }
+  body { background:#DDD8CC; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:40px 0; }
+  .frame {
+    width:390px; height:844px; background:var(--bg); border-radius:44px; overflow:hidden;
+    position:relative; box-shadow:0 30px 60px -20px rgba(27,59,54,0.35), 0 0 0 10px #111;
+    display:flex; flex-direction:column;
+  }
+  .status { height:48px; display:flex; align-items:center; justify-content:space-between; padding:0 28px; font-size:14px; font-weight:600; }
+  .topbar { padding:4px 24px 12px; display:flex; align-items:center; gap:14px; }
+  .back { width:36px; height:36px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.06); font-size:16px; }
+  .pillar-tag { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--physical); background:color-mix(in srgb, var(--physical) 12%, white); padding:6px 12px; border-radius:var(--r-full); }
+
+  .content { flex:1; padding:8px 24px 100px; overflow-y:auto; }
+
+  h1 { font-size:26px; font-weight:700; color:var(--text-primary); letter-spacing:-0.4px; margin-bottom:10px; line-height:1.2; }
+  .progress-row { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .level-pill { font-size:12px; font-weight:600; color:var(--secondary); background:color-mix(in srgb, var(--secondary) 12%, white); padding:6px 12px; border-radius:var(--r-full); }
+  .step-dots { display:flex; gap:5px; }
+  .step-dots span { width:7px; height:7px; border-radius:50%; background:var(--border); }
+  .step-dots span.on { background:var(--secondary); }
+
+  .desc { font-size:15px; line-height:1.6; color:var(--text-primary); margin-bottom:24px; }
+
+  .section-label { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-secondary); margin-bottom:10px; }
+
+  .evidence-card {
+    background:var(--surface); border-radius:var(--r-lg); padding:20px;
+    box-shadow:0 8px 24px rgba(27,59,54,0.08); border:1px solid var(--border);
+    margin-bottom:16px;
+  }
+  .evidence-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .evidence-head .label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); }
+  .grade-badge {
+    font-size:11px; font-weight:700; letter-spacing:0.4px; color:var(--strong);
+    background:var(--strong-bg); padding:5px 12px; border-radius:var(--r-full);
+    display:flex; align-items:center; gap:5px;
+  }
+  .grade-badge::before { content:"●"; font-size:8px; }
+
+  .evidence-claim { font-size:14px; font-weight:600; color:var(--text-primary); line-height:1.5; margin-bottom:10px; }
+  .evidence-meta { font-size:12px; color:var(--text-secondary); margin-bottom:12px; line-height:1.6; }
+  .effect-stat {
+    display:flex; align-items:baseline; gap:6px; background:var(--surface-alt); padding:12px 14px; border-radius:var(--r-md); margin-bottom:12px;
+  }
+  .effect-stat .num { font-size:20px; font-weight:700; color:var(--primary); }
+  .effect-stat .lbl { font-size:12px; color:var(--text-secondary); }
+  .caveat {
+    font-size:12px; color:var(--text-secondary); line-height:1.6; font-style:italic;
+    border-left:3px solid var(--border); padding-left:10px; margin-bottom:12px;
+  }
+  .doi-chip {
+    display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600; color:var(--primary);
+    background:color-mix(in srgb, var(--primary) 8%, white); padding:7px 12px; border-radius:var(--r-full);
+  }
+
+  .source-card {
+    background:var(--surface); border-radius:var(--r-lg); padding:20px;
+    box-shadow:0 8px 24px rgba(42,157,143,0.08); border:1px solid var(--border);
+    margin-bottom:16px;
+  }
+  .source-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .source-head .label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); }
+  .auth-badge {
+    font-size:11px; font-weight:700; color:var(--spiritual); background:color-mix(in srgb, var(--spiritual) 12%, white);
+    padding:5px 12px; border-radius:var(--r-full);
+  }
+  .scripture { font-size:15px; font-style:italic; color:var(--text-primary); line-height:1.7; margin-bottom:10px; }
+  .source-ref { font-size:12px; font-weight:600; color:var(--spiritual); }
+
+  .mockup-note { font-size:10.5px; line-height:1.6; color:var(--text-secondary); background:var(--surface-alt); border-radius:var(--r-sm); padding:10px 12px; margin-top:4px; }
+  .footer { position:absolute; bottom:0; left:0; right:0; padding:16px 24px 32px; background:linear-gradient(to top, var(--bg) 60%, transparent); }
+  .cta {
+    width:100%; padding:17px; border-radius:var(--r-full); background:var(--primary); color:var(--on-primary);
+    border:none; font-size:16px; font-weight:600; text-align:center; box-shadow:0 10px 24px rgba(27,59,54,0.3);
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="status"><span>9:41</span><span>●●● ▮▮▮ 100%</span></div>
+    <div class="topbar">
+      <div class="back">←</div>
+      <div class="pillar-tag">Physical</div>
+    </div>
+    <div class="content">
+      <h1>Brisk Walk to the Masjid</h1>
+      <div class="progress-row">
+        <div class="level-pill">Step 2 of 4 · 15 min</div>
+        <div class="step-dots"><span class="on"></span><span class="on"></span><span></span><span></span></div>
+      </div>
+      <p class="desc">A brisk 15-minute walk, ideally to the masjid for prayer. Pick up the pace slightly — enough that talking is still easy but singing isn't.</p>
+
+      <div class="section-label">Why this habit — the evidence</div>
+      <div class="evidence-card">
+        <div class="evidence-head">
+          <span class="label">Clinical evidence</span>
+          <span class="grade-badge">STRONG</span>
+        </div>
+        <div class="evidence-claim">Walking ~7,000 steps/day vs. 2,000 was linked to 47% lower all-cause mortality and 38% lower dementia risk.</div>
+        <div class="evidence-meta">Ding D, Nguyen B, Nau T, et al. (2025). <em>The Lancet Public Health</em>, 10(8):e668. Dose-response meta-analysis, 57 studies.</div>
+        <div class="effect-stat"><span class="num">47%</span><span class="lbl">lower all-cause mortality, 7,000 vs 2,000 steps/day</span></div>
+        <div class="caveat">GRADE certainty is moderate for most outcomes but very low for falls specifically — treat the falls figure with caution.</div>
+        <div class="doi-chip">🔗 doi.org/10.1016/S2468-2667(25)00164-1</div>
+      </div>
+
+      <div class="section-label">Rooted in sunnah</div>
+      <div class="source-card">
+        <div class="source-head">
+          <span class="label">Hadith</span>
+          <span class="auth-badge">Sahih</span>
+        </div>
+        <div class="scripture">"Whoever purifies himself in his house then walks to one of the houses of Allah to perform one of the obligatory prayers, one of his steps will erase a sin and the other will raise him a degree."</div>
+        <div class="source-ref">Sahih Muslim</div>
+      </div>
+      <div class="mockup-note">⚠ Design mockup only — this hadith text/grading is illustrative of the UI pattern. In the shipped app, every hadith is withheld until a named scholar reviewer confirms it (15 currently pending); only the Quran and confirmed hadith ever render this card.</div>
+    </div>
+    <div class="footer">
+      <div class="cta">Mark as done</div>
+    </div>
+  </div>
+</body>
+</html>

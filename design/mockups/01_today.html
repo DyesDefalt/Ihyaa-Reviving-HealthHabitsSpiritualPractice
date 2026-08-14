@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ihyaa — Today screen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EBE1;
+    --primary: #1B3B36;
+    --on-primary: #FFFFFF;
+    --secondary: #B5653E;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5C5F5E;
+    --border: #E8E4DB;
+    --physical: #B5653E;
+    --nutrition: #D99B29;
+    --mental: #4A6FA5;
+    --spiritual: #2A9D8F;
+    --r-sm: 8px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-full: 999px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; }
+  body {
+    background:#DDD8CC;
+    display:flex; justify-content:center; align-items:center;
+    min-height:100vh; padding:40px 0;
+  }
+  .frame {
+    width:390px; height:844px;
+    background:var(--bg);
+    border-radius:44px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 30px 60px -20px rgba(27,59,54,0.35), 0 0 0 10px #111;
+  }
+  /* subtle khatam star texture */
+  .frame::before {
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(27,59,54,0.05) 0, transparent 40%),
+      radial-gradient(circle at 85% 60%, rgba(181,101,62,0.05) 0, transparent 40%);
+    pointer-events:none;
+  }
+  .status {
+    height:48px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 28px; font-size:14px; font-weight:600; color:var(--text-primary);
+  }
+  .content {
+    position:relative; z-index:1;
+    padding:8px 24px 120px 24px;
+    height:calc(844px - 48px);
+    overflow-y:auto;
+  }
+  .greeting-row {
+    display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;
+  }
+  .greeting h1 { font-size:24px; font-weight:700; color:var(--text-primary); letter-spacing:-0.3px; }
+  .greeting p { font-size:14px; color:var(--text-secondary); margin-top:4px; }
+  .streak {
+    display:flex; align-items:center; gap:6px;
+    background:var(--surface); border:1px solid var(--border);
+    padding:8px 14px; border-radius:var(--r-full);
+    box-shadow:0 2px 8px rgba(27,59,54,0.06);
+  }
+  .streak span { font-size:15px; font-weight:700; color:var(--secondary); }
+
+  .hijri-chip {
+    margin-top:16px; display:inline-flex; align-items:center; gap:8px;
+    background:var(--surface-alt); padding:8px 14px; border-radius:var(--r-full);
+    font-size:12px; font-weight:500; color:var(--primary);
+  }
+
+  .section-title {
+    font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.6px;
+    color:var(--text-secondary); margin:28px 0 12px 2px;
+  }
+
+  .task {
+    display:flex; align-items:center; gap:14px;
+    background:var(--surface);
+    border-radius:var(--r-md);
+    padding:16px;
+    margin-bottom:12px;
+    box-shadow:0 2px 10px rgba(27,59,54,0.05);
+    border-left:4px solid var(--pillar,var(--physical));
+  }
+  .task.physical { --pillar:var(--physical); }
+  .task.nutrition { --pillar:var(--nutrition); }
+  .task.mental { --pillar:var(--mental); }
+  .task.spiritual { --pillar:var(--spiritual); }
+
+  .task-icon {
+    width:44px; height:44px; border-radius:var(--r-sm);
+    background:color-mix(in srgb, var(--pillar) 14%, white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; flex-shrink:0;
+  }
+  .task-body { flex:1; min-width:0; }
+  .task-body .pillar-label {
+    font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px;
+    color:var(--pillar); margin-bottom:2px;
+  }
+  .task-body h3 { font-size:16px; font-weight:600; color:var(--text-primary); }
+  .task-body p { font-size:13px; color:var(--text-secondary); margin-top:2px; }
+  .check {
+    width:28px; height:28px; border-radius:50%;
+    border:2px solid var(--border); flex-shrink:0;
+  }
+  .check.done {
+    background:var(--primary); border-color:var(--primary);
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-size:14px; font-weight:700;
+  }
+
+  .tabbar {
+    position:absolute; bottom:24px; left:24px; right:24px;
+    height:64px; border-radius:var(--r-full);
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.6);
+    box-shadow:0 12px 30px rgba(27,59,54,0.18);
+    display:flex; align-items:center; justify-content:space-around;
+    z-index:2;
+  }
+  .tab { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--text-secondary); font-weight:500; }
+  .tab.active { color:var(--primary); font-weight:700; }
+  .tab .dot { width:6px; height:6px; border-radius:50%; background:var(--primary); opacity:0; }
+  .tab.active .dot { opacity:1; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="status"><span>9:41</span><span>●●● ▮▮▮ 100%</span></div>
+    <div class="content">
+      <div class="greeting-row">
+        <div class="greeting">
+          <h1>Assalamu'alaikum,<br/>Ahmad</h1>
+          <p>Saturday, 14 August</p>
+        </div>
+        <div class="streak">🔥 <span>12</span></div>
+      </div>
+      <div class="hijri-chip">🌙 &nbsp; Sha'ban prep · Ramadan in 18 days</div>
+
+      <div class="section-title">Body first — today's focus</div>
+
+      <div class="task physical">
+        <div class="task-icon">🚶</div>
+        <div class="task-body">
+          <div class="pillar-label">Physical</div>
+          <h3>Brisk walk — 15 min</h3>
+          <p>Fajr window · Step 2 of 4</p>
+        </div>
+        <div class="check done">✓</div>
+      </div>
+
+      <div class="task nutrition">
+        <div class="task-icon">🌾</div>
+        <div class="task-body">
+          <div class="pillar-label">Nutrition</div>
+          <h3>Eat the whole thing</h3>
+          <p>Wholegrain swap at one meal</p>
+        </div>
+        <div class="check"></div>
+      </div>
+
+      <div class="task nutrition">
+        <div class="task-icon">🧂</div>
+        <div class="task-body">
+          <div class="pillar-label">Nutrition</div>
+          <h3>Taste before you salt</h3>
+          <p>Dhuhr · 4 min</p>
+        </div>
+        <div class="check"></div>
+      </div>
+
+      <div class="section-title">Optional today</div>
+
+      <div class="task mental">
+        <div class="task-icon">🧠</div>
+        <div class="task-body">
+          <div class="pillar-label">Mental</div>
+          <h3>Habit stacking</h3>
+          <p>Anchor a new habit to Asr</p>
+        </div>
+        <div class="check"></div>
+      </div>
+
+      <div class="task spiritual">
+        <div class="task-icon">🕌</div>
+        <div class="task-body">
+          <div class="pillar-label">Spiritual</div>
+          <h3>Steps to the masjid</h3>
+          <p>Maghrib · Sunnah intention</p>
+        </div>
+        <div class="check"></div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <div class="tab active"><span>🏠</span>Today<span class="dot"></span></div>
+      <div class="tab"><span>📈</span>Progress</div>
+      <div class="tab"><span>💬</span>Coach</div>
+      <div class="tab"><span>👤</span>Profile</div>
+    </div>
+  </div>
+</body>
+</html>

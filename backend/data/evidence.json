@@ -1,0 +1,822 @@
+{
+  "$schema_version": "1.0",
+  "_README": "Every record here was retrieved live from Consensus/Scite and checked for retractions on 2026-08-13. NEVER add a record from memory. NEVER invent a DOI. If a claim cannot be traced to a resolvable DOI, it does not ship. Run `python scripts/verify_evidence.py` before every release.",
+  "_grades": {
+    "STRONG": "Large RCT, or meta-analysis of RCTs, or very large cohort with consistent replication. Safe to state plainly.",
+    "MODERATE": "Meta-analysis of small trials, or consistent observational data. State with the effect size; keep the caveat visible.",
+    "WEAK": "Small, unblinded, single-region, or highly heterogeneous. Only usable if the caveat is shown in the UI.",
+    "CONTESTED": "Credible evidence points both ways. Must be presented as contested, never as settled."
+  },
+  "retracted_doi_blocklist": [
+    {
+      "doi": "10.1056/NEJMoa1200303",
+      "what": "PREDIMED 2013 original publication",
+      "reason": "Retracted for randomisation violations (some sites randomised households, not individuals)",
+      "retraction_notice_doi": "10.1056/NEJMc1806491",
+      "use_instead": "ev_evoo_cvd"
+    }
+  ],
+
+  "evidence": [
+
+    {
+      "id": "ev_steps_mortality",
+      "pillar": "physical",
+      "claim": {
+        "en": "Walking around 10,900 steps a day was associated with 53% lower all-cause mortality than around 3,550 steps, with benefit levelling off near 6,000-8,000 steps for adults over 60.",
+        "id": "Berjalan sekitar 10.900 langkah sehari dikaitkan dengan kematian 53% lebih rendah dibanding sekitar 3.550 langkah, dan manfaatnya mendatar sekitar 6.000-8.000 langkah untuk usia di atas 60.",
+        "ar": "ارتبط المشي نحو ١٠٬٩٠٠ خطوة يوميًا بانخفاض الوفيات بنسبة ٥٣٪ مقارنة بنحو ٣٬٥٥٠ خطوة، ويستقر النفع عند ٦٬٠٠٠-٨٬٠٠٠ خطوة لمن تجاوز الستين."
+      },
+      "authors": "Paluch AE, Bajpai S, Bassett DR, et al.",
+      "year": 2022,
+      "journal": "The Lancet Public Health",
+      "volume_pages": "7(3):e219-e228",
+      "doi": "10.1016/S2468-2667(21)00302-9",
+      "study_type": "meta-analysis of 15 prospective cohorts",
+      "sample_size": 47471,
+      "effect_size": "HR 0.47 (95% CI 0.39-0.57) highest vs lowest step quartile; 3,013 deaths over median 7.1 y",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Observational, so some of the association may be reverse causation in people who were already frail.",
+        "id": "Bersifat observasional, sebagian kaitannya bisa jadi sebab-terbalik pada orang yang memang sudah lemah.",
+        "ar": "دراسات رصدية، وقد يعود جزء من الارتباط إلى انعكاس السببية لدى من كان ضعيفًا أصلًا."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_steps_7000_target",
+      "pillar": "physical",
+      "claim": {
+        "en": "7,000 steps a day versus 2,000 was associated with 47% lower all-cause mortality, 38% lower dementia risk and 28% fewer falls. 10,000 is not a magic number; 7,000 is the defensible target.",
+        "id": "7.000 langkah sehari dibanding 2.000 dikaitkan dengan kematian 47% lebih rendah, risiko demensia 38% lebih rendah, dan 28% lebih sedikit jatuh. 10.000 bukan angka ajaib; 7.000 adalah target yang berdasar.",
+        "ar": "ارتبط المشي ٧٬٠٠٠ خطوة يوميًا مقابل ٢٬٠٠٠ بانخفاض الوفيات ٤٧٪ والخرف ٣٨٪ والسقوط ٢٨٪. ليست العشرة آلاف رقمًا سحريًا؛ السبعة آلاف هي الهدف المؤيَّد."
+      },
+      "authors": "Ding D, Nguyen B, Nau T, et al.",
+      "year": 2025,
+      "journal": "The Lancet Public Health",
+      "volume_pages": "10(8):e668-e681",
+      "doi": "10.1016/S2468-2667(25)00164-1",
+      "erratum_doi": "10.1016/S2468-2667(25)00199-9",
+      "study_type": "systematic review and dose-response meta-analysis, 57 studies / 35 cohorts",
+      "sample_size": null,
+      "effect_size": "All-cause HR 0.53 (0.46-0.60); CVD incidence 0.75 (0.67-0.85); dementia 0.62 (0.53-0.73); falls 0.72 (0.65-0.81)",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "GRADE moderate for most outcomes but very low for falls. Cite the corrected version.",
+        "id": "GRADE sedang untuk sebagian besar luaran, tetapi sangat rendah untuk jatuh. Gunakan versi terkoreksi.",
+        "ar": "تقدير GRADE متوسط لأغلب النتائج ومنخفض جدًا للسقوط. اعتمد النسخة المصحّحة."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_resistance_dose",
+      "pillar": "physical",
+      "claim": {
+        "en": "Just 30-60 minutes of muscle-strengthening a week - not a day - was associated with 10-20% lower all-cause mortality, cardiovascular disease and cancer. More is not better beyond that point.",
+        "id": "Hanya 30-60 menit latihan kekuatan per minggu - bukan per hari - dikaitkan dengan kematian, penyakit jantung, dan kanker 10-20% lebih rendah. Lebih banyak tidak lebih baik setelah titik itu.",
+        "ar": "ثلاثون إلى ستون دقيقة من تمارين تقوية العضلات أسبوعيًا - لا يوميًا - ارتبطت بانخفاض الوفيات وأمراض القلب والسرطان ١٠-٢٠٪. والزيادة بعد ذلك لا تنفع."
+      },
+      "authors": "Momma H, Kawakami R, Honda T, Sawada SS",
+      "year": 2022,
+      "journal": "British Journal of Sports Medicine",
+      "volume_pages": "56(13):755-763",
+      "doi": "10.1136/bjsports-2021-105061",
+      "study_type": "systematic review and meta-analysis of 16 prospective cohorts",
+      "sample_size": null,
+      "effect_size": "J-shaped; maximum risk reduction ~10-20% at ~30-60 min/week. PROSPERO CRD42020219808",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Observational cohorts. The J-shape means very high volumes show no extra benefit.",
+        "id": "Kohort observasional. Bentuk J berarti volume sangat tinggi tidak memberi manfaat tambahan.",
+        "ar": "دراسات رصدية. والمنحنى الجيمي يعني أن الأحجام العالية جدًا لا تضيف نفعًا."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_resistance_mortality",
+      "pillar": "physical",
+      "claim": {
+        "en": "Any amount of resistance training at all was associated with 15% lower all-cause mortality, with the largest reduction (27%) at about 60 minutes a week.",
+        "id": "Latihan beban dalam jumlah berapa pun dikaitkan dengan kematian 15% lebih rendah, dengan penurunan terbesar (27%) pada sekitar 60 menit per minggu.",
+        "ar": "أيّ قدر من تدريب المقاومة ارتبط بانخفاض الوفيات ١٥٪، وأكبر انخفاض (٢٧٪) عند نحو ستين دقيقة أسبوعيًا."
+      },
+      "authors": "Shailendra P, Baldock KL, Li LSK, Bennie JA, Boyle T",
+      "year": 2022,
+      "journal": "American Journal of Preventive Medicine",
+      "volume_pages": "63(2):277-285",
+      "doi": "10.1016/j.amepre.2022.03.020",
+      "study_type": "systematic review and meta-analysis, 10 studies",
+      "sample_size": null,
+      "effect_size": "All-cause RR 0.85 (0.77-0.93); CVD 0.81 (0.66-1.00); cancer 0.86 (0.78-0.95); max 27% at ~60 min/wk",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Benefit appears to diminish above roughly 130-150 minutes a week; the reason is not established.",
+        "id": "Manfaat tampak menurun di atas sekitar 130-150 menit per minggu; sebabnya belum jelas.",
+        "ar": "يبدو أن النفع يقلّ فوق نحو ١٣٠-١٥٠ دقيقة أسبوعيًا، والسبب غير محقَّق."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_muscle_strength_mortality",
+      "pillar": "physical",
+      "claim": {
+        "en": "Higher muscular strength predicted 31% lower all-cause mortality across nearly two million adults, making strength itself a vital sign.",
+        "id": "Kekuatan otot yang lebih tinggi memprediksi kematian 31% lebih rendah pada hampir dua juta orang dewasa, menjadikan kekuatan itu sendiri sebagai tanda vital.",
+        "ar": "ارتبطت القوة العضلية الأعلى بانخفاض الوفيات ٣١٪ لدى قرابة مليوني بالغ، فالقوة نفسها علامة حيوية."
+      },
+      "authors": "Garcia-Hermoso A, Cavero-Redondo I, Ramirez-Velez R, et al.",
+      "year": 2018,
+      "journal": "Archives of Physical Medicine and Rehabilitation",
+      "volume_pages": "99(10):2100-2113",
+      "doi": "10.1016/j.apmr.2018.01.008",
+      "study_type": "systematic review and meta-analysis, 38 cohort studies",
+      "sample_size": 1907580,
+      "effect_size": "Handgrip strength HR 0.69 (95% CI 0.64-0.74); 63,087 deaths",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Strength is partly a marker of underlying health, not purely a cause of longevity.",
+        "id": "Kekuatan sebagian merupakan penanda kesehatan yang mendasari, bukan semata penyebab umur panjang.",
+        "ar": "القوة في جزء منها مؤشّر على الصحة الكامنة لا سببٌ محضٌ لطول العمر."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_sedentary_breaks",
+      "pillar": "physical",
+      "claim": {
+        "en": "Any physical activity at all, at any intensity, was associated with substantially lower mortality, while the most sedentary quarter of adults had 2.6 times the death rate of the least sedentary.",
+        "id": "Aktivitas fisik apa pun, pada intensitas apa pun, dikaitkan dengan kematian jauh lebih rendah, sementara seperempat orang paling banyak duduk memiliki angka kematian 2,6 kali lipat dibanding yang paling sedikit.",
+        "ar": "أيّ نشاط بدني مهما كانت شدّته ارتبط بانخفاض كبير في الوفيات، بينما بلغ معدل الوفاة لدى الأكثر جلوسًا ٢٫٦ ضعف الأقلّ جلوسًا."
+      },
+      "authors": "Ekelund U, Tarp J, Steene-Johannessen J, et al.",
+      "year": 2019,
+      "journal": "The BMJ",
+      "volume_pages": "366:l4570",
+      "doi": "10.1136/bmj.l4570",
+      "study_type": "systematic review and harmonised meta-analysis, 8 accelerometer cohorts",
+      "sample_size": 36383,
+      "effect_size": "Most vs least active quartile HR 0.27 (0.23-0.32); most vs least sedentary HR 2.63 (1.94-3.56)",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Device-measured and dose-responsive, but still observational, with median follow-up under 6 years.",
+        "id": "Diukur perangkat dan berdosis-respons, tetapi tetap observasional, dengan pemantauan median di bawah 6 tahun.",
+        "ar": "قِيس بالأجهزة وله علاقة جرعة-استجابة، لكنه رصديّ، ومتابعته الوسيطة أقل من ست سنوات."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_salah_autonomic",
+      "pillar": "physical",
+      "claim": {
+        "en": "During salah, occipital alpha brain-wave power rose and heart-rate variability shifted toward parasympathetic (rest-and-digest) dominance.",
+        "id": "Saat shalat, daya gelombang alfa oksipital meningkat dan variabilitas denyut jantung bergeser ke dominasi parasimpatis (istirahat dan cerna).",
+        "ar": "أثناء الصلاة ارتفعت قدرة موجات ألفا القذالية، ومال تغيّر معدل ضربات القلب نحو سيادة الجهاز نظير الودّي (الراحة)."
+      },
+      "authors": "Doufesh H, Ibrahim F, Ismail NA, Wan Ahmad WA",
+      "year": 2014,
+      "journal": "Journal of Alternative and Complementary Medicine",
+      "volume_pages": "20(7):558-562",
+      "doi": "10.1089/acm.2013.0426",
+      "study_type": "within-subject physiological study",
+      "sample_size": 30,
+      "effect_size": "Significant increase in relative alpha power and normalised HF-HRV (p<0.05)",
+      "grade": "WEAK",
+      "caveat": {
+        "en": "Small, men only, and with no active control - any slow, paced-breathing ritual would likely produce a similar shift. This does not isolate posture from recitation or breathing.",
+        "id": "Kecil, hanya laki-laki, tanpa kontrol aktif - ritual pernapasan lambat apa pun kemungkinan menghasilkan pergeseran serupa. Ini tidak memisahkan postur dari bacaan atau napas.",
+        "ar": "عيّنة صغيرة من الرجال فقط وبلا ضابط فاعل، وأي ممارسة بتنفّس بطيء قد تُحدث مثله. ولا يفصل هذا بين الهيئة والقراءة والتنفّس."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_ramadan_training",
+      "pillar": "physical",
+      "claim": {
+        "en": "Ramadan fasting reduces short-burst anaerobic power, but aerobic capacity, muscular strength and jump height are unaffected. Training load can be maintained.",
+        "id": "Puasa Ramadan menurunkan daya anaerobik ledakan pendek, tetapi kapasitas aerobik, kekuatan otot, dan tinggi lompatan tidak terpengaruh. Beban latihan dapat dipertahankan.",
+        "ar": "يقلّل صيام رمضان القدرة اللاهوائية القصيرة، أما السعة الهوائية والقوة العضلية وارتفاع القفز فلا تتأثر. ويمكن الحفاظ على حمل التدريب."
+      },
+      "authors": "Abaidia AE, Daab W, Bouzid MA",
+      "year": 2020,
+      "journal": "Sports Medicine",
+      "volume_pages": "50(5):1009-1026",
+      "doi": "10.1007/s40279-020-01257-0",
+      "study_type": "systematic review and meta-analysis, 11 studies",
+      "sample_size": null,
+      "effect_size": "Deleterious for Wingate mean/peak power and repeated sprint; null for aerobic, strength, jump, fatigue index",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "An umbrella review rated the underlying reviews low-to-critically-low quality, and decrements track sleep loss more closely than fasting itself. Train near iftar and protect sleep.",
+        "id": "Tinjauan payung menilai kualitas tinjauan yang mendasari rendah hingga sangat rendah, dan penurunan lebih mengikuti kurang tidur daripada puasa itu sendiri. Berlatihlah menjelang iftar dan jaga tidur.",
+        "ar": "قيّمت مراجعة شاملة جودة المراجعات الأصلية بأنها منخفضة إلى منخفضة جدًا، والتراجع يتبع قلّة النوم أكثر من الصيام. تدرّب قرب الإفطار واحفظ نومك."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_inactivity_muslim_world",
+      "pillar": "physical",
+      "claim": {
+        "en": "More than a quarter of adults worldwide are insufficiently active, and four countries exceed 50% - Kuwait, American Samoa, Saudi Arabia and Iraq. Women are less active than men everywhere.",
+        "id": "Lebih dari seperempat orang dewasa di dunia kurang aktif, dan empat negara melampaui 50% - Kuwait, Samoa Amerika, Arab Saudi, dan Irak. Perempuan kurang aktif dibanding laki-laki di mana-mana.",
+        "ar": "أكثر من ربع البالغين في العالم غير نشطين بما يكفي، وتتجاوز أربع دول ٥٠٪: الكويت وساموا الأمريكية والسعودية والعراق. والنساء أقلّ نشاطًا من الرجال في كل مكان."
+      },
+      "authors": "Guthold R, Stevens GA, Riley LM, Bull FC",
+      "year": 2018,
+      "journal": "The Lancet Global Health",
+      "volume_pages": "6(10):e1077-e1086",
+      "doi": "10.1016/S2214-109X(18)30357-7",
+      "erratum_doi": "10.1016/S2214-109X(18)30454-6",
+      "study_type": "pooled analysis of 358 population surveys across 168 countries",
+      "sample_size": 1900000,
+      "effect_size": "27.5% insufficiently active globally; men 23.4% vs women 31.7%",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Self-reported activity across heterogeneous surveys.",
+        "id": "Aktivitas dilaporkan sendiri lintas survei yang heterogen.",
+        "ar": "النشاط مُبلَّغ ذاتيًا عبر مسوح متباينة."
+      },
+      "verified_at": "2026-08-13"
+    },
+
+    {
+      "id": "ev_evoo_cvd",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "A Mediterranean diet enriched with extra-virgin olive oil cut major cardiovascular events by 31% over five years in high-risk adults.",
+        "id": "Pola makan Mediterania yang diperkaya minyak zaitun extra virgin menurunkan kejadian kardiovaskular mayor 31% selama lima tahun pada orang dewasa berisiko tinggi.",
+        "ar": "خفّض النظام المتوسطي المُعزَّز بزيت الزيتون البكر أحداث القلب الكبرى ٣١٪ خلال خمس سنوات لدى بالغين مرتفعي الخطورة."
+      },
+      "authors": "Estruch R, Ros E, Salas-Salvado J, et al.",
+      "year": 2018,
+      "journal": "New England Journal of Medicine",
+      "volume_pages": "378(25):e34",
+      "doi": "10.1056/NEJMoa1800389",
+      "study_type": "randomised controlled trial (PREDIMED, re-analysis)",
+      "sample_size": 7447,
+      "effect_size": "HR 0.69 (95% CI 0.53-0.91) for MedDiet+EVOO; 288 primary events over median 4.8 y",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "This is the 2018 re-analysis. The 2013 original was RETRACTED for randomisation violations and must never be cited. The benefit belongs to the whole dietary pattern, not to olive oil in isolation.",
+        "id": "Ini adalah analisis ulang 2018. Publikasi asli 2013 DITARIK karena pelanggaran randomisasi dan tidak boleh dikutip. Manfaatnya milik keseluruhan pola makan, bukan minyak zaitun semata.",
+        "ar": "هذه إعادة التحليل لعام ٢٠١٨، أما نسخة ٢٠١٣ فسُحبت لخلل في العشوائية ولا يجوز الاستشهاد بها. والنفع للنمط الغذائي كله لا لزيت الزيتون وحده."
+      },
+      "supersedes_retracted_doi": "10.1056/NEJMoa1200303",
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_caloric_restriction",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Sustained mild calorie restriction of about 12% for two years improved every conventional cardiometabolic risk factor in healthy non-obese adults.",
+        "id": "Pembatasan kalori ringan berkelanjutan sekitar 12% selama dua tahun memperbaiki setiap faktor risiko kardiometabolik konvensional pada orang dewasa sehat non-obesitas.",
+        "ar": "أدى تقييد السعرات المعتدل نحو ١٢٪ لمدة سنتين إلى تحسّن كل عوامل الخطر القلبية الأيضية التقليدية لدى بالغين أصحّاء غير بدناء."
+      },
+      "authors": "Kraus WE, Bhapkar M, Huffman KM, et al.",
+      "year": 2019,
+      "journal": "The Lancet Diabetes & Endocrinology",
+      "volume_pages": "7(9):673-683",
+      "doi": "10.1016/S2213-8587(19)30151-2",
+      "study_type": "randomised controlled trial (CALERIE phase 2), 24 months",
+      "sample_size": 218,
+      "effect_size": "Achieved 11.9% restriction; weight -7.5 kg; significant improvement in LDL-C, TC:HDL, SBP, DBP, CRP, insulin sensitivity (all p<=0.012)",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Not risk-free: significant bone-mineral-density loss at spine, hip and femoral neck versus control, and adherence decayed after week 20. Do not present restriction as costless.",
+        "id": "Tidak bebas risiko: kehilangan kepadatan mineral tulang bermakna di tulang belakang, panggul, dan leher femur dibanding kontrol, dan kepatuhan menurun setelah minggu ke-20. Jangan sajikan pembatasan sebagai tanpa biaya.",
+        "ar": "ليس بلا ثمن: فقدٌ معتدّ به في كثافة العظام في العمود والورك وعنق الفخذ مقارنة بالضابط، وتراجع الالتزام بعد الأسبوع العشرين. فلا يُقدَّم التقييد وكأنه بلا كلفة."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_eating_rate",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Eating more slowly reliably reduces how much is eaten at that meal, and the effect holds regardless of how the slowing is achieved.",
+        "id": "Makan lebih lambat secara andal mengurangi jumlah yang dimakan pada waktu makan itu, dan efeknya bertahan terlepas dari cara memperlambatnya.",
+        "ar": "الأكل ببطء يقلّل بثبات ما يُؤكل في تلك الوجبة، ويصحّ الأثر أيًّا كانت وسيلة الإبطاء."
+      },
+      "authors": "Robinson E, Almiron-Roig E, Rutters F, et al.",
+      "year": 2014,
+      "journal": "American Journal of Clinical Nutrition",
+      "volume_pages": "100(1):123-151",
+      "doi": "10.3945/ajcn.113.081745",
+      "study_type": "systematic review and meta-analysis, 22 studies",
+      "sample_size": null,
+      "effect_size": "SMD 0.45 (95% CI 0.25-0.65) for reduced intake, p<0.0001",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "The supported construct is eating RATE, not 'mindful eating' as a branded programme - 7 of 9 RCTs of mindful/intuitive eating found no difference in energy intake. Build the habit around slowing down and chewing.",
+        "id": "Yang didukung bukti adalah KECEPATAN makan, bukan 'makan penuh kesadaran' sebagai program bermerek - 7 dari 9 RCT tidak menemukan perbedaan asupan energi. Bangun kebiasaan pada memperlambat dan mengunyah.",
+        "ar": "المؤيَّد هو سرعة الأكل لا 'الأكل الواعي' كبرنامج مُعلَّم؛ فسبعٌ من تسع تجارب لم تجد فرقًا في الطاقة المتناولة. فليُبنَ على الإبطاء والمضغ."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_blackseed_glycemia",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Black seed (Nigella sativa) lowered HbA1c by about 0.7 percentage points and fasting glucose by about 18 mg/dL in type 2 diabetes.",
+        "id": "Habbatussauda (Nigella sativa) menurunkan HbA1c sekitar 0,7 poin persentase dan glukosa puasa sekitar 18 mg/dL pada diabetes tipe 2.",
+        "ar": "خفّضت الحبة السوداء السكر التراكمي نحو ٠٫٧ نقطة مئوية والسكر الصائم نحو ١٨ ملغ/دل في السكري من النوع الثاني."
+      },
+      "authors": "Daryabeygi-Khotbehsara R, Golzarand M, Ghaffari MP, Djafarian K",
+      "year": 2017,
+      "journal": "Complementary Therapies in Medicine",
+      "volume_pages": "35:6-13",
+      "doi": "10.1016/j.ctim.2017.08.016",
+      "study_type": "meta-analysis, 7 RCTs",
+      "sample_size": null,
+      "effect_size": "HbA1c -0.71% (95% CI -1.04 to -0.39); FBS -17.84 mg/dL; TC -22.99 mg/dL; LDL-C -22.38 mg/dL",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Publication bias was detected specifically for HbA1c, and almost all trials were small and from a single region. A 2025 update found a smaller effect (-0.44%) and NO effect on weight, BMI or insulin resistance.",
+        "id": "Bias publikasi terdeteksi khusus untuk HbA1c, dan hampir semua uji berukuran kecil dari satu wilayah. Pembaruan 2025 menemukan efek lebih kecil (-0,44%) dan TIDAK ada efek pada berat, IMT, atau resistensi insulin.",
+        "ar": "رُصد تحيّز نشر خاص بالسكر التراكمي، وأغلب التجارب صغيرة ومن إقليم واحد. وحدّثت دراسة ٢٠٢٥ الأثر إلى ٠٫٤٤٪ ولا أثر على الوزن أو الكتلة أو مقاومة الإنسولين."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_blackseed_bp",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Black seed lowered systolic blood pressure by about 3.3 mmHg and diastolic by about 2.8 mmHg.",
+        "id": "Habbatussauda menurunkan tekanan darah sistolik sekitar 3,3 mmHg dan diastolik sekitar 2,8 mmHg.",
+        "ar": "خفّضت الحبة السوداء الضغط الانقباضي نحو ٣٫٣ ملم زئبق والانبساطي نحو ٢٫٨."
+      },
+      "authors": "Sahebkar A, Beccuti G, Simental-Mendia LE, Nobili V, Bo S",
+      "year": 2016,
+      "journal": "Journal of Hypertension",
+      "volume_pages": "34(11):2127-2135",
+      "doi": "10.1097/HJH.0000000000001049",
+      "study_type": "meta-analysis, 11 RCTs",
+      "sample_size": 860,
+      "effect_size": "SBP -3.26 mmHg (-5.10 to -1.42), I2=59%; DBP -2.80 mmHg (-4.28 to -1.32), I2=60%",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Mean trial duration only about 8 weeks; no long-term or hard-outcome data. Powdered seed outperformed oil for blood pressure.",
+        "id": "Durasi uji rata-rata hanya sekitar 8 minggu; tidak ada data jangka panjang atau luaran keras. Bubuk biji lebih unggul dari minyak untuk tekanan darah.",
+        "ar": "متوسط مدة التجارب ثمانية أسابيع فقط، ولا بيانات بعيدة المدى. وتفوّق المسحوق على الزيت في خفض الضغط."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_blackseed_dose_response",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "The largest synthesis of black seed trials to date (82 RCTs, n=5,026) confirmed significant, dose-related improvements in both systolic and diastolic blood pressure alongside cholesterol, blood sugar and inflammation markers.",
+        "id": "Sintesis terbesar uji habbatussauda hingga kini (82 RCT, n=5.026) mengonfirmasi perbaikan bermakna dan berkaitan-dosis pada tekanan darah sistolik dan diastolik, disertai kolesterol, gula darah, dan penanda peradangan.",
+        "ar": ""
+      },
+      "authors": "Jafari A, Mardani H, Faghfouri AH, et al.",
+      "year": 2025,
+      "journal": "Pharmacological Research",
+      "volume_pages": "219:107882",
+      "doi": "10.1016/j.phrs.2025.107882",
+      "study_type": "GRADE-assessed systematic review and dose-response meta-analysis, 82 RCTs (79 quantitative, 3 qualitative), 2008-2024",
+      "sample_size": 5026,
+      "effect_size": "Significant improvement in SBP, DBP, MAP plus an extensive lipid/glycaemic/inflammatory panel; some effects dose-dependent across 200-4600 mg/day, 1-48 week interventions. Exact pooled point estimates sit behind a paywall beyond the open abstract, so no specific mmHg figure is stated here - see ev_blackseed_bp (Sahebkar 2016) for a citable point estimate.",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "GRADE certainty is rated low to moderate for most outcomes per the authors' own assessment. This record corroborates ev_blackseed_bp with a much larger and more recent evidence base; it does not replace it, since this record's own numeric BP effect size could not be independently verified from open-access text.",
+        "id": "Kepastian GRADE dinilai rendah hingga sedang untuk sebagian besar luaran menurut penilaian penulis sendiri. Catatan ini memperkuat ev_blackseed_bp dengan basis bukti yang jauh lebih besar dan baru; tidak menggantikannya, karena besar efek tekanan darah numerik pada catatan ini sendiri belum dapat diverifikasi independen dari teks akses terbuka.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
+      "id": "ev_dates_gi",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Common date varieties have a low glycaemic index of 46 to 55 and did not cause significant blood-sugar spikes even in people with type 2 diabetes.",
+        "id": "Varietas kurma umum memiliki indeks glikemik rendah 46 hingga 55 dan tidak menyebabkan lonjakan gula darah bermakna bahkan pada penyandang diabetes tipe 2.",
+        "ar": "للأصناف الشائعة من التمر مؤشّر سكري منخفض بين ٤٦ و٥٥، ولم تُحدث قفزات سكر معتدًّا بها حتى لدى مرضى السكري الثاني."
+      },
+      "authors": "Alkaabi JM, Al-Dabbagh B, Ahmad S, et al.",
+      "year": 2011,
+      "journal": "Nutrition Journal",
+      "volume_pages": "10:59",
+      "doi": "10.1186/1475-2891-10-59",
+      "study_type": "randomised crossover trial, 5 date varieties",
+      "sample_size": 23,
+      "effect_size": "GI 46.3-55.1 in healthy; 43.8-53.0 in T2DM; no significant difference between groups",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Well designed but very small. A separate 12-week RCT found 60 g of dates daily did not improve HbA1c, lipids or blood pressure - dates are safe, not therapeutic. Claims that Ajwa dates are cardioprotective or an antidote have NO supporting trial.",
+        "id": "Dirancang baik tetapi sangat kecil. RCT 12 minggu terpisah menemukan 60 g kurma harian tidak memperbaiki HbA1c, lipid, atau tekanan darah - kurma aman, bukan terapeutik. Klaim kurma Ajwa kardioprotektif atau penawar racun TIDAK didukung uji apa pun.",
+        "ar": "تصميم جيّد لكن العيّنة صغيرة جدًا. ووجدت تجربة أخرى مدتها ١٢ أسبوعًا أن ٦٠ غرامًا يوميًا لم تحسّن التراكمي ولا الدهون ولا الضغط؛ فالتمر آمن لا علاجي. وأما دعوى أن العجوة تقي القلب أو تُبطل السمّ فلا تجربة تسندها."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_sodium_reduction",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Reducing dietary sodium lowers blood pressure in a clear dose-response way - every 50 mmol cut in daily sodium lowered systolic pressure by about 1.1 mmHg, with a bigger effect in older adults and those with higher starting blood pressure.",
+        "id": "Mengurangi natrium makanan menurunkan tekanan darah secara berkaitan-dosis yang jelas - setiap pengurangan 50 mmol natrium harian menurunkan tekanan sistolik sekitar 1,1 mmHg, dengan efek lebih besar pada usia lanjut dan tekanan darah awal yang lebih tinggi.",
+        "ar": ""
+      },
+      "authors": "Huang L, Trieu K, Yoshimura S, et al.",
+      "year": 2020,
+      "journal": "The BMJ",
+      "volume_pages": "368:m315",
+      "doi": "10.1136/bmj.m315",
+      "study_type": "systematic review and dose-response meta-analysis of randomised trials, PROSPERO CRD42019140812",
+      "sample_size": 12197,
+      "effect_size": "133 trials: reduced vs usual sodium gave SBP -4.26 mmHg (3.62-4.89), DBP -2.07 mmHg (1.67-2.48). Each 50 mmol/day reduction in 24h urinary sodium: SBP -1.10 mmHg (0.66-1.54), DBP -0.33 mmHg (0.04-0.63). Effect present in both hypertensive and non-hypertensive people.",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Blood pressure is a surrogate marker, not a direct measurement of heart attacks or strokes. Trials under 15 days understated the effect by about half - the benefit of a habit like this compounds over weeks, not overnight.",
+        "id": "Tekanan darah adalah penanda pengganti, bukan pengukuran langsung serangan jantung atau stroke. Uji di bawah 15 hari meremehkan efek sekitar separuhnya - manfaat kebiasaan seperti ini terakumulasi selama berminggu-minggu, bukan seketika.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
+      "id": "ev_barley_ldl",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "About 6.5 to 7 grams a day of barley beta-glucan lowered LDL cholesterol by 0.25 mmol/L.",
+        "id": "Sekitar 6,5 hingga 7 gram beta-glukan jelai per hari menurunkan kolesterol LDL sebesar 0,25 mmol/L.",
+        "ar": "نحو ٦٫٥ إلى ٧ غرامات يوميًا من بيتا غلوكان الشعير خفّضت الكوليسترول الضار ٠٫٢٥ مليمول/لتر."
+      },
+      "authors": "Ho HVT, Sievenpiper JL, Zurbau A, et al.",
+      "year": 2016,
+      "journal": "European Journal of Clinical Nutrition",
+      "volume_pages": "70(11):1239-1245",
+      "doi": "10.1038/ejcn.2016.89",
+      "erratum_doi": "10.1038/ejcn.2016.129",
+      "study_type": "systematic review and meta-analysis, 14 RCTs, median 4 weeks",
+      "sample_size": 615,
+      "effect_size": "LDL-C -0.25 mmol/L (-0.30 to -0.20); non-HDL-C -0.31 mmol/L; no change in apoB",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Heterogeneity was extreme (I2=98% for non-HDL-C), and a 2025 real-world 16-week trial of beta-glucan bread found NO effect on HbA1c, glucose, insulin or LDL. Efficacy is not effectiveness. There is NO human trial of barley for mood.",
+        "id": "Heterogenitas ekstrem (I2=98% untuk non-HDL-C), dan uji dunia nyata 16 minggu tahun 2025 pada roti beta-glukan TIDAK menemukan efek pada HbA1c, glukosa, insulin, atau LDL. Efikasi bukan efektivitas. TIDAK ada uji pada manusia untuk jelai dan suasana hati.",
+        "ar": "التباين شديد جدًا (٩٨٪ لغير الكوليسترول النافع)، ولم تجد تجربة واقعية سنة ٢٠٢٥ لمدة ١٦ أسبوعًا أثرًا على التراكمي أو السكر أو الإنسولين أو الضار. والفاعلية المخبرية ليست الواقعية. ولا توجد تجربة بشرية للشعير والمزاج."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_honey_cough",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Honey probably relieves acute cough in children better than no treatment or diphenhydramine, though it is no better than dextromethorphan.",
+        "id": "Madu kemungkinan meredakan batuk akut pada anak lebih baik daripada tanpa pengobatan atau difenhidramin, meski tidak lebih baik dari dekstrometorfan.",
+        "ar": "يُرجَّح أن العسل يخفّف السعال الحاد عند الأطفال أفضل من عدم العلاج ومن الديفينهيدرامين، لكنه ليس أفضل من الدكستروميثورفان."
+      },
+      "authors": "Oduwole O, Udoh EE, Oyo-Ita A, Meremikwu MM",
+      "year": 2018,
+      "journal": "Cochrane Database of Systematic Reviews",
+      "volume_pages": "CD007094",
+      "doi": "10.1002/14651858.CD007094.pub5",
+      "study_type": "Cochrane systematic review",
+      "sample_size": null,
+      "effect_size": "About 1.97 points reduction in cough frequency/severity on a 7-point scale versus no treatment",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "NEVER give honey to an infant under 12 months - risk of infant botulism. Most children were treated for a single night, and a 2023 re-grading of the same trials rated the evidence low to very low quality.",
+        "id": "JANGAN PERNAH memberi madu pada bayi di bawah 12 bulan - risiko botulisme bayi. Sebagian besar anak diobati satu malam saja, dan penilaian ulang 2023 menilai buktinya berkualitas rendah hingga sangat rendah.",
+        "ar": "لا يُعطى العسل لرضيع دون اثني عشر شهرًا أبدًا لخطر التسمّم الوشيقي. وأغلب الأطفال عولجوا ليلة واحدة، وأعادت مراجعة ٢٠٢٣ تصنيف الأدلة إلى منخفضة ومنخفضة جدًا."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_miswak_adjunct",
+      "pillar": "physical",
+      "claim": {
+        "en": "Miswak used alone is equivalent to a toothbrush for plaque and gum inflammation. Used in ADDITION to brushing, it is significantly better than brushing alone.",
+        "id": "Miswak yang dipakai sendiri setara dengan sikat gigi untuk plak dan radang gusi. Dipakai SEBAGAI TAMBAHAN menyikat, hasilnya bermakna lebih baik daripada menyikat saja.",
+        "ar": "السواك وحده مكافئ للفرشاة في اللويحة والتهاب اللثة، أما استعماله زيادةً على الفرشاة فأفضل منها وحدها بفارق معتدّ به."
+      },
+      "authors": "Ramli H, Nor Aripin KN, Mohd-Said S, et al.",
+      "year": 2022,
+      "journal": "Journal of Ethnopharmacology",
+      "volume_pages": "298:115598",
+      "doi": "10.1016/j.jep.2022.115598",
+      "study_type": "systematic review and meta-analysis, 10 RCTs, GRADE-assessed",
+      "sample_size": null,
+      "effect_size": "Alone vs toothbrush: plaque SMD 0.39 (-0.05 to 0.83) NS. Adjunctive: plaque SMD 0.68 (0.14-1.22) p=0.01; gingivitis SMD 0.66 (0.03-1.29) p=0.04",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "HARM SIGNAL: a 2025 review of 6,315 users found higher gingival recession, increased tooth wear and attachment loss, attributed to aggressive technique. Any miswak guidance must include a gentle-technique warning. Miswak is NOT superior to a toothbrush.",
+        "id": "SINYAL BAHAYA: tinjauan 2025 atas 6.315 pengguna menemukan resesi gusi lebih tinggi, keausan gigi, dan kehilangan perlekatan, akibat teknik agresif. Panduan miswak harus menyertakan peringatan teknik lembut. Miswak TIDAK lebih unggul dari sikat gigi.",
+        "ar": "تنبيه ضرر: وجدت مراجعة ٢٠٢٥ لـ٦٬٣١٥ مستخدمًا انحسارًا لثويًا أعلى وتآكلًا في الأسنان وفقدًا للارتباط بسبب الاستعمال العنيف. فيجب أن يصحب كل إرشاد للسواك تنبيهٌ إلى الرفق. والسواك ليس أفضل من الفرشاة."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_alcohol_no_safe_level",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "There is no protective level of alcohol. Genetically predicted intake was linearly associated with premature death, and the famous 'moderate drinking is healthy' J-curve disappears once confounding is removed.",
+        "id": "Tidak ada kadar alkohol yang protektif. Asupan yang diprediksi secara genetik berhubungan linear dengan kematian dini, dan kurva-J terkenal 'minum sedang itu sehat' lenyap begitu perancu dihilangkan.",
+        "ar": "لا يوجد قدر واقٍ من الخمر. فالتناول المتوقَّع جينيًا يرتبط خطيًا بالموت المبكر، ويختفي منحنى 'الشرب المعتدل صحي' الشهير متى أُزيلت العوامل المُربِكة."
+      },
+      "authors": "Kassaw NA, Zhou A, Mulugeta A, Hypponen E",
+      "year": 2024,
+      "journal": "International Journal of Epidemiology",
+      "volume_pages": "53(2):dyae046",
+      "doi": "10.1093/ije/dyae046",
+      "study_type": "Mendelian randomisation, UK Biobank, median 12.6 y",
+      "sample_size": 278093,
+      "effect_size": "Per 8 g/day: all-cause OR 1.27 (1.16-1.39); CVD 1.30 (1.10-1.53); cancer 1.20 (1.08-1.33); digestive 2.06 (1.36-3.12). P-nonlinearity >=0.21",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "White-British participants only, with self-reported intake; Mendelian randomisation estimates lifetime average exposure rather than current drinking.",
+        "id": "Hanya peserta Britania kulit putih dengan asupan dilaporkan sendiri; randomisasi Mendel memperkirakan paparan rata-rata seumur hidup, bukan konsumsi saat ini.",
+        "ar": "المشاركون بريطانيون بيض فقط والتناول مُبلَّغ ذاتيًا، والعشوائية المندلية تقدّر متوسط التعرّض مدى الحياة لا الشرب الحالي."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_ramadan_metabolic",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Ramadan fasting produces small but consistent improvements across body weight, waist, cholesterol, blood pressure and fasting glucose.",
+        "id": "Puasa Ramadan menghasilkan perbaikan kecil namun konsisten pada berat badan, lingkar pinggang, kolesterol, tekanan darah, dan glukosa puasa.",
+        "ar": "يُحدث صيام رمضان تحسّنًا صغيرًا لكنه متّسق في الوزن ومحيط الخصر والكوليسترول والضغط وسكر الصيام."
+      },
+      "authors": "Jahrami H, Ammar A, Glenn JM, et al.",
+      "year": 2024,
+      "journal": "Nutrition Reviews",
+      "volume_pages": "83(2):e711-e721",
+      "doi": "10.1093/nutrit/nuae001",
+      "study_type": "umbrella review and meta-analysis of 11 systematic reviews",
+      "sample_size": null,
+      "effect_size": "All |SMD| <= 0.34: weight -0.34, waist -0.30, HDL +0.20, LDL -0.10, SBP -0.20, fasting glucose -0.10",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "The authors themselves rate the included reviews low to critically low quality, and every effect is small. Crucially, these changes REVERT within 2-5 weeks after Ramadan - see ev_ramadan_transient.",
+        "id": "Penulis sendiri menilai tinjauan yang disertakan berkualitas rendah hingga sangat rendah, dan semua efeknya kecil. Yang penting, perubahan ini KEMBALI dalam 2-5 minggu setelah Ramadan - lihat ev_ramadan_transient.",
+        "ar": "صنّف المؤلفون أنفسهم المراجعات المُدرجة بأنها منخفضة إلى منخفضة جدًا، وكل الآثار صغيرة. والأهم أن هذه التغيّرات ترتدّ خلال ٢-٥ أسابيع بعد رمضان."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_ramadan_transient",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Weight lost in Ramadan returns within two to five weeks, and roughly 30% of what is lost is muscle rather than fat. Ramadan is worship, not a weight-loss programme - only year-round habits hold the gain.",
+        "id": "Berat yang hilang saat Ramadan kembali dalam dua hingga lima minggu, dan sekitar 30% yang hilang adalah otot, bukan lemak. Ramadan adalah ibadah, bukan program penurunan berat badan - hanya kebiasaan sepanjang tahun yang mempertahankannya.",
+        "ar": "يعود الوزن المفقود في رمضان خلال أسبوعين إلى خمسة، ونحو ٣٠٪ من المفقود عضلٌ لا شحم. فرمضان عبادة لا برنامج تنحيف، ولا يثبت الأثر إلا بعادات تدوم العام كله."
+      },
+      "authors": "Fernando HA, Zibellini J, Harris RA, Seimon RV, Sainsbury A",
+      "year": 2019,
+      "journal": "Nutrients",
+      "volume_pages": "11(2):478",
+      "doi": "10.3390/nu11020478",
+      "study_type": "systematic review and meta-analysis, 70 publications / 90 comparison groups",
+      "sample_size": 2947,
+      "effect_size": "Body fat -1.46% (95% CI -2.57 to -0.35) in overweight/obese only; not significant in normal weight (-0.41%)",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Corroborated by a separate meta-analysis of 85 studies (n=4,176) finding only -1.02 kg. Do not market Ramadan as weight loss.",
+        "id": "Dikuatkan meta-analisis terpisah atas 85 studi (n=4.176) yang hanya menemukan -1,02 kg. Jangan memasarkan Ramadan sebagai penurunan berat badan.",
+        "ar": "أيّدتها مراجعة أخرى لـ٨٥ دراسة (٤٬١٧٦ مشاركًا) لم تجد سوى -١٫٠٢ كغم. فلا يُسوَّق رمضان على أنه تنحيف."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_if_no_winner",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Across 99 randomised trials, alternate-day fasting modestly beat continuous calorie restriction for weight, but beyond 24 weeks no intermittent-fasting pattern outperformed any other.",
+        "id": "Di 99 uji acak, puasa selang-seling sedikit mengungguli pembatasan kalori kontinu untuk berat badan, tetapi setelah 24 minggu tidak ada pola puasa intermiten yang mengungguli lainnya.",
+        "ar": "عبر ٩٩ تجربة عشوائية تفوّق صيام يوم بيوم قليلًا على تقييد السعرات المستمر في الوزن، لكن بعد ٢٤ أسبوعًا لم يتفوّق أي نمط صيام متقطّع على غيره."
+      },
+      "authors": "Semnani-Azad Z, Khan TA, Chiavaroli L, et al.",
+      "year": 2025,
+      "journal": "The BMJ",
+      "volume_pages": "389:e082007",
+      "doi": "10.1136/bmj-2024-082007",
+      "erratum_doi": "10.1136/bmj.r1737",
+      "study_type": "systematic review and network meta-analysis, 99 RCTs",
+      "sample_size": 6582,
+      "effect_size": "ADF -1.29 kg (95% CI -1.99 to -0.59) vs continuous restriction, GRADE moderate. In trials >=24 weeks (n=17), no strategy beat another",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Mapping the sunnah fasts (Monday/Thursday, Ayyam al-Bid, the fast of Dawud) onto 5:2 or alternate-day fasting is a STRUCTURAL ANALOGY, not a tested equivalence - no trial has compared them. Never claim they are proven equivalent.",
+        "id": "Memetakan puasa sunnah (Senin/Kamis, Ayyamul Bidh, puasa Dawud) ke 5:2 atau puasa selang-seling adalah ANALOGI STRUKTURAL, bukan kesetaraan teruji - belum ada uji yang membandingkannya. Jangan pernah mengklaim keduanya setara terbukti.",
+        "ar": "قياس صيام السنّة (الاثنين والخميس، وأيام البيض، وصوم داود) على نمطي ٥:٢ أو يوم بيوم مشابهةٌ بنيوية لا مكافأةٌ مُثبتة، إذ لم تقارنها تجربة. فلا يُدَّعى ثبوت التكافؤ."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_late_eating",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Under strictly matched calories, eating four hours later increased hunger, lowered waking energy expenditure and shifted fat tissue toward storage rather than burning.",
+        "id": "Dengan kalori yang sangat disamakan, makan empat jam lebih lambat meningkatkan rasa lapar, menurunkan pengeluaran energi saat bangun, dan menggeser jaringan lemak ke arah penyimpanan alih-alih pembakaran.",
+        "ar": "بسعرات مضبوطة تمامًا، أدّى تأخير الأكل أربع ساعات إلى زيادة الجوع وخفض صرف الطاقة عند اليقظة وميل النسيج الشحمي إلى التخزين بدل الحرق."
+      },
+      "authors": "Vujovic N, Piron MJ, Qian J, et al.",
+      "year": 2022,
+      "journal": "Cell Metabolism",
+      "volume_pages": "34(10):1486-1498.e7",
+      "doi": "10.1016/j.cmet.2022.09.007",
+      "study_type": "randomised controlled crossover, tightly controlled inpatient conditions",
+      "sample_size": null,
+      "effect_size": "Increased hunger (p<0.0001); decreased waketime energy expenditure (p=0.002); decreased 24-h core temperature (p=0.019)",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Strong as mechanism, but this was not a Ramadan trial. It supports eating the larger portion at iftar rather than late at night - that is inference, not direct evidence.",
+        "id": "Kuat sebagai mekanisme, tetapi ini bukan uji Ramadan. Ini mendukung makan porsi lebih besar saat iftar daripada larut malam - itu inferensi, bukan bukti langsung.",
+        "ar": "قويّ كآلية، لكنه ليس تجربة رمضانية. يسند جعل الحصة الأكبر عند الإفطار لا في جوف الليل، وهو استنباط لا دليل مباشر."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_hydration_cognition",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Twenty-four hours of water restriction impaired memory and mood, and rehydrating with about one litre restored processing speed and working memory.",
+        "id": "Pembatasan air selama 24 jam mengganggu memori dan suasana hati, dan rehidrasi sekitar satu liter memulihkan kecepatan pemrosesan dan memori kerja.",
+        "ar": "أضعف الحرمان من الماء أربعًا وعشرين ساعة الذاكرة والمزاج، وأعاد شرب نحو لتر سرعة المعالجة والذاكرة العاملة."
+      },
+      "authors": "Zhang J, Zhang N, Liang S, et al.",
+      "year": 2021,
+      "journal": "Nutrients",
+      "volume_pages": "13(9):3060",
+      "doi": "10.3390/nu13093060",
+      "study_type": "randomised controlled trial",
+      "sample_size": 76,
+      "effect_size": "1000 mL was the optimal rehydration volume for processing speed, working memory and mood",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Young adults under artificial restriction. A standing sceptical literature holds that hydration effects in normally-living young adults are inconsistent. Do not overclaim.",
+        "id": "Orang dewasa muda dalam pembatasan buatan. Ada literatur skeptis yang menyatakan efek hidrasi pada dewasa muda dengan hidup normal tidak konsisten. Jangan berlebihan.",
+        "ar": "شبابٌ تحت حرمان مصطنع، وثمّة أدبيات مشكّكة ترى أن أثر الترطيب لدى الشباب في الحياة الطبيعية غير متّسق. فلا تُبالغ."
+      },
+      "verified_at": "2026-08-13"
+    },
+
+    {
+      "id": "ev_handwashing",
+      "pillar": "physical",
+      "claim": {
+        "en": "Washing hands with soap reduced acute respiratory infection by 17% and gastrointestinal illness by about 31%. Antibacterial soap added nothing over plain soap.",
+        "id": "Mencuci tangan dengan sabun menurunkan infeksi saluran napas akut 17% dan penyakit saluran cerna sekitar 31%. Sabun antibakteri tidak menambah apa pun dibanding sabun biasa.",
+        "ar": "خفّض غسل اليدين بالصابون التهابات الجهاز التنفسي الحادة ١٧٪ وأمراض الجهاز الهضمي نحو ٣١٪. ولم يُضِف الصابون المضاد للبكتيريا شيئًا على الصابون العادي."
+      },
+      "authors": "Ross I, Bick S, Ayieko P, et al.",
+      "year": 2023,
+      "journal": "The Lancet",
+      "volume_pages": "401(10389):1681-1690",
+      "doi": "10.1016/S0140-6736(23)00021-1",
+      "study_type": "systematic review and meta-analysis, 26 studies / 27 comparisons (21 randomised)",
+      "sample_size": 161659,
+      "effect_size": "Acute respiratory infection RR 0.83 (95% CI 0.76-0.90), I2=88%",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Mostly low- and middle-income settings with very high heterogeneity. This is evidence for handwashing generally, not a measurement of wudu specifically.",
+        "id": "Sebagian besar di negara berpenghasilan rendah-menengah dengan heterogenitas sangat tinggi. Ini bukti untuk cuci tangan secara umum, bukan pengukuran wudhu secara khusus.",
+        "ar": "أغلبها في بلدان منخفضة ومتوسطة الدخل مع تباين عالٍ جدًا. وهو دليل على غسل اليدين عمومًا لا قياسٌ للوضوء بعينه."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_nap_dose_cap",
+      "pillar": "physical",
+      "claim": {
+        "en": "Naps under 60 minutes carry no measurable cardiovascular or mortality risk, but naps of an hour or more were associated with 82% higher cardiovascular risk. Keep the midday rest short.",
+        "id": "Tidur siang di bawah 60 menit tidak membawa risiko kardiovaskular atau kematian yang terukur, tetapi tidur satu jam atau lebih dikaitkan dengan risiko kardiovaskular 82% lebih tinggi. Buat qailulah tetap singkat.",
+        "ar": "القيلولة دون ستين دقيقة لا خطر قلبيًا أو وفاتيًا معلومًا لها، أما ساعة فأكثر فارتبطت بارتفاع خطر القلب ٨٢٪. فاجعل القيلولة قصيرة."
+      },
+      "authors": "Yamada T, Hara K, Shojima N, Yamauchi T, Kadowaki T",
+      "year": 2015,
+      "journal": "Sleep",
+      "volume_pages": "38(12):1945-1953",
+      "doi": "10.5665/sleep.5246",
+      "study_type": "meta-analysis, 11 prospective cohorts",
+      "sample_size": 151588,
+      "effect_size": ">=60 min: CVD RR 1.82 (1.22-2.71), mortality RR 1.27 (1.11-1.45). <60 min: not significant (p=0.98 / p=0.08)",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Observational, with likely confounding by underlying illness - sick people nap longer. This is a reason to CAP nap length in guidance, not to claim long naps cause disease.",
+        "id": "Observasional, dengan kemungkinan perancu penyakit yang mendasari - orang sakit tidur lebih lama. Ini alasan untuk MEMBATASI durasi tidur siang dalam panduan, bukan mengklaim tidur panjang menyebabkan penyakit.",
+        "ar": "رصديّ مع احتمال إرباك المرض الكامن، فالمريض ينام أطول. وهذا سبب لتحديد مدة القيلولة في الإرشاد لا لادّعاء أن طولها يُمرض."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_nap_genetics_mr",
+      "pillar": "physical",
+      "claim": {
+        "en": "Genetic analysis designed to test cause and effect (Mendelian randomization) found that a genetic tendency toward more frequent daytime napping causally raised blood pressure and waist circumference - napping frequency is not just a marker of poor health, it may contribute to it.",
+        "id": "Analisis genetik yang dirancang untuk menguji sebab-akibat (randomisasi Mendel) menemukan bahwa kecenderungan genetik untuk lebih sering tidur siang secara kausal meningkatkan tekanan darah dan lingkar pinggang - frekuensi tidur siang bukan sekadar penanda kesehatan buruk, tetapi bisa turut menyebabkannya.",
+        "ar": ""
+      },
+      "authors": "Dashti HS, Daghlas I, Lane JM, et al.",
+      "year": 2021,
+      "journal": "Nature Communications",
+      "volume_pages": "12:900",
+      "doi": "10.1038/s41467-020-20585-3",
+      "study_type": "genome-wide association study plus Mendelian randomization, UK Biobank discovery with 23andMe replication",
+      "sample_size": 452633,
+      "effect_size": "123 napping-associated loci identified, 61 replicated in an independent 23andMe cohort (n=541,333); Mendelian randomization supported a causal effect of more frequent napping on higher blood pressure and larger waist circumference",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "This is genetic evidence for napping FREQUENCY, not duration, so it corroborates but does not replace ev_nap_dose_cap's cohort finding that naps under 60 minutes carry no measurable added risk - the two designs answer related but distinct questions. Single study, though very large and independently replicated.",
+        "id": "Ini bukti genetik untuk FREKUENSI tidur siang, bukan durasi, sehingga memperkuat namun tidak menggantikan temuan kohort ev_nap_dose_cap bahwa tidur siang di bawah 60 menit tidak menambah risiko terukur - kedua desain menjawab pertanyaan yang terkait tetapi berbeda. Studi tunggal, meski sangat besar dan direplikasi independen.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
+      "id": "ev_sleep_timing",
+      "pillar": "mental",
+      "claim": {
+        "en": "A mismatch between body-clock timing and actual sleep schedule was independently linked to worse cholesterol, higher insulin resistance and more body fat. Regular sleep timing matters beyond sleep quantity.",
+        "id": "Ketidaksesuaian antara jam biologis dan jadwal tidur aktual berhubungan independen dengan kolesterol lebih buruk, resistensi insulin lebih tinggi, dan lemak tubuh lebih banyak. Keteraturan waktu tidur penting melebihi jumlah tidur.",
+        "ar": "ارتبط التفاوت بين الساعة البيولوجية وجدول النوم الفعلي ارتباطًا مستقلًا بسوء الدهون وارتفاع مقاومة الإنسولين وزيادة الشحم. فانتظام توقيت النوم مهمّ وراء كمّه."
+      },
+      "authors": "Wong PM, Hasler BP, Kamarck TW, Muldoon MF, Manuck SB",
+      "year": 2015,
+      "journal": "Journal of Clinical Endocrinology & Metabolism",
+      "volume_pages": "100(12):4612-4620",
+      "doi": "10.1210/jc.2015-2923",
+      "study_type": "cross-sectional",
+      "sample_size": 447,
+      "effect_size": "Associations with HDL, triglycerides, fasting insulin, insulin resistance and adiposity all p<0.05, adjusted for sleep quality and health behaviours",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "Cross-sectional, in a largely white US day-shift sample. It does NOT test Fajr or Isha timing specifically. Frame as regular sleep timing, never as 'Fajr is proven metabolic medicine'.",
+        "id": "Potong-lintang, pada sampel pekerja siang AS yang sebagian besar kulit putih. Ini TIDAK menguji waktu Subuh atau Isya secara khusus. Sampaikan sebagai keteraturan waktu tidur, bukan 'Subuh terbukti sebagai obat metabolik'.",
+        "ar": "مقطعية على عيّنة أمريكية نهارية أغلبها من البيض، ولا تختبر توقيت الفجر أو العشاء بعينه. فليُصَغ الأمر انتظامًا في التوقيت لا أن 'الفجر دواء أيضي مُثبت'."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_vitamin_d_veiled",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Sixty percent of women in a national sample were vitamin D deficient, and covering dress was the strongest independent risk factor. Supplementation - not sun-exposure guilt - is the answer.",
+        "id": "Enam puluh persen perempuan dalam sampel nasional mengalami defisiensi vitamin D, dan busana tertutup adalah faktor risiko independen terkuat. Suplementasi - bukan rasa bersalah soal paparan matahari - adalah jawabannya.",
+        "ar": "ستون بالمئة من النساء في عيّنة وطنية لديهنّ نقص فيتامين د، وكان اللباس الساتر أقوى عامل خطر مستقل. والحلّ المكمّلات لا تأنيب الضمير بشأن الشمس."
+      },
+      "authors": "Nichols EK, Khatib IMD, Aburto NJ, et al.",
+      "year": 2012,
+      "journal": "European Journal of Clinical Nutrition",
+      "volume_pages": "66(6):751-756",
+      "doi": "10.1038/ejcn.2012.25",
+      "study_type": "nationally representative survey, LC-MS/MS assay",
+      "sample_size": 2013,
+      "effect_size": "60.3% deficient (<12 ng/mL); 95.7% insufficient (<20 ng/mL); prevalence ratio 1.60 (1.06-2.40) hijab, 1.87 (1.20-2.93) niqab",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "One Bangladeshi study found no significant effect of covering dress, so the finding is not universal across populations. Supplementation dosing is a medical decision - point users to a clinician, do not prescribe a dose.",
+        "id": "Satu studi Bangladesh tidak menemukan efek bermakna dari busana tertutup, sehingga temuan ini tidak universal. Dosis suplementasi adalah keputusan medis - arahkan pengguna ke dokter, jangan meresepkan dosis.",
+        "ar": "لم تجد دراسة بنغلاديشية أثرًا معتدًّا به للّباس الساتر، فليس الأمر مطّردًا في كل المجتمعات. وجرعة المكمّل قرار طبي، فأحِل المستخدم إلى طبيب ولا تصف جرعة."
+      },
+      "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_vitamin_d_veiled_replication",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "A 2025 national survey of 2,803 women in Lebanon independently replicated the hijab-vitamin D link: covering dress was the strongest risk factor for deficiency, in a different country and population than the original finding.",
+        "id": "Survei nasional 2025 pada 2.803 perempuan di Lebanon secara independen mereplikasi kaitan hijab-vitamin D: busana tertutup adalah faktor risiko terkuat untuk defisiensi, di negara dan populasi yang berbeda dari temuan aslinya.",
+        "ar": ""
+      },
+      "authors": "El-Mallah C, Yarparvar A, Galetti V, et al.",
+      "year": 2025,
+      "journal": "Nutrients",
+      "volume_pages": "17(5):804",
+      "doi": "10.3390/nu17050804",
+      "study_type": "national cross-sectional survey, LC-MS/MS-class serum assay",
+      "sample_size": 2803,
+      "effect_size": "Deficiency (<30 nmol/L) 37.9%; hypovitaminosis D (<50 nmol/L) 69.2%. Hijab was the strongest independent risk factor: adjusted prevalence ratio 3.76 for deficiency, 1.47 for hypovitaminosis D. Daily sun exposure >1 hour and supplementation were protective (aPR 0.83-0.91 and 0.30-0.55).",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Uses a different deficiency cutoff (<30 nmol/L) than Nichols 2012 (<12 ng/mL, roughly equivalent), and a different country (Lebanon vs Jordan) - this is an independent replication in a new population, not a re-analysis of the same data. Supplementation dosing remains a medical decision; point users to a clinician rather than prescribing a dose.",
+        "id": "Menggunakan ambang defisiensi berbeda (<30 nmol/L) dari Nichols 2012 (<12 ng/mL, kurang lebih setara), dan negara berbeda (Lebanon vs Yordania) - ini replikasi independen pada populasi baru, bukan analisis ulang data yang sama. Dosis suplementasi tetap keputusan medis; arahkan pengguna ke dokter, bukan meresepkan dosis.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
+      "id": "ev_habit_stacking",
+      "pillar": "mental",
+      "claim": {
+        "en": "Anchoring a new small behaviour to an existing routine cue roughly doubles how long people keep it up, compared with time-based reminders.",
+        "id": "Menautkan perilaku kecil baru pada pemicu rutinitas yang sudah ada kira-kira menggandakan lamanya orang bertahan, dibanding pengingat berbasis waktu.",
+        "ar": "ربط سلوك صغير جديد بمحفّز روتيني قائم يضاعف تقريبًا مدة الاستمرار عليه مقارنة بالتنبيهات الزمنية."
+      },
+      "authors": "Gardner B, Lally P, Wardle J",
+      "year": 2012,
+      "journal": "British Journal of General Practice",
+      "volume_pages": "62(605):664-666",
+      "doi": "10.3399/bjgp12X659466",
+      "study_type": "review of habit-formation evidence in practice",
+      "sample_size": null,
+      "effect_size": "Context-dependent repetition is the core mechanism of automaticity; median time to automaticity 66 days (range 18-254)",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "This is a practice review rather than a trial. The 66-day median comes from a single small study with wide variance - never present it as a fixed rule.",
+        "id": "Ini tinjauan praktik, bukan uji klinis. Median 66 hari berasal dari satu studi kecil dengan variasi lebar - jangan pernah menyajikannya sebagai aturan pasti.",
+        "ar": "مراجعة ممارسة لا تجربة. والوسيط ٦٦ يومًا من دراسة صغيرة واحدة بتباين واسع، فلا يُقدَّم قاعدةً ثابتة."
+      },
+      "verified_at": "2026-08-13"
+    }
+  ]
+}

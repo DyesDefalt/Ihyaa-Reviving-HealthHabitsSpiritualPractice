@@ -1,0 +1,503 @@
+{
+  "$schema_version": "1.0",
+  "_README": "Quran references (surah:ayah) are stable and safe to ship. HADITH REFERENCE NUMBERS ARE THE WEAKEST LINK IN THIS ENTIRE DATASET. Three independent research passes on 2026-08-13 were unable to verify hadith numbers with any tool. Every hadith below therefore ships as verification_status='pending_scholar_review' and is BLOCKED from rendering until a qualified reviewer confirms collection, number, wording and grading. Only 'sahih' and 'hasan' gradings are permitted - see product decision 2026-08-13. Never add a hadith from memory and never mark one 'verified' without a named human reviewer.",
+  "_grading_policy": {
+    "allowed": [
+      "sahih",
+      "hasan"
+    ],
+    "blocked": [
+      "daif",
+      "mawdu",
+      "unknown"
+    ],
+    "rationale": "Much popular prophetic-medicine content rests on weak or fabricated narrations. For a health app whose credibility depends on scholarly defensibility, weak narrations are a liability, not content."
+  },
+  "_verification_workflow": "1) A qualified reviewer checks collection + number + wording against a printed or authoritative edition. 2) Reviewer confirms the grading and who graded it. 3) Set verification_status='verified', fill reviewed_by and reviewed_at. 4) scripts/verify_evidence.py will then allow it to ship.",
+  "sources": [
+    {
+      "id": "is_fasting_prescribed",
+      "type": "quran",
+      "reference": "2:183-185",
+      "surah_name": "Al-Baqarah",
+      "text": {
+        "en": "O you who believe, fasting is prescribed for you as it was prescribed for those before you, so that you may become mindful of God... God intends ease for you, not hardship.",
+        "id": "Wahai orang-orang yang beriman, diwajibkan atas kamu berpuasa sebagaimana diwajibkan atas orang sebelum kamu, agar kamu bertakwa... Allah menghendaki kemudahan bagimu, bukan kesukaran.",
+        "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ... يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ"
+      },
+      "note": "The same passage grants explicit exemption to the sick and the traveller - the scriptural basis for the app's medical safety gate.",
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_eat_not_excess",
+      "type": "quran",
+      "reference": "7:31",
+      "surah_name": "Al-A'raf",
+      "text": {
+        "en": "Eat and drink, but be not excessive. Indeed, He does not love those who commit excess.",
+        "id": "Makan dan minumlah, tetapi jangan berlebihan. Sungguh, Dia tidak menyukai orang-orang yang berlebihan.",
+        "ar": "وَكُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا ۚ إِنَّهُ لَا يُحِبُّ الْمُسْرِفِينَ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_wudu",
+      "type": "quran",
+      "reference": "5:6",
+      "surah_name": "Al-Ma'idah",
+      "text": {
+        "en": "O you who believe, when you rise for prayer, wash your faces and your forearms to the elbows, wipe your heads and wash your feet to the ankles.",
+        "id": "Wahai orang-orang yang beriman, apabila kamu hendak melaksanakan shalat, basuhlah wajahmu dan tanganmu sampai ke siku, sapulah kepalamu, dan basuh kakimu sampai ke mata kaki.",
+        "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_purify",
+      "type": "quran",
+      "reference": "2:222",
+      "surah_name": "Al-Baqarah",
+      "text": {
+        "en": "Indeed, God loves those who turn to Him constantly and loves those who keep themselves pure.",
+        "id": "Sungguh, Allah menyukai orang yang bertaubat dan menyukai orang yang menyucikan diri.",
+        "ar": "إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ وَيُحِبُّ الْمُتَطَهِّرِينَ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_honey",
+      "type": "quran",
+      "reference": "16:69",
+      "surah_name": "An-Nahl",
+      "text": {
+        "en": "From their bellies comes a drink of varying colours, in which there is healing for people.",
+        "id": "Dari perutnya keluar minuman beraneka warna, di dalamnya terdapat obat bagi manusia.",
+        "ar": "يَخْرُجُ مِن بُطُونِهَا شَرَابٌ مُّخْتَلِفٌ أَلْوَانُهُ فِيهِ شِفَاءٌ لِّلنَّاسِ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_olive",
+      "type": "quran",
+      "reference": "24:35",
+      "surah_name": "An-Nur",
+      "text": {
+        "en": "Lit from a blessed tree, an olive, neither of the east nor of the west, whose oil almost glows though untouched by fire.",
+        "id": "Dinyalakan dari pohon yang berkah, zaitun, yang bukan di timur maupun di barat, yang minyaknya hampir menerangi walau tidak disentuh api.",
+        "ar": "يُوقَدُ مِن شَجَرَةٍ مُّبَارَكَةٍ زَيْتُونَةٍ لَّا شَرْقِيَّةٍ وَلَا غَرْبِيَّةٍ يَكَادُ زَيْتُهَا يُضِيءُ وَلَوْ لَمْ تَمْسَسْهُ نَارٌ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_fig_olive",
+      "type": "quran",
+      "reference": "95:1",
+      "surah_name": "At-Tin",
+      "text": {
+        "en": "By the fig and the olive.",
+        "id": "Demi buah tin dan buah zaitun.",
+        "ar": "وَالتِّينِ وَالزَّيْتُونِ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_water_life",
+      "type": "quran",
+      "reference": "21:30",
+      "surah_name": "Al-Anbiya",
+      "text": {
+        "en": "And We made from water every living thing. Will they not then believe?",
+        "id": "Dan Kami jadikan segala sesuatu yang hidup berasal dari air. Maka mengapa mereka tidak beriman?",
+        "ar": "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ ۖ أَفَلَا يُؤْمِنُونَ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_date_palm",
+      "type": "quran",
+      "reference": "19:25",
+      "surah_name": "Maryam",
+      "text": {
+        "en": "And shake toward you the trunk of the palm tree; it will drop upon you ripe, fresh dates.",
+        "id": "Dan goyanglah pangkal pohon kurma itu ke arahmu, niscaya ia akan menjatuhkan kurma masak kepadamu.",
+        "ar": "وَهُزِّي إِلَيْكِ بِجِذْعِ النَّخْلَةِ تُسَاقِطْ عَلَيْكِ رُطَبًا جَنِيًّا"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_alcohol",
+      "type": "quran",
+      "reference": "5:90-91",
+      "surah_name": "Al-Ma'idah",
+      "text": {
+        "en": "O you who believe, intoxicants, gambling, idols and divining arrows are but defilement from the work of Satan, so avoid it that you may be successful.",
+        "id": "Wahai orang-orang yang beriman, sesungguhnya minuman keras, judi, berhala, dan mengundi nasib adalah kekejian dari perbuatan setan, maka jauhilah agar kamu beruntung.",
+        "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّمَا الْخَمْرُ وَالْمَيْسِرُ وَالْأَنصَابُ وَالْأَزْلَامُ رِجْسٌ مِّنْ عَمَلِ الشَّيْطَانِ فَاجْتَنِبُوهُ لَعَلَّكُمْ تُفْلِحُونَ"
+      },
+      "note": "Pairs with ev_alcohol_no_safe_level - the observational 'moderate drinking is protective' J-curve was a confounding artefact.",
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_modest_dress",
+      "type": "quran",
+      "reference": "24:31",
+      "surah_name": "An-Nur",
+      "text": {
+        "en": "And tell the believing women to lower their gaze and guard their modesty, and to draw their coverings over their bosoms.",
+        "id": "Dan katakanlah kepada para perempuan beriman agar menahan pandangan dan memelihara kemaluan mereka, dan menutupkan kain kerudung ke dada mereka.",
+        "ar": "وَقُل لِّلْمُؤْمِنَاتِ يَغْضُضْنَ مِنْ أَبْصَارِهِنَّ وَيَحْفَظْنَ فُرُوجَهُنَّ وَلْيَضْرِبْنَ بِخُمُرِهِنَّ عَلَىٰ جُيُوبِهِنَّ"
+      },
+      "note": "Paired with ev_vitamin_d_veiled. The framing must be practical support (supplementation, clinician referral) and never guilt about observing hijab.",
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_guard_prayers",
+      "type": "quran",
+      "reference": "2:238",
+      "surah_name": "Al-Baqarah",
+      "text": {
+        "en": "Guard strictly the prayers, especially the middle prayer, and stand before God devoutly obedient.",
+        "id": "Peliharalah semua shalat dan shalat wustha. Dan laksanakanlah shalat karena Allah dengan khusyuk.",
+        "ar": "حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_prayer_times",
+      "type": "quran",
+      "reference": "17:78-79",
+      "surah_name": "Al-Isra",
+      "text": {
+        "en": "Establish prayer at the decline of the sun until the darkness of the night, and the recitation at dawn - indeed, the recitation at dawn is ever witnessed.",
+        "id": "Laksanakanlah shalat sejak matahari tergelincir sampai gelapnya malam, dan bacaan fajar. Sungguh, bacaan fajar itu disaksikan.",
+        "ar": "أَقِمِ الصَّلَاةَ لِدُلُوكِ الشَّمْسِ إِلَىٰ غَسَقِ اللَّيْلِ وَقُرْآنَ الْفَجْرِ ۖ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا"
+      },
+      "note": "Scriptural anchor for prayer-timed habits. Do NOT attach ev_sleep_timing as proof that Fajr is metabolic medicine - that study tested neither.",
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_night_rest",
+      "type": "quran",
+      "reference": "78:9-11",
+      "surah_name": "An-Naba",
+      "text": {
+        "en": "And We made your sleep a means of rest, and made the night a covering, and made the day for livelihood.",
+        "id": "Dan Kami jadikan tidurmu untuk istirahat, dan Kami jadikan malam sebagai pakaian, dan Kami jadikan siang untuk mencari penghidupan.",
+        "ar": "وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا وَجَعَلْنَا اللَّيْلَ لِبَاسًا وَجَعَلْنَا النَّهَارَ مَعَاشًا"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_hearts_rest",
+      "type": "quran",
+      "reference": "13:28",
+      "surah_name": "Ar-Ra'd",
+      "text": {
+        "en": "Surely in the remembrance of God do hearts find rest.",
+        "id": "Ingatlah, hanya dengan mengingat Allah hati menjadi tenang.",
+        "ar": "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ"
+      },
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_prostrate_near",
+      "type": "quran",
+      "reference": "96:19",
+      "surah_name": "Al-Alaq",
+      "text": {
+        "en": "But prostrate and draw near to God.",
+        "id": "Dan sujudlah serta dekatkanlah dirimu kepada Allah.",
+        "ar": "وَاسْجُدْ وَاقْتَرِب"
+      },
+      "note": "May be paired with ev_salah_autonomic ONLY. There is no human evidence for cerebral blood flow during sujud - never make that claim.",
+      "verification_status": "verified",
+      "reviewed_by": "quran_reference_stable",
+      "reviewed_at": "2026-08-13"
+    },
+    {
+      "id": "is_black_seed",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "5688",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "In the black seed there is healing for every disease except death.",
+        "id": "Dalam habbatussauda terdapat obat untuk setiap penyakit kecuali kematian.",
+        "ar": "إِنَّ فِي الْحَبَّةِ السَّوْدَاءِ شِفَاءً مِنْ كُلِّ دَاءٍ إِلَّا السَّامَ"
+      },
+      "review_note": "Number could not be tool-verified; wording varies by edition. Scholars differ on how 'every disease' is to be understood - the app must not present this as a claim of universal cure. Pair only with ev_blackseed_glycemia / ev_blackseed_bp.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_one_third_rule",
+      "type": "hadith",
+      "collection": "Jami at-Tirmidhi",
+      "reference": "2380",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "hasan",
+      "grader": "at-Tirmidhi",
+      "text": {
+        "en": "If he must eat more, then one third for his food, one third for his drink and one third for his breath.",
+        "id": "Jika ia harus makan lebih, maka sepertiga untuk makanannya, sepertiga untuk minumannya, dan sepertiga untuk napasnya.",
+        "ar": "فَإِنْ كَانَ لَا مَحَالَةَ فَثُلُثٌ لِطَعَامِهِ وَثُلُثٌ لِشَرَابِهِ وَثُلُثٌ لِنَفَسِهِ"
+      },
+      "review_note": "Graded hasan rather than sahih in most gradings - permitted under policy but the grade must be displayed. Also narrated in Sunan Ibn Majah. Pair with ev_caloric_restriction (CALERIE), NOT with the Okinawan 'hara hachi bu' literature which is observational only.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_steps_masjid",
+      "type": "hadith",
+      "collection": "Sahih Muslim",
+      "reference": "654",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "Muslim (in his Sahih)",
+      "text": {
+        "en": "He does not take a step toward the mosque but that by it a degree is raised for him and a sin is erased from him.",
+        "id": "Tidaklah ia melangkah satu langkah menuju masjid melainkan dengannya diangkat baginya satu derajat dan dihapus darinya satu kesalahan.",
+        "ar": "مَا خَطَا خَطْوَةً إِلَّا رُفِعَتْ لَهُ بِهَا دَرَجَةٌ وَحُطَّتْ عَنْهُ بِهَا خَطِيئَةٌ"
+      },
+      "review_note": "Number could not be tool-verified. Pairs with the strongest evidence in the whole dataset (ev_steps_mortality, ev_steps_7000_target).",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_strong_believer",
+      "type": "hadith",
+      "collection": "Sahih Muslim",
+      "reference": "2664",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "Muslim (in his Sahih)",
+      "text": {
+        "en": "The strong believer is better and more beloved to God than the weak believer, though in both there is good.",
+        "id": "Mukmin yang kuat lebih baik dan lebih dicintai Allah daripada mukmin yang lemah, dan pada keduanya ada kebaikan.",
+        "ar": "الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ وَفِي كُلٍّ خَيْرٌ"
+      },
+      "review_note": "Number could not be tool-verified. The scholarly reading is that 'strength' here is primarily strength of faith and resolve; physical strength is a defensible secondary application, not the primary meaning. Do not overclaim.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_drink_seated_sips",
+      "type": "hadith",
+      "collection": "Jami at-Tirmidhi",
+      "reference": "1885",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "hasan",
+      "grader": "at-Tirmidhi",
+      "text": {
+        "en": "Do not drink in one gulp like a camel, but drink in two or three breaths, saying Bismillah when you drink and Alhamdulillah when you finish.",
+        "id": "Jangan minum sekali teguk seperti unta, tetapi minumlah dalam dua atau tiga tarikan napas, ucapkan Bismillah saat minum dan Alhamdulillah saat selesai.",
+        "ar": "لَا تَشْرَبُوا وَاحِدًا كَشُرْبِ الْبَعِيرِ وَلَكِنِ اشْرَبُوا مَثْنَى وَثُلَاثَ وَسَمُّوا إِذَا أَنْتُمْ شَرِبْتُمْ وَاحْمَدُوا إِذَا أَنْتُمْ رَفَعْتُمْ"
+      },
+      "review_note": "Number could not be tool-verified. NOTE: the app previously attached a '24% metabolic rate for 90 minutes' claim here. The real source measured 24% over 60 minutes and a later paper failed to replicate it - that claim has been removed, and this narration is now paired with ev_hydration_cognition instead.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_eating_adab",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "5376",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "Say the name of God, eat with your right hand, and eat from what is nearest to you.",
+        "id": "Sebutlah nama Allah, makanlah dengan tangan kananmu, dan makanlah dari yang terdekat denganmu.",
+        "ar": "سَمِّ اللَّهَ وَكُلْ بِيَمِينِكَ وَكُلْ مِمَّا يَلِيكَ"
+      },
+      "review_note": "Number could not be tool-verified. Pair with ev_eating_rate - the supported science is eating RATE, not 'mindfulness'.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_iftar_dates",
+      "type": "hadith",
+      "collection": "Sunan Abi Dawud",
+      "reference": "2355",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "hasan",
+      "grader": "commonly graded hasan; confirm with reviewer",
+      "text": {
+        "en": "When one of you breaks his fast, let him break it with dates, for they are a blessing.",
+        "id": "Apabila salah seorang dari kalian berbuka, hendaklah ia berbuka dengan kurma, karena ia berkah.",
+        "ar": "إِذَا أَفْطَرَ أَحَدُكُمْ فَلْيُفْطِرْ عَلَى تَمْرٍ فَإِنَّهُ بَرَكَةٌ"
+      },
+      "review_note": "Number could not be tool-verified. Pair with ev_dates_gi. Do NOT attach Ajwa cardioprotective or antidote claims - no trial supports them.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_suhoor_blessing",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "1923",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "Take suhoor, for in suhoor there is blessing.",
+        "id": "Bersahurlah, karena dalam sahur itu terdapat berkah.",
+        "ar": "تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً"
+      },
+      "review_note": "Number could not be tool-verified. Keep the sunnah framing. Do NOT claim that skipping suhoor causes diabetes - no study tests suhoor-skipping on hard outcomes, and the breakfast literature is observational and contradicted by RCTs.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_siwak",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "887",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "Were it not that it would burden my community, I would have ordered them to use the siwak at every prayer.",
+        "id": "Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali shalat.",
+        "ar": "لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ صَلَاةٍ"
+      },
+      "review_note": "Number could not be tool-verified. Pair with ev_miswak_adjunct AND its harm caveat - miswak is equivalent, not superior, to a toothbrush, and aggressive technique causes gum recession.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_barakah_morning",
+      "type": "hadith",
+      "collection": "Sunan Abi Dawud",
+      "reference": "2606",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "hasan",
+      "grader": "commonly graded hasan; confirm with reviewer",
+      "text": {
+        "en": "O God, bless my community in their early mornings.",
+        "id": "Ya Allah, berkahilah umatku pada waktu pagi mereka.",
+        "ar": "اللَّهُمَّ بَارِكْ لِأُمَّتِي فِي بُكُورِهَا"
+      },
+      "review_note": "Number could not be tool-verified. Pair with ev_sleep_timing framed as regular sleep timing only.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_mon_thu_fast",
+      "type": "hadith",
+      "collection": "Jami at-Tirmidhi",
+      "reference": "747",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "hasan",
+      "grader": "at-Tirmidhi",
+      "text": {
+        "en": "Deeds are presented on Monday and Thursday, and I love that my deeds be presented while I am fasting.",
+        "id": "Amal-amal dihadapkan pada hari Senin dan Kamis, dan aku suka amalku dihadapkan saat aku berpuasa.",
+        "ar": "تُعْرَضُ الْأَعْمَالُ يَوْمَ الِاثْنَيْنِ وَالْخَمِيسِ فَأُحِبُّ أَنْ يُعْرَضَ عَمَلِي وَأَنَا صَائِمٌ"
+      },
+      "review_note": "Number could not be tool-verified. Pair with ev_if_no_winner and its caveat - the mapping to 5:2 is a structural analogy, never a proven equivalence. MUST be gated by the fasting safety check.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_ayyam_bid",
+      "type": "hadith",
+      "collection": "Sunan an-Nasa'i",
+      "reference": "2420",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "commonly graded sahih; confirm with reviewer",
+      "text": {
+        "en": "Fasting three days of each month is fasting for a lifetime - the white days, the thirteenth, fourteenth and fifteenth.",
+        "id": "Puasa tiga hari setiap bulan adalah seperti puasa sepanjang masa - hari-hari putih, tanggal 13, 14, dan 15.",
+        "ar": "صِيَامُ ثَلَاثَةِ أَيَّامٍ مِنْ كُلِّ شَهْرٍ صِيَامُ الدَّهْرِ أَيَّامُ الْبِيضِ الثَّالِثَةَ عَشْرَةَ وَالرَّابِعَةَ عَشْرَةَ وَالْخَامِسَةَ عَشْرَةَ"
+      },
+      "review_note": "Number could not be tool-verified. Drives the monthly Hijri periodization block. MUST be gated by the fasting safety check.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_dawud_fast",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "1131",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "The most beloved fasting to God is the fasting of Dawud; he would fast a day and break his fast a day.",
+        "id": "Puasa yang paling dicintai Allah adalah puasa Dawud; beliau berpuasa sehari dan berbuka sehari.",
+        "ar": "أَحَبُّ الصِّيَامِ إِلَى اللَّهِ صِيَامُ دَاوُدَ كَانَ يَصُومُ يَوْمًا وَيُفْطِرُ يَوْمًا"
+      },
+      "review_note": "Number could not be tool-verified. Structurally resembles alternate-day fasting, the only IF pattern that beat continuous restriction - but see ev_if_no_winner: the advantage vanishes beyond 24 weeks. Advanced users only, and MUST be safety-gated.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_body_right_over_you",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "5199",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "Your body has a right over you.",
+        "id": "Sesungguhnya tubuhmu memiliki hak atasmu.",
+        "ar": "إِنَّ لِجَسَدِكَ عَلَيْكَ حَقًّا"
+      },
+      "review_note": "Number could not be tool-verified. This is the single most important narration for the app's thesis - physical health as a religious obligation, not vanity. Worth prioritising for scholarly verification.",
+      "verification_status": "pending_scholar_review"
+    },
+    {
+      "id": "is_two_blessings",
+      "type": "hadith",
+      "collection": "Sahih al-Bukhari",
+      "reference": "6412",
+      "reference_confidence": "commonly_cited_unverified",
+      "grading": "sahih",
+      "grader": "al-Bukhari (in his Sahih)",
+      "text": {
+        "en": "There are two blessings which many people squander: health and free time.",
+        "id": "Dua nikmat yang banyak manusia tertipu padanya: kesehatan dan waktu luang.",
+        "ar": "نِعْمَتَانِ مَغْبُونٌ فِيهِمَا كَثِيرٌ مِنَ النَّاسِ الصِّحَّةُ وَالْفَرَاغُ"
+      },
+      "review_note": "Number could not be tool-verified. Core framing narration for the app's body-first positioning.",
+      "verification_status": "pending_scholar_review"
+    }
+  ],
+  "_excluded_claims": {
+    "_note": "Recorded deliberately so nobody re-adds them later. Each was checked against the literature on 2026-08-13 and found unsupported or contradicted.",
+    "salah_calorie_burn": "No indirect-calorimetry study of salah energy expenditure exists. Never publish a kcal or MET figure for prayer.",
+    "sujud_cerebral_blood_flow": "No human study measures cerebral blood flow or intracranial pressure during prostration. Only small unblinded EEG/HRV work exists (ev_salah_autonomic).",
+    "salah_cures_back_pain": "Zero RCTs. All supporting literature is cross-sectional or in non-indexed journals.",
+    "right_side_sleeping_health": "Evidence points the OTHER way: for reflux the LEFT lateral position is superior (Schuitenmaker 2021, doi 10.14309/ajg.0000000000001588). Ship right-side sleeping as sunnah practice with NO clinical claim.",
+    "hijama_efficacy": "Fails against sham in every well-controlled trial (Cramer 2020, doi 10.1016/j.jpain.2020.01.002: vs sham SMD -0.27, not significant), blinding demonstrably failed, and adverse events exceed no-treatment. Sunnah practice only, no efficacy claim.",
+    "istinshaq_nasal_irrigation": "No evidence bridges the brief nasal sniffing of wudu to therapeutic saline irrigation.",
+    "camel_milk_autism": "One RCT, no effect, strength of evidence graded INSUFFICIENT (Sathe 2017, doi 10.1542/peds.2017-0346).",
+    "black_seed_weight_loss": "Null for weight, BMI, insulin and HOMA-IR in the 2025 meta-analysis.",
+    "ajwa_antidote_cardioprotective": "No supporting RCT; the only 12-week T2DM trial was null.",
+    "talbina_for_depression": "No human clinical trial located. Barley is a lipid card, not a mood card.",
+    "ramadan_as_weight_loss": "Effects revert within 2-5 weeks and ~30% of loss is fat-free mass (ev_ramadan_transient).",
+    "qaylulah_hadith_reference": "REMOVED 2026-08-13: the narration is well known but its collection and number could not be verified with any tool, and a placeholder must never ship. The p_qaylulah habit now rests on ev_nap_dose_cap alone. Re-add only with a reviewer-confirmed collection + number."
+  }
+}

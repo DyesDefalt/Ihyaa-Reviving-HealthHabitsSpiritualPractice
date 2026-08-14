@@ -94,6 +94,15 @@ def serialize_task(task: DailyTask, lang: str, timings: dict | None = None,
         "quran_reference": content.get("quran_reference"),
         "hadith_reference": content.get("hadith_reference"),
         "science_reference": content.get("science_reference"),
+        # Structured sourcing. The client can show the DOI, the study type, the
+        # effect size and the caveat, and can badge a card by evidence grade.
+        # `hadith` is empty whenever a narration has not cleared scholar review.
+        "evidence": content.get("evidence", []),
+        "quran": content.get("quran", []),
+        "hadith": content.get("hadith", []),
+        "evidence_grade": content.get("evidence_grade"),
+        "target_steps": content.get("target_steps"),
+        "family_key": content.get("family_key"),
     }
 
 
@@ -136,9 +145,9 @@ async def current_user(request: Request) -> User:
 async def startup() -> None:
     await ensure_indexes()
     db = get_db()
-    for email_key, pass_key, name, role in (
-        ("ADMIN_EMAIL", "ADMIN_PASSWORD", "Ihyaa Admin", "admin"),
-        ("DEMO_EMAIL", "DEMO_PASSWORD", "Demo User", "user"),
+    for email_key, pass_key, name, role, is_pro in (
+        ("ADMIN_EMAIL", "ADMIN_PASSWORD", "Ihyaa Admin", "admin", True),
+        ("DEMO_EMAIL", "DEMO_PASSWORD", "Demo User", "user", False),
     ):
         email = os.environ.get(email_key)
         password = os.environ.get(pass_key)
@@ -146,12 +155,14 @@ async def startup() -> None:
             continue
         existing = await db.users.find_one({"email": email.lower()})
         if existing is None:
-            user = User(email=email.lower(), name=name, role=role,
+            user = User(email=email.lower(), name=name, role=role, is_pro=is_pro,
                         password_hash=A.hash_password(password))
             await db.users.insert_one(user.to_mongo())
-        elif not A.verify_password(password, existing.get("password_hash") or ""):
-            await db.users.update_one({"_id": existing["_id"]},
-                                      {"$set": {"password_hash": A.hash_password(password)}})
+        else:
+            updates = {"role": role, "is_pro": is_pro}
+            if not A.verify_password(password, existing.get("password_hash") or ""):
+                updates["password_hash"] = A.hash_password(password)
+            await db.users.update_one({"_id": existing["_id"]}, {"$set": updates})
 
 
 @app.get("/api/health")

@@ -1,0 +1,353 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "nutrition",
+  "_README": "Body-first pillar alongside physical. Anything touching fasting, black seed or honey MUST declare the matching contraindication tag - safety.py filters on these and the tests assert it.",
+
+  "families": [
+    {
+      "key": "n_water",
+      "family": "hydration",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": ["ev_hydration_cognition"],
+      "islamic_source_ids": ["is_drink_seated_sips", "is_water_life"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura", "shawwal_six"],
+      "title": {"en": "Water, Seated, in Three Sips", "id": "Air, Duduk, Tiga Tegukan", "ar": "المَاءُ جَالِسًا عَلَى ثَلَاثِ دَفَعَات"},
+      "desc": {
+        "en": "First thing after waking: sit down, say Bismillah, and drink unhurried. Being properly hydrated measurably protects memory and mood.",
+        "id": "Hal pertama setelah bangun: duduk, ucapkan Bismillah, dan minum tanpa tergesa. Terhidrasi dengan baik secara terukur melindungi memori dan suasana hati.",
+        "ar": "أوّلَ ما تستيقظ: اجلس، وسمِّ الله، واشرب بلا عجلة؛ فحُسنُ الترطيب يحمي الذاكرة والمزاج حمايةً ملموسة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 2, "label": {"en": "One glass on waking", "id": "Satu gelas saat bangun", "ar": "كوبٌ عند الاستيقاظ"}},
+        {"step": 2, "minutes": 3, "label": {"en": "One glass before each prayer", "id": "Satu gelas sebelum tiap shalat", "ar": "كوبٌ قبل كل صلاة"}},
+        {"step": 3, "minutes": 3, "label": {"en": "Replace one sweet drink with water", "id": "Ganti satu minuman manis dengan air", "ar": "استبدل مشروبًا محلّى بالماء"}}
+      ]
+    },
+    {
+      "key": "n_evoo",
+      "family": "prophetic_pantry",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_evoo_cvd"],
+      "islamic_source_ids": ["is_olive", "is_fig_olive"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Add Extra-Virgin Olive Oil", "id": "Tambahkan Minyak Zaitun Extra Virgin", "ar": "أَضِفْ زَيْتَ الزَّيْتُونِ البِكْر"},
+      "desc": {
+        "en": "A spoonful over salad, rice or bread - raw, not fried. This sits inside the strongest dietary trial we have: a Mediterranean pattern enriched with olive oil cut major cardiovascular events by about a third. The benefit belongs to the whole pattern, not to the oil alone.",
+        "id": "Satu sendok di atas salad, nasi, atau roti - mentah, bukan digoreng. Ini bagian dari uji diet terkuat yang kita miliki: pola Mediterania yang diperkaya minyak zaitun menurunkan kejadian kardiovaskular mayor sekitar sepertiga. Manfaatnya milik keseluruhan pola, bukan minyaknya saja.",
+        "ar": "ملعقةٌ على السلطة أو الأرز أو الخبز، نيّئةً لا مقليّة. وهذا داخل أقوى تجربةٍ غذائية لدينا: نمطٌ متوسطي معزَّز بزيت الزيتون خفّض أحداث القلب الكبرى نحو الثلث، والنفع للنمط كلّه لا للزيت وحده."
+      },
+      "progression": [
+        {"step": 1, "minutes": 2, "label": {"en": "One tablespoon, raw", "id": "Satu sendok makan, mentah", "ar": "ملعقةٌ كبيرة نيّئة"}},
+        {"step": 2, "minutes": 3, "label": {"en": "Replace your cooking fat with it", "id": "Ganti lemak masak Anda dengannya", "ar": "استبدل به دهن الطهي"}},
+        {"step": 3, "minutes": 4, "level": 2, "label": {"en": "Build a full Mediterranean-pattern meal", "id": "Susun satu hidangan pola Mediterania penuh", "ar": "اصنع وجبةً متوسطية كاملة"}}
+      ]
+    },
+    {
+      "key": "n_dates",
+      "family": "prophetic_pantry",
+      "anchor": "maghrib",
+      "level": 1,
+      "evidence_ids": ["ev_dates_gi"],
+      "islamic_source_ids": ["is_iftar_dates", "is_date_palm"],
+      "contraindications": [],
+      "block_affinity": ["ramadan", "ordinary", "shawwal_six", "ashura"],
+      "title": {"en": "Dates Instead of a Sweet", "id": "Kurma Ganti Camilan Manis", "ar": "تَمْرٌ بَدَلَ الحَلْوَى"},
+      "desc": {
+        "en": "Swap today's sugary snack for dates and water. Dates have a genuinely low glycaemic index and do not spike blood sugar the way refined sweets do - though they are food, not medicine.",
+        "id": "Gantikan camilan manis hari ini dengan kurma dan air. Kurma memiliki indeks glikemik yang benar-benar rendah dan tidak melonjakkan gula darah seperti manisan olahan - meski ia makanan, bukan obat.",
+        "ar": "استبدل حلوى اليوم بتمرٍ وماء؛ فللتمر مؤشّرٌ سكري منخفض حقًّا ولا يرفع السكر كما ترفعه الحلويات المصنّعة، وإن كان طعامًا لا دواء."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "Three dates, instead of a sweet", "id": "Tiga kurma, ganti manisan", "ar": "ثلاث تمرات بدل الحلوى"}},
+        {"step": 2, "minutes": 3, "label": {"en": "No refined sweets at all today", "id": "Tanpa manisan olahan sama sekali hari ini", "ar": "لا حلوى مصنّعة اليوم البتّة"}}
+      ]
+    },
+    {
+      "key": "n_eating_rate",
+      "family": "eating_behaviour",
+      "anchor": "maghrib",
+      "level": 1,
+      "evidence_ids": ["ev_eating_rate"],
+      "islamic_source_ids": ["is_eating_adab"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura", "shawwal_six"],
+      "title": {"en": "Eat Slowly, Without a Screen", "id": "Makan Perlahan, Tanpa Layar", "ar": "كُلْ بِبُطْءٍ بِلَا شَاشَة"},
+      "desc": {
+        "en": "One meal today: Bismillah, right hand, no phone, no television. Chew properly and put the food down between mouthfuls. It is the SLOWING that reduces how much you eat - the evidence for that is solid, while 'mindful eating' as a programme is not.",
+        "id": "Satu waktu makan hari ini: Bismillah, tangan kanan, tanpa ponsel, tanpa televisi. Kunyah dengan baik dan letakkan makanan di antara suapan. MEMPERLAMBAT-lah yang mengurangi jumlah yang Anda makan - buktinya kuat, sementara 'makan penuh kesadaran' sebagai program tidak.",
+        "ar": "وجبةٌ واحدة اليوم: بسم الله، وباليمين، بلا هاتف ولا تلفاز. امضغ جيّدًا وضَع الطعام بين اللقيمات؛ فالإبطاءُ هو ما يقلّل ما تأكل، ودليلُه متين، بخلاف 'الأكل الواعي' كبرنامج."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "One screen-free meal", "id": "Satu waktu makan tanpa layar", "ar": "وجبةٌ بلا شاشة"}},
+        {"step": 2, "minutes": 15, "label": {"en": "Put the utensil down between bites", "id": "Letakkan alat makan di antara suapan", "ar": "ضَع الأداة بين اللقيمات"}},
+        {"step": 3, "minutes": 20, "label": {"en": "All meals screen-free today", "id": "Semua waktu makan tanpa layar hari ini", "ar": "كل وجبات اليوم بلا شاشة"}}
+      ]
+    },
+    {
+      "key": "n_third_rule",
+      "family": "eating_behaviour",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_caloric_restriction", "ev_eating_rate"],
+      "islamic_source_ids": ["is_one_third_rule", "is_eat_not_excess"],
+      "contraindications": ["caloric_restriction"],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "The One-Third Rule", "id": "Aturan Sepertiga", "ar": "قَاعِدَةُ الثُّلُث"},
+      "desc": {
+        "en": "At one meal today: a third food, a third water, a third breath. Stop while you could still eat more. Sustained mild restriction improved every cardiometabolic marker in a two-year trial - though it also cost bone density, so this is about moderation, not deprivation.",
+        "id": "Pada satu waktu makan hari ini: sepertiga makanan, sepertiga air, sepertiga napas. Berhenti saat masih bisa makan lagi. Pembatasan ringan berkelanjutan memperbaiki setiap penanda kardiometabolik dalam uji dua tahun - meski juga mengurangi kepadatan tulang, jadi ini soal kesederhanaan, bukan penyiksaan.",
+        "ar": "في وجبةٍ اليوم: ثلثٌ طعامًا وثلثٌ شرابًا وثلثٌ نفَسًا، وتوقّف وأنت قادرٌ على الزيادة. فالتقييد اليسير المستدام حسّن كل مؤشّرات الأيض في تجربةِ سنتين، لكنه كلّف كثافة العظم، فالمقصود الاعتدال لا الحرمان."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "One meal, stop at comfortable", "id": "Satu waktu makan, berhenti saat nyaman", "ar": "وجبةٌ واحدة، وتوقّف عند الراحة"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Two meals, smaller plate", "id": "Dua waktu makan, piring lebih kecil", "ar": "وجبتان بصحنٍ أصغر"}},
+        {"step": 3, "minutes": 12, "level": 2, "label": {"en": "All meals today", "id": "Semua waktu makan hari ini", "ar": "كل وجبات اليوم"}}
+      ]
+    },
+    {
+      "key": "n_blackseed",
+      "family": "prophetic_pantry",
+      "anchor": "morning",
+      "level": 2,
+      "evidence_ids": ["ev_blackseed_glycemia", "ev_blackseed_bp", "ev_blackseed_dose_response"],
+      "islamic_source_ids": ["is_black_seed"],
+      "contraindications": ["black_seed"],
+      "block_affinity": ["ordinary", "shaban_prep"],
+      "title": {"en": "Black Seed", "id": "Habbatussauda", "ar": "الحَبَّةُ السَّوْدَاء"},
+      "desc": {
+        "en": "Half a teaspoon of black seed. The trials show a real but modest effect on blood sugar and blood pressure - it is a useful addition, not a cure, and it does nothing for weight. If you take blood thinners or diabetes medication, speak to your doctor first: the effects add up.",
+        "id": "Setengah sendok teh habbatussauda. Uji klinis menunjukkan efek nyata namun sedang pada gula darah dan tekanan darah - ini tambahan yang berguna, bukan obat, dan tidak berpengaruh pada berat badan. Jika Anda mengonsumsi pengencer darah atau obat diabetes, bicaralah dengan dokter dulu: efeknya saling menambah.",
+        "ar": "نصف ملعقةٍ صغيرة من الحبة السوداء. تُظهر التجارب أثرًا حقيقيًّا لكنه معتدل في السكر والضغط؛ فهي إضافةٌ نافعة لا شفاءٌ جامع، ولا أثر لها في الوزن. وإن كنت تتناول مميّعًا للدم أو دواءَ سكري فراجع طبيبك أوّلًا، فالآثار تتراكم."
+      },
+      "progression": [
+        {"step": 1, "minutes": 2, "label": {"en": "Half a teaspoon with honey", "id": "Setengah sendok teh dengan madu", "ar": "نصف ملعقة صغيرة مع عسل"}},
+        {"step": 2, "minutes": 2, "label": {"en": "Half a teaspoon, twice daily", "id": "Setengah sendok teh, dua kali sehari", "ar": "نصف ملعقة صغيرة مرّتين يوميًا"}}
+      ]
+    },
+    {
+      "key": "n_barley",
+      "family": "prophetic_pantry",
+      "anchor": "morning",
+      "level": 2,
+      "evidence_ids": ["ev_barley_ldl"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep"],
+      "title": {"en": "Talbina - Barley Porridge", "id": "Talbina - Bubur Jelai", "ar": "التَّلْبِينَة"},
+      "desc": {
+        "en": "Barley cooked soft, with a little honey. The beta-glucan in barley measurably lowers LDL cholesterol. Note honestly: the cholesterol effect is real in controlled trials but a real-world bread trial found nothing, and there is no human evidence that barley lifts mood.",
+        "id": "Jelai yang dimasak lembut, dengan sedikit madu. Beta-glukan dalam jelai secara terukur menurunkan kolesterol LDL. Perlu jujur dicatat: efek kolesterolnya nyata dalam uji terkendali tetapi uji roti di dunia nyata tidak menemukan apa pun, dan tidak ada bukti pada manusia bahwa jelai mengangkat suasana hati.",
+        "ar": "شعيرٌ مطبوخٌ ليّنًا مع قليلِ عسل. وبيتا غلوكان الشعير يخفّض الكوليسترول الضار خفضًا ملموسًا. وللأمانة: أثرُ الكوليسترول حقيقي في التجارب المضبوطة لكن تجربةَ خبزٍ واقعية لم تجد شيئًا، ولا دليل بشريّ على أن الشعير يحسّن المزاج."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "One bowl", "id": "Satu mangkuk", "ar": "صحنٌ واحد"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Three times this week", "id": "Tiga kali minggu ini", "ar": "ثلاث مرّات هذا الأسبوع"}}
+      ]
+    },
+    {
+      "key": "n_veg",
+      "family": "food_quality",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_evoo_cvd"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "One More Vegetable", "id": "Satu Sayur Lagi", "ar": "خُضْرَةٌ إِضَافِيَّة"},
+      "desc": {
+        "en": "Add one extra serving of vegetables to a meal you were already going to eat. The simplest possible change, and the one most likely to still be there in a year.",
+        "id": "Tambahkan satu porsi sayur pada makanan yang memang akan Anda makan. Perubahan paling sederhana, dan yang paling mungkin masih ada setahun kemudian.",
+        "ar": "أضِف حصّةَ خضارٍ إلى وجبةٍ كنتَ ستأكلها أصلًا؛ أبسطُ تغييرٍ ممكن، وأرجاهُ بقاءً بعد عام."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "One extra serving", "id": "Satu porsi tambahan", "ar": "حصّةٌ إضافية"}},
+        {"step": 2, "minutes": 5, "label": {"en": "Half the plate, at one meal", "id": "Setengah piring, pada satu waktu makan", "ar": "نصفُ الصحن في وجبة"}},
+        {"step": 3, "minutes": 6, "label": {"en": "Half the plate, every meal", "id": "Setengah piring, setiap waktu makan", "ar": "نصفُ الصحن في كل وجبة"}}
+      ]
+    },
+    {
+      "key": "n_nosugar",
+      "family": "food_quality",
+      "anchor": "anytime",
+      "level": 2,
+      "evidence_ids": ["ev_dates_gi", "ev_caloric_restriction"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "No Added Sugar Today", "id": "Tanpa Gula Tambahan Hari Ini", "ar": "بِلَا سُكَّرٍ مُضَافٍ اليَوْم"},
+      "desc": {
+        "en": "One day without added sugar. Read the label before you drink it - most of the sugar people consume arrives in liquid form without being noticed.",
+        "id": "Satu hari tanpa gula tambahan. Baca label sebelum meminumnya - sebagian besar gula yang dikonsumsi orang datang dalam bentuk cair tanpa disadari.",
+        "ar": "يومٌ بلا سكّرٍ مضاف. واقرأ الملصق قبل أن تشرب، فأكثرُ ما يتناوله الناس من السكّر يأتي سائلًا دون انتباه."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "No sugary drinks today", "id": "Tanpa minuman manis hari ini", "ar": "لا مشروبات محلّاة اليوم"}},
+        {"step": 2, "minutes": 6, "label": {"en": "No added sugar at all today", "id": "Tanpa gula tambahan sama sekali", "ar": "لا سكّر مضاف البتّة اليوم"}},
+        {"step": 3, "minutes": 8, "label": {"en": "Three days running", "id": "Tiga hari berturut-turut", "ar": "ثلاثة أيام متتالية"}}
+      ]
+    },
+    {
+      "key": "n_protein",
+      "family": "food_quality",
+      "anchor": "dhuhr",
+      "level": 2,
+      "evidence_ids": ["ev_muscle_strength_mortality", "ev_resistance_dose"],
+      "islamic_source_ids": ["is_strong_believer"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "Protein at Every Main Meal", "id": "Protein di Setiap Waktu Makan Utama", "ar": "بُرُوتِينٌ فِي كُلِّ وَجْبَةٍ رَئِيسَة"},
+      "desc": {
+        "en": "A palm-sized portion of halal protein at each main meal. Strength is one of the clearest predictors of a long life, and you cannot build it without the raw material.",
+        "id": "Porsi protein halal seukuran telapak tangan di tiap waktu makan utama. Kekuatan adalah salah satu prediktor umur panjang paling jelas, dan Anda tidak bisa membangunnya tanpa bahan bakunya.",
+        "ar": "حصّةٌ بحجم راحة اليد من بروتينٍ حلال في كل وجبة رئيسة؛ فالقوّة من أوضح مؤشّرات طول العمر، ولا تُبنى بلا مادّتها."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "One meal", "id": "Satu waktu makan", "ar": "وجبةٌ واحدة"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Every main meal", "id": "Setiap waktu makan utama", "ar": "كل وجبةٍ رئيسة"}}
+      ]
+    },
+    {
+      "key": "n_no_processed",
+      "family": "food_quality",
+      "anchor": "anytime",
+      "level": 2,
+      "evidence_ids": ["ev_evoo_cvd", "ev_eating_rate"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Nothing Ultra-Processed", "id": "Tanpa Makanan Ultra-Olahan", "ar": "بِلَا أَطْعِمَةٍ فَائِقَةِ التَّصْنِيع"},
+      "desc": {
+        "en": "One day eating only food you could recognise as food. If the ingredient list reads like a chemistry paper, leave it.",
+        "id": "Satu hari hanya memakan makanan yang bisa Anda kenali sebagai makanan. Jika daftar bahannya terbaca seperti makalah kimia, tinggalkan.",
+        "ar": "يومٌ لا تأكل فيه إلا ما تعرفه طعامًا؛ فإن كانت قائمة المكوّنات تُقرأ كورقةِ كيمياء فدَعها."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "One day", "id": "Satu hari", "ar": "يومٌ واحد"}},
+        {"step": 2, "minutes": 10, "label": {"en": "Cook one meal from scratch", "id": "Masak satu hidangan dari awal", "ar": "اطبخ وجبةً من الصفر"}}
+      ]
+    },
+    {
+      "key": "n_sunnah_fast",
+      "family": "fasting",
+      "anchor": "fajr",
+      "level": 3,
+      "evidence_ids": ["ev_if_no_winner", "ev_ramadan_metabolic"],
+      "islamic_source_ids": ["is_mon_thu_fast", "is_fasting_prescribed"],
+      "contraindications": ["fasting"],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Fast Monday or Thursday", "id": "Puasa Senin atau Kamis", "ar": "صَوْمُ الاثْنَيْنِ أَوِ الخَمِيس"},
+      "desc": {
+        "en": "The weekly sunnah fast. It structurally resembles the patterns studied as intermittent fasting, though no trial has tested the sunnah fasts directly - so we present the resemblance honestly and let the worship stand on its own terms.",
+        "id": "Puasa sunnah mingguan. Secara struktur menyerupai pola yang diteliti sebagai puasa intermiten, meski belum ada uji yang menguji puasa sunnah secara langsung - jadi kami menyajikan kemiripannya dengan jujur dan membiarkan ibadahnya berdiri di atas dasarnya sendiri.",
+        "ar": "صومُ السنّة الأسبوعي، ويشبه بنيويًّا الأنماط المدروسة تحت اسم الصيام المتقطّع، وإن لم تختبر تجربةٌ صيام السنّة مباشرةً؛ فنعرض الشبه بأمانة، وتبقى العبادة قائمةً بذاتها."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "One day this week", "id": "Satu hari minggu ini", "ar": "يومٌ هذا الأسبوع"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Both Monday and Thursday", "id": "Senin dan Kamis", "ar": "الاثنين والخميس معًا"}}
+      ]
+    },
+    {
+      "key": "n_ayyam_bid",
+      "family": "fasting",
+      "anchor": "fajr",
+      "level": 3,
+      "evidence_ids": ["ev_if_no_winner"],
+      "islamic_source_ids": ["is_ayyam_bid", "is_fasting_prescribed"],
+      "contraindications": ["fasting"],
+      "block_affinity": ["ayyam_bid"],
+      "title": {"en": "The White Days", "id": "Ayyamul Bidh", "ar": "أَيَّامُ البِيض"},
+      "desc": {
+        "en": "The thirteenth, fourteenth and fifteenth of the Hijri month. Three days a month, every month - the most sustainable fasting rhythm in the tradition.",
+        "id": "Tanggal 13, 14, dan 15 bulan Hijriah. Tiga hari sebulan, setiap bulan - ritme puasa paling lestari dalam tradisi ini.",
+        "ar": "الثالث عشر والرابع عشر والخامس عشر من الشهر الهجري: ثلاثةُ أيامٍ كل شهر، وهي أدومُ إيقاعٍ للصيام في السنّة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "One of the three", "id": "Satu dari tiga", "ar": "واحدٌ من الثلاثة"}},
+        {"step": 2, "minutes": 8, "label": {"en": "All three", "id": "Ketiganya", "ar": "الثلاثة كلّها"}}
+      ]
+    },
+    {
+      "key": "n_suhoor",
+      "family": "ramadan_nutrition",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": ["ev_ramadan_transient", "ev_hydration_cognition"],
+      "islamic_source_ids": ["is_suhoor_blessing"],
+      "contraindications": [],
+      "block_affinity": ["ramadan"],
+      "title": {"en": "Do Not Skip Suhoor", "id": "Jangan Lewatkan Sahur", "ar": "لَا تَتْرُكِ السُّحُور"},
+      "desc": {
+        "en": "Slow carbohydrates, protein, and water at suhoor. The sunnah is clear on taking it; note honestly that no study has tested skipping suhoor on hard health outcomes, so we make no medical claim beyond the obvious one about hydration.",
+        "id": "Karbohidrat lambat, protein, dan air saat sahur. Sunnahnya jelas untuk melakukannya; perlu jujur dicatat bahwa tidak ada studi yang menguji melewatkan sahur terhadap luaran kesehatan keras, jadi kami tidak membuat klaim medis di luar yang jelas soal hidrasi.",
+        "ar": "نشويّاتٌ بطيئة وبروتينٌ وماءٌ في السحور. والسنّة صريحة في اتّخاذه، وللأمانة: لم تختبر دراسةٌ تركَ السحور على نتائج صحية صلبة، فلا ندّعي طبيًّا أكثر من أمر الترطيب الظاهر."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Eat suhoor, with water", "id": "Sahur, dengan air", "ar": "تسحّر مع الماء"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Add protein and slow carbohydrate", "id": "Tambahkan protein dan karbohidrat lambat", "ar": "أضف بروتينًا ونشويّاتٍ بطيئة"}}
+      ]
+    },
+    {
+      "key": "n_iftar_composition",
+      "family": "ramadan_nutrition",
+      "anchor": "maghrib",
+      "level": 1,
+      "evidence_ids": ["ev_late_eating", "ev_dates_gi", "ev_eating_rate"],
+      "islamic_source_ids": ["is_iftar_dates", "is_one_third_rule"],
+      "contraindications": [],
+      "block_affinity": ["ramadan"],
+      "title": {"en": "Break Your Fast Well", "id": "Berbukalah dengan Baik", "ar": "أَحْسِنْ فِطْرَك"},
+      "desc": {
+        "en": "Dates and water, pray, then eat properly and slowly. Put the larger portion at iftar rather than late at night - eating late measurably lowers energy expenditure and pushes fat tissue toward storage.",
+        "id": "Kurma dan air, shalat, lalu makan dengan benar dan perlahan. Letakkan porsi lebih besar saat iftar daripada larut malam - makan larut secara terukur menurunkan pengeluaran energi dan mendorong jaringan lemak ke arah penyimpanan.",
+        "ar": "تمرٌ وماء، ثم صلاة، ثم طعامٌ بإحسانٍ وتمهّل. واجعل الحصّة الأكبر عند الإفطار لا في جوف الليل، فالأكل المتأخّر يخفض صرف الطاقة ويميل بالشحم إلى التخزين."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "Dates and water first", "id": "Kurma dan air dulu", "ar": "التمر والماء أولًا"}},
+        {"step": 2, "minutes": 15, "label": {"en": "Larger portion at iftar, light later", "id": "Porsi lebih besar saat iftar, ringan setelahnya", "ar": "الحصّة الأكبر عند الإفطار وخفّةٌ بعده"}}
+      ]
+    },
+    {
+      "key": "n_vitamin_d",
+      "family": "targeted_gaps",
+      "anchor": "morning",
+      "level": 1,
+      "evidence_ids": ["ev_vitamin_d_veiled", "ev_vitamin_d_veiled_replication"],
+      "islamic_source_ids": ["is_modest_dress", "is_body_right_over_you"],
+      "contraindications": ["sun_exposure"],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura"],
+      "title": {"en": "Check Your Vitamin D", "id": "Periksa Vitamin D Anda", "ar": "افْحَصْ فِيتَامِين د"},
+      "desc": {
+        "en": "Vitamin D deficiency is strikingly common among Muslim women, and covering dress is the strongest single predictor. This is not a reason to change how you dress - it is a reason to get tested and, if needed, supplement. Ask your doctor for the dose; we will not guess it for you.",
+        "id": "Defisiensi vitamin D sangat umum di kalangan perempuan Muslim, dan busana tertutup adalah prediktor tunggal terkuat. Ini bukan alasan mengubah cara Anda berpakaian - ini alasan untuk memeriksakan diri dan, jika perlu, mengonsumsi suplemen. Tanyakan dosisnya pada dokter Anda; kami tidak akan menebaknya.",
+        "ar": "نقصُ فيتامين د شائعٌ بشكلٍ لافت بين المسلمات، وأقوى مؤشّرٍ مفردٍ له اللباسُ الساتر. وليس هذا داعيًا لتغيير لباسك، بل داعيًا للفحص وللمكمّل عند الحاجة. واسأل طبيبك عن الجرعة، فلن نخمّنها لك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Book a vitamin D test", "id": "Jadwalkan tes vitamin D", "ar": "احجز فحص فيتامين د"}},
+        {"step": 2, "minutes": 3, "label": {"en": "Take the dose your doctor set", "id": "Konsumsi dosis yang ditetapkan dokter", "ar": "خُذ الجرعة التي حدّدها طبيبك"}}
+      ]
+    },
+    {
+      "key": "n_alcohol_free",
+      "family": "targeted_gaps",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_alcohol_no_safe_level"],
+      "islamic_source_ids": ["is_alcohol"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ashura", "shawwal_six"],
+      "title": {"en": "The Thing You Already Avoid", "id": "Hal yang Sudah Anda Hindari", "ar": "مَا تَجْتَنِبُهُ أَصْلًا"},
+      "desc": {
+        "en": "For decades the science said a little alcohol was good for the heart. Genetic studies have now dismantled that: there is no protective level, and the famous benefit was a statistical artefact. Learn why - it is the clearest case of the revelation arriving first.",
+        "id": "Selama puluhan tahun sains mengatakan sedikit alkohol baik untuk jantung. Studi genetik kini membongkarnya: tidak ada kadar yang protektif, dan manfaat terkenal itu adalah artefak statistik. Pelajari mengapa - ini kasus paling jelas wahyu tiba lebih dulu.",
+        "ar": "عقودًا قال العلم إنّ قليل الخمر نافعٌ للقلب، ثم نقضت الدراساتُ الجينية ذلك: لا قدرَ واقيًا البتّة، وذلك النفع المشهور كان وهمًا إحصائيًّا. فاعرف السبب؛ فهذا أوضح مواضع سبق الوحي."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "Read why the J-curve collapsed", "id": "Baca mengapa kurva-J runtuh", "ar": "اقرأ لِمَ سقط منحنى الجيم"}}
+      ]
+    }
+  ]
+}

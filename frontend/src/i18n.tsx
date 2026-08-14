@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { storeGet, storeSet } from './storage';
 
+// 'ar' stays in the type and in existing translation dicts so nothing already
+// shipped breaks, but it is deliberately left out of LANGS - the app is
+// English/Indonesian only for now. Re-add a LANGS entry to bring it back.
 export type Lang = 'en' | 'id' | 'ar';
 export const LANGS: { code: Lang; label: string; native: string }[] = [
   { code: 'en', label: 'English', native: 'English' },
   { code: 'id', label: 'Indonesian', native: 'Bahasa Indonesia' },
-  { code: 'ar', label: 'Arabic', native: 'العربية' },
 ];
 
 const KEY = 'ihyaa_lang';

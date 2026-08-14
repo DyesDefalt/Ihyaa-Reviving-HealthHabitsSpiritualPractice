@@ -94,6 +94,15 @@ def serialize_task(task: DailyTask, lang: str, timings: dict | None = None,
         "quran_reference": content.get("quran_reference"),
         "hadith_reference": content.get("hadith_reference"),
         "science_reference": content.get("science_reference"),
+        # Structured sourcing. The client can show the DOI, the study type, the
+        # effect size and the caveat, and can badge a card by evidence grade.
+        # `hadith` is empty whenever a narration has not cleared scholar review.
+        "evidence": content.get("evidence", []),
+        "quran": content.get("quran", []),
+        "hadith": content.get("hadith", []),
+        "evidence_grade": content.get("evidence_grade"),
+        "target_steps": content.get("target_steps"),
+        "family_key": content.get("family_key"),
     }
 
 

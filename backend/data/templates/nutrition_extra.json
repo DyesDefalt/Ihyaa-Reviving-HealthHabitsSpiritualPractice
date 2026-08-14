@@ -1,0 +1,214 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "nutrition",
+  "_README": "Second nutrition tranche. Nutrition is drawn ~1.07 times a day over a year under body-first weighting, so a 60-day no-repeat floor needs ~63 presentations. Tranche 1 supplied 39.",
+
+  "families": [
+    {
+      "key": "n_fibre",
+      "family": "food_quality",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_barley_ldl", "ev_dates_gi"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura", "shawwal_six"],
+      "title": {"en": "Eat the Whole Thing", "id": "Makan Utuh", "ar": "كُلْهُ كَامِلًا"},
+      "desc": {
+        "en": "Whole grains, beans, lentils, the skin on the fruit. Fibre is the part of food that modern processing strips out first, and it is the part that most reliably lowers cholesterol and steadies blood sugar.",
+        "id": "Biji-bijian utuh, kacang, lentil, kulit buah. Serat adalah bagian makanan yang pertama dibuang oleh pengolahan modern, dan bagian yang paling andal menurunkan kolesterol dan menstabilkan gula darah.",
+        "ar": "الحبوبُ الكاملة والفاصولياء والعدس وقشرُ الفاكهة. فالأليافُ أوّلُ ما ينزعه التصنيع الحديث، وهي أثبتُ ما يخفض الكوليسترول ويضبط السكر."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Swap white rice or bread for wholegrain", "id": "Ganti nasi atau roti putih dengan gandum utuh", "ar": "استبدل الأبيض بالحبّ الكامل"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Add beans or lentils to one meal", "id": "Tambahkan kacang atau lentil pada satu hidangan", "ar": "أضف بقولًا أو عدسًا إلى وجبة"}},
+        {"step": 3, "minutes": 7, "label": {"en": "Leave the skin on the fruit", "id": "Biarkan kulit buah", "ar": "أبقِ قشر الفاكهة"}},
+        {"step": 4, "minutes": 8, "level": 2, "label": {"en": "Wholegrain at every meal today", "id": "Gandum utuh di setiap waktu makan", "ar": "حبٌّ كامل في كل وجبةٍ اليوم"}}
+      ]
+    },
+    {
+      "key": "n_salt",
+      "family": "food_quality",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_blackseed_bp", "ev_evoo_cvd"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura"],
+      "title": {"en": "Taste Before You Salt", "id": "Cicipi Sebelum Menggarami", "ar": "ذُقْ قَبْلَ أَنْ تُمَلِّح"},
+      "desc": {
+        "en": "Most salt does not come from the shaker, it comes from packaged food. Taste the food first, then decide. Your palate adjusts within about two weeks and food starts tasting like itself again.",
+        "id": "Sebagian besar garam bukan dari wadah garam, melainkan dari makanan kemasan. Cicipi dulu, baru putuskan. Lidah Anda menyesuaikan dalam sekitar dua minggu dan makanan mulai terasa seperti dirinya lagi.",
+        "ar": "أكثرُ الملح لا يأتي من المملحة بل من الطعام المعلّب. ذُق أوّلًا ثم قرّر؛ فذوقك يتكيّف في نحو أسبوعين ويعود الطعامُ إلى طعمه الحقيقي."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Taste before adding salt", "id": "Cicipi sebelum menambah garam", "ar": "ذُق قبل إضافة الملح"}},
+        {"step": 2, "minutes": 5, "label": {"en": "Check the salt on one packet you buy", "id": "Periksa kadar garam pada satu kemasan", "ar": "افحص الملح في عبوةٍ تشتريها"}},
+        {"step": 3, "minutes": 6, "label": {"en": "Season with herbs, lemon or vinegar instead", "id": "Bumbui dengan rempah, lemon, atau cuka", "ar": "تبّل بالأعشاب أو الليمون أو الخلّ"}}
+      ]
+    },
+    {
+      "key": "n_meal_prep",
+      "family": "food_quality",
+      "anchor": "anytime",
+      "level": 2,
+      "evidence_ids": ["ev_evoo_cvd", "ev_eating_rate"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "ramadan"],
+      "title": {"en": "Decide Before You Are Hungry", "id": "Putuskan Sebelum Anda Lapar", "ar": "قَرِّرْ قَبْلَ أَنْ تَجُوع"},
+      "desc": {
+        "en": "Almost every poor food choice is made while hungry and out of time. Cook once, eat twice. The decision you make on a full stomach is a different decision entirely.",
+        "id": "Hampir setiap pilihan makanan yang buruk dibuat saat lapar dan kehabisan waktu. Masak sekali, makan dua kali. Keputusan yang Anda buat dengan perut kenyang adalah keputusan yang sama sekali berbeda.",
+        "ar": "أكثرُ الخيارات الغذائية السيّئة تُتّخذ جوعانَ ضيّقَ الوقت. اطبخ مرّةً وكُل مرّتين؛ فالقرارُ وأنت شبعان قرارٌ آخر تمامًا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Plan tomorrow's meals tonight", "id": "Rencanakan makan besok malam ini", "ar": "خطّط لوجبات الغد الليلة"}},
+        {"step": 2, "minutes": 25, "label": {"en": "Cook double, keep half", "id": "Masak dua kali lipat, simpan setengah", "ar": "اطبخ ضِعفًا واحفظ نصفه"}},
+        {"step": 3, "minutes": 40, "label": {"en": "Prepare three days at once", "id": "Siapkan tiga hari sekaligus", "ar": "جهّز ثلاثة أيامٍ دفعة"}}
+      ]
+    },
+    {
+      "key": "n_labels",
+      "family": "food_quality",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_dates_gi"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Read Three Labels", "id": "Baca Tiga Label", "ar": "اقْرَأْ ثَلَاثَةَ مُلْصَقَات"},
+      "desc": {
+        "en": "Before you buy, turn the packet over. Look at the sugar per hundred grams and the length of the ingredient list. You only need to do this properly once per product - after that you know.",
+        "id": "Sebelum membeli, balik kemasannya. Lihat gula per seratus gram dan panjang daftar bahannya. Anda hanya perlu melakukan ini sekali per produk - setelah itu Anda sudah tahu.",
+        "ar": "قبل الشراء اقلب العبوة: انظر إلى السكّر لكل مئة غرام وإلى طول قائمة المكوّنات. ويكفي أن تفعلها مرّةً لكل منتج، فبعدها تعرف."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Three labels today", "id": "Tiga label hari ini", "ar": "ثلاثة ملصقات اليوم"}},
+        {"step": 2, "minutes": 7, "label": {"en": "Replace the worst one you find", "id": "Ganti yang terburuk yang Anda temukan", "ar": "استبدل أسوأ ما تجد"}}
+      ]
+    },
+    {
+      "key": "n_eating_window",
+      "family": "fasting",
+      "anchor": "anytime",
+      "level": 3,
+      "evidence_ids": ["ev_late_eating", "ev_if_no_winner"],
+      "islamic_source_ids": ["is_eat_not_excess"],
+      "contraindications": ["fasting", "prolonged_fasting"],
+      "block_affinity": ["ordinary", "shaban_prep"],
+      "title": {"en": "Close the Kitchen Earlier", "id": "Tutup Dapur Lebih Awal", "ar": "أَغْلِقِ المَطْبَخَ بَاكِرًا"},
+      "desc": {
+        "en": "Keep eating inside a set window and finish earlier in the evening. Be aware the evidence here is mixed: shorter trials favour it, but the longest trial found it added nothing to simply eating less. The clearest finding is that eating late itself lowers energy expenditure.",
+        "id": "Makanlah dalam jendela waktu yang ditetapkan dan selesaikan lebih awal di malam hari. Perlu diketahui buktinya beragam: uji yang lebih pendek mendukungnya, tetapi uji terpanjang menemukan ia tidak menambah apa pun dibanding sekadar makan lebih sedikit. Temuan paling jelas adalah makan larut itu sendiri menurunkan pengeluaran energi.",
+        "ar": "اجعل أكلك داخل نافذةٍ محدّدة وأنهِه أبكرَ مساءً. واعلم أن الأدلة متفاوتة: التجارب القصيرة تؤيّده، وأطولُ تجربةٍ لم تجده يضيف شيئًا على مجرّد الأكل الأقل. وأوضحُ ما ثبت أن الأكل المتأخّر بذاته يخفض صرف الطاقة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "Nothing after Isha", "id": "Tidak makan setelah Isya", "ar": "لا أكل بعد العشاء"}},
+        {"step": 2, "minutes": 8, "label": {"en": "A twelve-hour eating window", "id": "Jendela makan dua belas jam", "ar": "نافذةُ أكلٍ اثنتا عشرة ساعة"}},
+        {"step": 3, "minutes": 10, "label": {"en": "A ten-hour eating window", "id": "Jendela makan sepuluh jam", "ar": "نافذةُ أكلٍ عشر ساعات"}}
+      ]
+    },
+    {
+      "key": "n_honey",
+      "family": "prophetic_pantry",
+      "anchor": "morning",
+      "level": 1,
+      "evidence_ids": ["ev_honey_cough"],
+      "islamic_source_ids": ["is_honey"],
+      "contraindications": ["honey"],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura"],
+      "title": {"en": "Honey, in Warm Water", "id": "Madu dalam Air Hangat", "ar": "عَسَلٌ فِي مَاءٍ دَافِئ"},
+      "desc": {
+        "en": "A teaspoon of raw honey in warm, never boiling, water. Its best-evidenced use is soothing a cough - a Cochrane review found it beats no treatment. Never give honey to a baby under one year: the botulism risk is real. It is still sugar, so treat it as a food, not a supplement.",
+        "id": "Satu sendok teh madu murni dalam air hangat, jangan mendidih. Penggunaan dengan bukti terbaik adalah meredakan batuk - tinjauan Cochrane menemukan ia mengalahkan tanpa pengobatan. Jangan pernah memberi madu pada bayi di bawah satu tahun: risiko botulisme itu nyata. Ini tetap gula, jadi perlakukan sebagai makanan, bukan suplemen.",
+        "ar": "ملعقةٌ صغيرة من العسل الخام في ماءٍ دافئ لا مغليّ. وأقوى استعمالاته دليلًا تهدئةُ السعال، فقد وجدته مراجعةُ كوكرين أفضل من عدم العلاج. ولا تُعطِ العسل لرضيعٍ دون سنة، فخطرُ التسمّم الوشيقي حقيقي. وهو سكّرٌ على كل حال، فعامِله طعامًا لا مكمّلًا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "A teaspoon in warm water", "id": "Satu sendok teh dalam air hangat", "ar": "ملعقةٌ صغيرة في ماءٍ دافئ"}},
+        {"step": 2, "minutes": 3, "label": {"en": "Use it instead of refined sugar", "id": "Gunakan sebagai ganti gula olahan", "ar": "استعمله بدل السكّر المكرّر"}}
+      ]
+    },
+    {
+      "key": "n_pomegranate",
+      "family": "prophetic_pantry",
+      "anchor": "morning",
+      "level": 1,
+      "evidence_ids": ["ev_evoo_cvd"],
+      "islamic_source_ids": ["is_fig_olive", "is_eat_not_excess"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shawwal_six", "ashura"],
+      "title": {"en": "Fruit Named in the Book", "id": "Buah yang Disebut dalam Kitab", "ar": "فَاكِهَةٌ ذُكِرَتْ فِي الكِتَاب"},
+      "desc": {
+        "en": "Figs, olives, grapes, pomegranate. Eat them as whole fruit rather than juice - the fibre is the point, and juice removes it. We make no specific medical claim for any single one of them: the honest evidence is for whole-food dietary patterns, not individual miracle fruits.",
+        "id": "Buah tin, zaitun, anggur, delima. Makanlah sebagai buah utuh, bukan jus - seratnya yang penting, dan jus menghilangkannya. Kami tidak membuat klaim medis khusus untuk satu pun: bukti yang jujur adalah untuk pola makan utuh, bukan buah ajaib tunggal.",
+        "ar": "التينُ والزيتونُ والعنبُ والرمّان. كُلها فاكهةً كاملة لا عصيرًا، فالأليافُ هي المقصود والعصيرُ يزيلها. ولا ندّعي لأيٍّ منها أثرًا طبيًّا بعينه؛ فالأدلةُ الصادقة للأنماط الغذائية الكاملة لا لفاكهةٍ معجزة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "One whole fruit today", "id": "Satu buah utuh hari ini", "ar": "فاكهةٌ كاملة اليوم"}},
+        {"step": 2, "minutes": 5, "label": {"en": "Replace a juice with whole fruit", "id": "Ganti jus dengan buah utuh", "ar": "استبدل العصير بفاكهةٍ كاملة"}}
+      ]
+    },
+    {
+      "key": "n_hydration_day",
+      "family": "hydration",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_hydration_cognition"],
+      "islamic_source_ids": ["is_water_life"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "Water Through the Day", "id": "Air Sepanjang Hari", "ar": "المَاءُ عَلَى مَدَارِ اليَوْم"},
+      "desc": {
+        "en": "Not all at once. Keep a glass where you work and refill it. Dehydration shows up as tiredness and poor concentration long before it shows up as thirst.",
+        "id": "Bukan sekaligus. Simpan gelas di tempat Anda bekerja dan isi ulang. Dehidrasi muncul sebagai kelelahan dan sulit konsentrasi jauh sebelum muncul sebagai rasa haus.",
+        "ar": "لا دفعةً واحدة؛ ضَع كوبًا حيث تعمل وأعِد ملأه. فالجفافُ يظهر تعبًا وضعفَ تركيزٍ قبل أن يظهر عطشًا بزمن."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "A glass at each prayer", "id": "Segelas di tiap shalat", "ar": "كوبٌ عند كل صلاة"}},
+        {"step": 2, "minutes": 4, "label": {"en": "Keep a bottle where you work", "id": "Simpan botol di tempat kerja", "ar": "ضَع قارورةً في مكان عملك"}},
+        {"step": 3, "minutes": 4, "label": {"en": "Water instead of every other drink", "id": "Air alih-alih minuman lain", "ar": "ماءٌ بدل كل مشروبٍ آخر"}}
+      ]
+    },
+    {
+      "key": "n_ramadan_hydration",
+      "family": "ramadan_nutrition",
+      "anchor": "night",
+      "level": 1,
+      "evidence_ids": ["ev_hydration_cognition", "ev_ramadan_metabolic"],
+      "islamic_source_ids": ["is_water_life", "is_suhoor_blessing"],
+      "contraindications": [],
+      "block_affinity": ["ramadan"],
+      "title": {"en": "Drink Across the Night", "id": "Minum Sepanjang Malam", "ar": "اشْرَبْ عَبْرَ اللَّيْل"},
+      "desc": {
+        "en": "Spread your water between iftar and suhoor rather than drinking a litre at once, which mostly passes straight through. Go easy on very sweet drinks and heavy coffee - both work against you here.",
+        "id": "Sebarkan air Anda antara iftar dan sahur alih-alih meminum satu liter sekaligus, yang sebagian besar langsung terbuang. Kurangi minuman sangat manis dan kopi pekat - keduanya merugikan Anda di sini.",
+        "ar": "وزّع ماءك بين الإفطار والسحور بدل لترٍ دفعةً واحدة يمرّ أكثره دون فائدة، وخفّف المشروبات شديدة الحلاوة والقهوة الثقيلة، فكلاهما ضدّك هنا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "A glass every hour after iftar", "id": "Segelas tiap jam setelah iftar", "ar": "كوبٌ كل ساعةٍ بعد الإفطار"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Add water at suhoor too", "id": "Tambahkan air saat sahur juga", "ar": "وأضف الماء في السحور أيضًا"}}
+      ]
+    },
+    {
+      "key": "n_share_food",
+      "family": "targeted_gaps",
+      "anchor": "maghrib",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_eating_adab", "is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ramadan", "ordinary", "dhul_hijjah_ten", "ashura"],
+      "title": {"en": "Feed Someone Else", "id": "Beri Makan Orang Lain", "ar": "أَطْعِمْ غَيْرَك"},
+      "desc": {
+        "en": "Cook a little extra and give it away, or feed someone breaking their fast. Eating together is also the most reliable way anyone has found to eat more slowly.",
+        "id": "Masak sedikit lebih banyak dan berikan, atau beri makan orang yang berbuka. Makan bersama juga cara paling andal yang pernah ditemukan untuk makan lebih perlahan.",
+        "ar": "اطبخ زيادةً وأعطِها، أو أطعِم صائمًا فطره. والأكلُ مع الناس أيضًا أوثقُ وسيلةٍ عُرفت لإبطاء الأكل."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Share one meal", "id": "Bagikan satu hidangan", "ar": "شارك وجبةً واحدة"}},
+        {"step": 2, "minutes": 20, "label": {"en": "Feed someone breaking their fast", "id": "Beri makan orang yang berbuka", "ar": "أطعِم صائمًا فطره"}}
+      ]
+    }
+  ]
+}

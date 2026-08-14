@@ -1,0 +1,303 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "physical",
+  "_README": "A family carries the shared title/description/sourcing. Each progression step adds only a short label and its parameters, so a family of 5 steps is 5 distinct presentations without duplicating trilingual prose. Progressive overload IS the anti-boredom mechanism. Every family must reference at least one evidence_id; the verifier fails the build otherwise.",
+
+  "families": [
+    {
+      "key": "p_walk",
+      "family": "walking",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": ["ev_steps_mortality", "ev_steps_7000_target"],
+      "islamic_source_ids": ["is_steps_masjid", "is_body_right_over_you"],
+      "contraindications": ["prolonged_standing"],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "Walk After Fajr", "id": "Jalan Kaki Setelah Subuh", "ar": "المَشْيُ بَعْدَ الفَجْر"},
+      "desc": {
+        "en": "Walk in the early light. No phone, no pace target - just move and breathe. Every step toward the masjid counts twice.",
+        "id": "Berjalanlah di cahaya pagi. Tanpa ponsel, tanpa target kecepatan - bergerak dan bernapas saja. Setiap langkah menuju masjid bernilai dua kali.",
+        "ar": "امشِ في ضوء الصباح بلا هاتف ولا هدفِ سرعة؛ تحرّك وتنفّس فقط. وكلُّ خطوةٍ إلى المسجد تُحسب مرّتين."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "10 minutes, easy", "id": "10 menit, santai", "ar": "عشر دقائق برفق"}},
+        {"step": 2, "minutes": 15, "label": {"en": "15 minutes", "id": "15 menit", "ar": "خمس عشرة دقيقة"}},
+        {"step": 3, "minutes": 20, "label": {"en": "20 minutes", "id": "20 menit", "ar": "عشرون دقيقة"}},
+        {"step": 4, "minutes": 25, "target_steps": 5000, "label": {"en": "25 minutes, toward 5,000 steps", "id": "25 menit, menuju 5.000 langkah", "ar": "خمسٌ وعشرون دقيقة نحو ٥٬٠٠٠ خطوة"}},
+        {"step": 5, "minutes": 35, "target_steps": 7000, "level": 2, "label": {"en": "Reach 7,000 steps today", "id": "Capai 7.000 langkah hari ini", "ar": "ابلغ ٧٬٠٠٠ خطوة اليوم"}},
+        {"step": 6, "minutes": 45, "target_steps": 8000, "level": 2, "label": {"en": "8,000 steps", "id": "8.000 langkah", "ar": "٨٬٠٠٠ خطوة"}}
+      ]
+    },
+    {
+      "key": "p_walk_masjid",
+      "family": "walking",
+      "anchor": "maghrib",
+      "level": 1,
+      "evidence_ids": ["ev_steps_mortality"],
+      "islamic_source_ids": ["is_steps_masjid"],
+      "contraindications": ["prolonged_standing"],
+      "block_affinity": ["ordinary", "ramadan", "ashura"],
+      "title": {"en": "Walk to the Masjid", "id": "Berjalan ke Masjid", "ar": "المَشْيُ إِلَى المَسْجِد"},
+      "desc": {
+        "en": "Walk to the masjid for one prayer today. If that is not possible, take the longer way home on foot.",
+        "id": "Berjalanlah ke masjid untuk satu shalat hari ini. Jika tidak memungkinkan, ambil jalan pulang yang lebih panjang dengan berjalan kaki.",
+        "ar": "امشِ إلى المسجد لصلاةٍ واحدة اليوم، فإن تعذّر فاسلك طريق العودة الأطول سيرًا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "One prayer, on foot", "id": "Satu shalat, berjalan kaki", "ar": "صلاةٌ واحدة سيرًا"}},
+        {"step": 2, "minutes": 18, "label": {"en": "Two prayers, on foot", "id": "Dua shalat, berjalan kaki", "ar": "صلاتان سيرًا"}},
+        {"step": 3, "minutes": 25, "level": 2, "label": {"en": "Take the long route", "id": "Ambil rute panjang", "ar": "اسلك الطريق الأطول"}}
+      ]
+    },
+    {
+      "key": "p_strength",
+      "family": "strength",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_resistance_dose", "ev_resistance_mortality", "ev_muscle_strength_mortality"],
+      "islamic_source_ids": ["is_strong_believer"],
+      "contraindications": ["vigorous_exercise", "high_impact"],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "Bodyweight Strength", "id": "Kekuatan Berat Badan", "ar": "قُوَّةٌ بِوَزْنِ الجِسْم"},
+      "desc": {
+        "en": "You need only thirty to sixty minutes of this across the whole week - not per day. Squats, push-ups (knees are completely fine), and a plank. Rest thirty seconds between rounds.",
+        "id": "Anda hanya perlu tiga puluh hingga enam puluh menit sepanjang minggu - bukan per hari. Squat, push-up (lutut menyentuh sama sekali tidak masalah), dan plank. Istirahat tiga puluh detik antar putaran.",
+        "ar": "تكفيك ثلاثون إلى ستون دقيقة في الأسبوع كلّه لا في اليوم: قرفصاء، وضغطٌ (على الركبتين مقبول تمامًا)، وبلانك، مع راحةِ ثلاثين ثانية بين الجولات."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "2 rounds: 8 squats, 5 push-ups, 15s plank", "id": "2 putaran: 8 squat, 5 push-up, plank 15 detik", "ar": "جولتان: ٨ قرفصاء، ٥ ضغط، بلانك ١٥ ثانية"}},
+        {"step": 2, "minutes": 12, "label": {"en": "3 rounds: 10 squats, 8 push-ups, 20s plank", "id": "3 putaran: 10 squat, 8 push-up, plank 20 detik", "ar": "ثلاث جولات: ١٠ قرفصاء، ٨ ضغط، بلانك ٢٠ ثانية"}},
+        {"step": 3, "minutes": 16, "label": {"en": "4 rounds, add a slow 3-second lower", "id": "4 putaran, tambahkan turun lambat 3 detik", "ar": "أربع جولات مع نزولٍ بطيء ثلاث ثوانٍ"}},
+        {"step": 4, "minutes": 20, "level": 3, "label": {"en": "4 rounds, tempo squats and full push-ups", "id": "4 putaran, squat tempo dan push-up penuh", "ar": "أربع جولات: قرفصاء بإيقاع وضغطٌ كامل"}},
+        {"step": 5, "minutes": 24, "level": 3, "label": {"en": "5 rounds, add split squats", "id": "5 putaran, tambahkan split squat", "ar": "خمس جولات مع قرفصاء مُنفصلة"}}
+      ]
+    },
+    {
+      "key": "p_core",
+      "family": "strength",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_resistance_dose"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": ["high_impact"],
+      "block_affinity": ["ordinary", "shaban_prep"],
+      "title": {"en": "Core for a Stronger Sujud", "id": "Inti Tubuh untuk Sujud Lebih Kuat", "ar": "تَقْوِيَةُ الجِذْعِ لِسُجُودٍ أَثْبَت"},
+      "desc": {
+        "en": "Your lower back is what carries you through a long qiyam. Plank, bird-dogs, dead bugs - slow and controlled, never rushed.",
+        "id": "Punggung bawah Anda yang menopang qiyam yang panjang. Plank, bird-dog, dead bug - pelan dan terkendali, jangan terburu-buru.",
+        "ar": "أسفلُ ظهرك هو ما يحملك في القيام الطويل: بلانك، وبيرد-دوغ، وديد-باغ، ببطءٍ وضبطٍ لا بعجلة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "2 rounds: 15s plank, 8 bird-dogs", "id": "2 putaran: plank 15 detik, 8 bird-dog", "ar": "جولتان: بلانك ١٥ ثانية، ٨ بيرد-دوغ"}},
+        {"step": 2, "minutes": 9, "label": {"en": "3 rounds: 20s plank, 10 bird-dogs, 10 dead bugs", "id": "3 putaran: plank 20 detik, 10 bird-dog, 10 dead bug", "ar": "ثلاث جولات: بلانك ٢٠ ثانية، ١٠ بيرد-دوغ، ١٠ ديد-باغ"}},
+        {"step": 3, "minutes": 12, "level": 3, "label": {"en": "3 rounds: 40s plank, add side plank", "id": "3 putaran: plank 40 detik, tambahkan side plank", "ar": "ثلاث جولات: بلانك ٤٠ ثانية مع بلانك جانبي"}}
+      ]
+    },
+    {
+      "key": "p_mobility",
+      "family": "mobility",
+      "anchor": "morning",
+      "level": 1,
+      "evidence_ids": ["ev_habit_stacking"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura"],
+      "title": {"en": "Mobility, Stacked on Wudu", "id": "Mobilitas, Ditempelkan pada Wudhu", "ar": "المُرُونَةُ مَقْرُونَةً بِالوُضُوء"},
+      "desc": {
+        "en": "Attach this to wudu, a habit you already have - that roughly doubles the odds you keep it. Neck rolls, shoulder circles, wrist circles. Breathe out into each stretch.",
+        "id": "Tempelkan ini pada wudhu, kebiasaan yang sudah Anda miliki - itu kira-kira menggandakan peluang Anda bertahan. Putar leher, lingkarkan bahu, putar pergelangan. Buang napas saat meregang.",
+        "ar": "اقرِن هذا بالوضوء وهو عادةٌ قائمة عندك، فذلك يضاعف تقريبًا فرصة الاستمرار: لفُّ الرقبة، ودوائرُ الكتف والمعصم، مع إخراج النَّفَس في كل تمدّد."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "Neck and shoulders only", "id": "Leher dan bahu saja", "ar": "الرقبة والكتفان فقط"}},
+        {"step": 2, "minutes": 5, "label": {"en": "Add wrists and hips", "id": "Tambahkan pergelangan dan pinggul", "ar": "أضف المعصمين والوركين"}},
+        {"step": 3, "minutes": 8, "label": {"en": "Full-body, hold each 20 seconds", "id": "Seluruh tubuh, tahan 20 detik", "ar": "الجسم كلّه، ٢٠ ثانية لكل وضع"}},
+        {"step": 4, "minutes": 11, "level": 2, "label": {"en": "Continuous 10-minute flow", "id": "Alur berkelanjutan 10 menit", "ar": "تدفّقٌ متّصل عشر دقائق"}}
+      ]
+    },
+    {
+      "key": "p_sitting_breaks",
+      "family": "daily_movement",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_sedentary_breaks"],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": ["prolonged_standing"],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura", "shawwal_six"],
+      "title": {"en": "Break Up the Sitting", "id": "Pecah Waktu Duduk", "ar": "قَطْعُ الجُلُوسِ الطَّوِيل"},
+      "desc": {
+        "en": "The most sedentary quarter of adults die at more than twice the rate of the least. You do not need a gym for this - stand and move for two minutes for every half hour you sit. Take the stairs.",
+        "id": "Seperempat orang dewasa yang paling banyak duduk meninggal dengan angka lebih dari dua kali lipat dibanding yang paling sedikit. Anda tidak perlu gym - berdiri dan bergerak dua menit setiap setengah jam duduk. Naik tangga.",
+        "ar": "الرُّبعُ الأكثرُ جلوسًا يموتون بأكثر من ضعف معدّل الأقلّ جلوسًا. ولا تحتاج إلى ناد رياضي: قِف وتحرّك دقيقتين مقابل كل نصف ساعة جلوس، واصعد الدرج."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Stairs instead of the lift, today", "id": "Tangga alih-alih lift, hari ini", "ar": "الدرج بدل المصعد اليوم"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Stand and move every 45 minutes", "id": "Berdiri dan bergerak setiap 45 menit", "ar": "قِف وتحرّك كل ٤٥ دقيقة"}},
+        {"step": 3, "minutes": 10, "label": {"en": "Stand and move every 30 minutes", "id": "Berdiri dan bergerak setiap 30 menit", "ar": "قِف وتحرّك كل ٣٠ دقيقة"}}
+      ]
+    },
+    {
+      "key": "p_balance",
+      "family": "balance",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_steps_7000_target", "ev_muscle_strength_mortality"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": ["mobility_impairment"],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep"],
+      "title": {"en": "Balance and Ankle Strength", "id": "Keseimbangan dan Kekuatan Pergelangan Kaki", "ar": "التَّوَازُنُ وَقُوَّةُ الكَاحِل"},
+      "desc": {
+        "en": "Stand on one leg while you brush your teeth. It costs no extra time, and balance training meaningfully lowers fall risk as you age.",
+        "id": "Berdiri satu kaki saat menyikat gigi. Tidak memakan waktu tambahan, dan latihan keseimbangan menurunkan risiko jatuh secara bermakna seiring usia.",
+        "ar": "قِف على قدمٍ واحدة أثناء تنظيف أسنانك؛ لا يكلّفك وقتًا زائدًا، وتدريبُ التوازن يقلّل خطر السقوط مع التقدّم في العمر."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "15 seconds each leg", "id": "15 detik tiap kaki", "ar": "١٥ ثانية لكل قدم"}},
+        {"step": 2, "minutes": 5, "label": {"en": "30 seconds each leg, 2 rounds", "id": "30 detik tiap kaki, 2 putaran", "ar": "٣٠ ثانية لكل قدم، جولتان"}},
+        {"step": 3, "minutes": 6, "level": 2, "label": {"en": "30 seconds each leg, eyes closed", "id": "30 detik tiap kaki, mata tertutup", "ar": "٣٠ ثانية لكل قدم بعينين مغمضتين"}}
+      ]
+    },
+    {
+      "key": "p_interval",
+      "family": "conditioning",
+      "anchor": "asr",
+      "level": 3,
+      "evidence_ids": ["ev_steps_7000_target", "ev_sedentary_breaks"],
+      "islamic_source_ids": ["is_strong_believer"],
+      "contraindications": ["vigorous_exercise"],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "Interval Brisk Walk", "id": "Jalan Cepat Interval", "ar": "مَشْيٌ مُتَقَطِّعٌ سَرِيع"},
+      "desc": {
+        "en": "Alternate easy and brisk. You should be slightly breathless but still able to hold a conversation - if you cannot speak, slow down.",
+        "id": "Selang-seling santai dan cepat. Anda harus sedikit terengah tetapi masih bisa berbicara - jika tidak bisa bicara, perlambat.",
+        "ar": "بادِل بين الهادئ والسريع؛ ليعلُ نفَسُك قليلًا مع بقاء قدرتك على الحديث، فإن عجزتَ عن الكلام فأبطئ."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "3 min easy / 1 min brisk, x3", "id": "3 menit santai / 1 menit cepat, x3", "ar": "٣ دقائق هدوء / دقيقة سرعة، ×٣"}},
+        {"step": 2, "minutes": 15, "label": {"en": "3 min easy / 2 min brisk, x3", "id": "3 menit santai / 2 menit cepat, x3", "ar": "٣ دقائق هدوء / دقيقتان سرعة، ×٣"}},
+        {"step": 3, "minutes": 20, "label": {"en": "2 min easy / 2 min brisk, x5", "id": "2 menit santai / 2 menit cepat, x5", "ar": "دقيقتان هدوء / دقيقتان سرعة، ×٥"}}
+      ]
+    },
+    {
+      "key": "p_long_walk",
+      "family": "walking",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_steps_7000_target", "ev_steps_mortality"],
+      "islamic_source_ids": ["is_steps_masjid"],
+      "contraindications": ["prolonged_standing"],
+      "block_affinity": ["ordinary", "dhul_hijjah_ten", "shawwal_six"],
+      "title": {"en": "One Long, Unhurried Walk", "id": "Satu Jalan Panjang Tanpa Terburu", "ar": "مَشْيَةٌ وَاحِدَةٌ طَوِيلَةٌ بِلَا عَجَلَة"},
+      "desc": {
+        "en": "Once a week, walk far enough that it stops being exercise and becomes thinking time. Leave the headphones at home.",
+        "id": "Sekali seminggu, berjalanlah cukup jauh sampai ia berhenti menjadi olahraga dan menjadi waktu berpikir. Tinggalkan headphone di rumah.",
+        "ar": "مرّةً في الأسبوع امشِ حتى يتحوّل المشي من رياضةٍ إلى وقتٍ للتفكّر، ودَع السمّاعات في البيت."
+      },
+      "progression": [
+        {"step": 1, "minutes": 30, "label": {"en": "30 minutes", "id": "30 menit", "ar": "ثلاثون دقيقة"}},
+        {"step": 2, "minutes": 45, "label": {"en": "45 minutes", "id": "45 menit", "ar": "خمس وأربعون دقيقة"}},
+        {"step": 3, "minutes": 60, "level": 3, "label": {"en": "A full hour", "id": "Satu jam penuh", "ar": "ساعةٌ كاملة"}}
+      ]
+    },
+    {
+      "key": "p_posture",
+      "family": "mobility",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_sedentary_breaks"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura"],
+      "title": {"en": "Posture Reset", "id": "Reset Postur", "ar": "إِعَادَةُ ضَبْطِ القَوَام"},
+      "desc": {
+        "en": "Raise your screen to eye height. Then chin tucks and wall angels - the antidote to a day spent folded over a phone.",
+        "id": "Naikkan layar Anda setinggi mata. Lalu chin tuck dan wall angel - penawar untuk hari yang dihabiskan membungkuk di atas ponsel.",
+        "ar": "ارفع شاشتك إلى مستوى العين، ثم اسحب ذقنك ومارس 'ملائكة الجدار'؛ فهذا ترياقُ يومٍ انحنيتَ فيه على هاتفك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Screen height + 10 chin tucks", "id": "Tinggi layar + 10 chin tuck", "ar": "ارتفاع الشاشة + ١٠ سحبات ذقن"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Add 10 wall angels", "id": "Tambahkan 10 wall angel", "ar": "أضف ١٠ ملائكة جدار"}}
+      ]
+    },
+    {
+      "key": "p_breath",
+      "family": "recovery",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_salah_autonomic"],
+      "islamic_source_ids": ["is_hearts_rest", "is_prostrate_near"],
+      "contraindications": ["breath_holding"],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six"],
+      "title": {"en": "Slow Breathing After Salah", "id": "Napas Lambat Setelah Shalat", "ar": "تَنَفُّسٌ بَطِيءٌ بَعْدَ الصَّلَاة"},
+      "desc": {
+        "en": "Stay on the prayer mat a moment longer. Breathe in for four, out slowly for eight. A long exhale is what shifts the nervous system toward rest.",
+        "id": "Tetaplah di sajadah sejenak lebih lama. Tarik napas empat hitungan, buang perlahan delapan. Hembusan panjanglah yang menggeser sistem saraf ke arah istirahat.",
+        "ar": "امكُث على السجّادة لحظةً أطول: شهيقٌ على أربع، وزفيرٌ بطيء على ثمان؛ فالزفيرُ المُطوَّل هو ما يميل بالجهاز العصبي إلى السكون."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "4 rounds", "id": "4 putaran", "ar": "أربع دورات"}},
+        {"step": 2, "minutes": 5, "label": {"en": "8 rounds", "id": "8 putaran", "ar": "ثماني دورات"}},
+        {"step": 3, "minutes": 7, "label": {"en": "8 rounds, then sit in silence", "id": "8 putaran, lalu duduk dalam diam", "ar": "ثماني دورات ثم جلوسٌ في صمت"}}
+      ]
+    },
+    {
+      "key": "p_siwak",
+      "family": "hygiene",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_miswak_adjunct"],
+      "islamic_source_ids": ["is_siwak"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura"],
+      "title": {"en": "Siwak, Alongside Your Brush", "id": "Siwak, Bersama Sikat Gigi Anda", "ar": "السِّوَاكُ مَعَ الفُرْشَاة"},
+      "desc": {
+        "en": "Use the siwak in ADDITION to brushing, not instead of it - that is the combination the evidence actually supports. Be gentle: pressing hard causes gum recession, which is a real and documented harm.",
+        "id": "Gunakan siwak SEBAGAI TAMBAHAN menyikat gigi, bukan penggantinya - itulah kombinasi yang benar-benar didukung bukti. Bersikaplah lembut: menekan keras menyebabkan resesi gusi, bahaya yang nyata dan terdokumentasi.",
+        "ar": "استعمل السواك زيادةً على الفرشاة لا بدلًا منها، فهذا هو الجمعُ الذي تسنده الأدلة فعلًا. وارفُق، فالضغط الشديد يُحدث انحسارًا لثويًا، وهو ضررٌ حقيقيّ موثَّق."
+      },
+      "progression": [
+        {"step": 1, "minutes": 2, "label": {"en": "Once today, gently", "id": "Sekali hari ini, dengan lembut", "ar": "مرّةً اليوم برفق"}},
+        {"step": 2, "minutes": 3, "label": {"en": "Before two prayers", "id": "Sebelum dua shalat", "ar": "قبل صلاتين"}}
+      ]
+    },
+    {
+      "key": "p_handwashing",
+      "family": "hygiene",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": ["ev_handwashing"],
+      "islamic_source_ids": ["is_wudu", "is_purify"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "Wash Properly, Not Quickly", "id": "Cuci dengan Benar, Bukan Cepat", "ar": "أَحْسِنِ الغَسْلَ لَا أَنْ تُسْرِع"},
+      "desc": {
+        "en": "Wudu already puts your hands under water several times a day. Use soap and take the full twenty seconds - plain soap works as well as antibacterial.",
+        "id": "Wudhu sudah menempatkan tangan Anda di bawah air beberapa kali sehari. Gunakan sabun dan ambil dua puluh detik penuh - sabun biasa sama baiknya dengan antibakteri.",
+        "ar": "الوضوء يضع يديك تحت الماء مرارًا كل يوم؛ فاستعمل الصابون وخُذ العشرين ثانية كاملة، والصابون العادي يكفي كالمضادّ للبكتيريا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 2, "label": {"en": "Soap, 20 seconds, before every meal", "id": "Sabun, 20 detik, sebelum tiap makan", "ar": "صابون، ٢٠ ثانية، قبل كل وجبة"}}
+      ]
+    },
+    {
+      "key": "p_qaylulah",
+      "family": "recovery",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": ["ev_nap_dose_cap"],
+      "islamic_source_ids": [],
+      "contraindications": [],
+      "block_affinity": ["ramadan", "dhul_hijjah_ten", "ordinary"],
+      "title": {"en": "A Short Midday Rest", "id": "Istirahat Siang Singkat", "ar": "قَيْلُولَةٌ قَصِيرَة"},
+      "desc": {
+        "en": "Keep it under thirty minutes and set an alarm. Short naps carry no measurable risk, but naps of an hour or more are associated with substantially higher cardiovascular risk - shorter is genuinely better here.",
+        "id": "Jaga di bawah tiga puluh menit dan pasang alarm. Tidur siang singkat tidak membawa risiko terukur, tetapi tidur satu jam atau lebih dikaitkan dengan risiko kardiovaskular jauh lebih tinggi - lebih singkat benar-benar lebih baik.",
+        "ar": "اجعلها دون ثلاثين دقيقة واضبط منبّهًا؛ فالقيلولة القصيرة لا خطر معلومًا لها، أما ساعةٌ فأكثر فترتبط بارتفاعٍ كبير في خطر القلب، فالأقصرُ هنا أفضل حقًّا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 20, "label": {"en": "20 minutes, alarm set", "id": "20 menit, alarm dipasang", "ar": "عشرون دقيقة مع منبّه"}},
+        {"step": 2, "minutes": 30, "label": {"en": "30 minutes maximum", "id": "Maksimal 30 menit", "ar": "ثلاثون دقيقة كحدٍّ أقصى"}}
+      ]
+    }
+  ]
+}

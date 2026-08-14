@@ -3,7 +3,7 @@ daily habits on the 100-Day and 1-Year tracks.
 """
 from datetime import date, timedelta
 
-from templates_advanced import T
+from curriculum import T
 
 WEEKLY_MILESTONES: list[dict] = [
     {

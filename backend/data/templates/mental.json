@@ -1,0 +1,172 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "mental",
+  "_README": "SECONDARY pillar under the body-first positioning. NOTE: two claims were removed from the old curriculum during the 2026-08-13 audit - a 'Harvard Business School working paper' citation (not peer-reviewed) and a 'Harvard Health' citation (a consumer publication, not a study). Habits that lost their citation now rest on scripture or on the habit-formation evidence, which is honest. Do not re-add a citation without a resolvable DOI.",
+
+  "families": [
+    {
+      "key": "m_muhasabah",
+      "family": "reflection",
+      "anchor": "night",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six"],
+      "title": {"en": "Account for the Day", "id": "Hisab Diri Harian", "ar": "مُحَاسَبَةُ اليَوْم"},
+      "desc": {
+        "en": "Three questions before sleep: what went well, what I missed, what I will do differently tomorrow. Then istighfar, and close the day without carrying it into bed.",
+        "id": "Tiga pertanyaan sebelum tidur: apa yang baik, apa yang terlewat, apa yang akan kulakukan berbeda besok. Lalu istighfar, dan tutup hari tanpa membawanya ke tempat tidur.",
+        "ar": "ثلاثةُ أسئلةٍ قبل النوم: ما أحسنتُ فيه، وما فاتني، وما سأغيّره غدًا. ثم استغفار، وأغلق يومك دون أن تحمله إلى فراشك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Three questions, in your head", "id": "Tiga pertanyaan, dalam hati", "ar": "ثلاثة أسئلة في نفسك"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Write them down", "id": "Tuliskan", "ar": "اكتبها"}},
+        {"step": 3, "minutes": 15, "level": 2, "label": {"en": "A longer written reflection", "id": "Refleksi tertulis lebih panjang", "ar": "تأمّلٌ مكتوبٌ أطول"}}
+      ]
+    },
+    {
+      "key": "m_gratitude",
+      "family": "reflection",
+      "anchor": "isha",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "Three Specific Things", "id": "Tiga Hal yang Spesifik", "ar": "ثَلَاثَةُ أَشْيَاءَ بِعَيْنِهَا"},
+      "desc": {
+        "en": "Not 'my family' - name the exact thing that happened today. Health and free time are the two blessings most people only notice once they are gone.",
+        "id": "Bukan 'keluargaku' - sebutkan hal persis yang terjadi hari ini. Kesehatan dan waktu luang adalah dua nikmat yang kebanyakan orang baru sadari setelah hilang.",
+        "ar": "لا تقل 'أهلي'، بل سمِّ الشيء الذي وقع اليوم بعينه. فالصحّة والفراغ نعمتان لا ينتبه أكثر الناس إليهما حتى تزولا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Three things", "id": "Tiga hal", "ar": "ثلاثة أشياء"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Three things, and why each matters", "id": "Tiga hal, dan mengapa penting", "ar": "ثلاثة أشياء وسببُ أهميّتها"}}
+      ]
+    },
+    {
+      "key": "m_digital",
+      "family": "attention",
+      "anchor": "isha",
+      "level": 2,
+      "evidence_ids": ["ev_sleep_timing"],
+      "islamic_source_ids": ["is_night_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "One Hour Without the Phone", "id": "Satu Jam Tanpa Ponsel", "ar": "سَاعَةٌ بِلَا هَاتِف"},
+      "desc": {
+        "en": "After Isha, put it in another room - not face down on the table. Protecting the hour before sleep is mostly about protecting when you actually fall asleep.",
+        "id": "Setelah Isya, letakkan di ruangan lain - bukan tengkurap di atas meja. Menjaga satu jam sebelum tidur pada dasarnya soal menjaga kapan Anda benar-benar tertidur.",
+        "ar": "بعد العشاء ضَعه في غرفةٍ أخرى لا مقلوبًا على الطاولة؛ فحفظُ الساعة التي تسبق النوم حفظٌ لوقت نومك حقًّا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 30, "label": {"en": "Thirty minutes", "id": "Tiga puluh menit", "ar": "ثلاثون دقيقة"}},
+        {"step": 2, "minutes": 60, "label": {"en": "A full hour", "id": "Satu jam penuh", "ar": "ساعةٌ كاملة"}},
+        {"step": 3, "minutes": 60, "level": 3, "label": {"en": "Phone stays out of the bedroom", "id": "Ponsel tidak masuk kamar tidur", "ar": "الهاتف خارج غرفة النوم"}}
+      ]
+    },
+    {
+      "key": "m_tafakkur",
+      "family": "attention",
+      "anchor": "asr",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten", "ashura"],
+      "title": {"en": "Ten Minutes Outdoors, Thinking", "id": "Sepuluh Menit di Luar, Merenung", "ar": "عَشْرُ دَقَائِقَ فِي الخَارِجِ تَتَفَكَّر"},
+      "desc": {
+        "en": "Outside, without headphones, without a destination. Look at something you did not make.",
+        "id": "Di luar, tanpa headphone, tanpa tujuan. Pandanglah sesuatu yang bukan buatan Anda.",
+        "ar": "في الخارج بلا سمّاعات ولا وجهة، وانظر إلى شيءٍ لم تصنعه أنت."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "Six minutes", "id": "Enam menit", "ar": "ست دقائق"}},
+        {"step": 2, "minutes": 10, "label": {"en": "Ten minutes", "id": "Sepuluh menit", "ar": "عشر دقائق"}},
+        {"step": 3, "minutes": 20, "level": 2, "label": {"en": "Twenty minutes of silence", "id": "Dua puluh menit hening", "ar": "عشرون دقيقة صمت"}}
+      ]
+    },
+    {
+      "key": "m_worry",
+      "family": "reflection",
+      "anchor": "isha",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ashura", "shaban_prep"],
+      "title": {"en": "Sort the Worries", "id": "Pilah Kekhawatiran", "ar": "افْرِزْ هُمُومَك"},
+      "desc": {
+        "en": "Two columns: what I can act on, and what I can only entrust. Do one thing from the first column and hand the second column over.",
+        "id": "Dua kolom: yang bisa saya tindaklanjuti, dan yang hanya bisa saya pasrahkan. Kerjakan satu hal dari kolom pertama dan serahkan kolom kedua.",
+        "ar": "عمودان: ما أقدر على فعله، وما لا أملك إلا تفويضه. افعل شيئًا من الأول وسلّم الثاني."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "Write the two columns", "id": "Tulis dua kolom", "ar": "اكتب العمودين"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Act on one item today", "id": "Tindaklanjuti satu hal hari ini", "ar": "نفّذ بندًا اليوم"}}
+      ]
+    },
+    {
+      "key": "m_read",
+      "family": "learning",
+      "anchor": "night",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura"],
+      "title": {"en": "Read Paper, Not a Screen", "id": "Baca Kertas, Bukan Layar", "ar": "اقْرَأْ وَرَقًا لَا شَاشَة"},
+      "desc": {
+        "en": "Fifteen minutes of something beneficial, on paper. The format matters because a screen invites the next thing.",
+        "id": "Lima belas menit sesuatu yang bermanfaat, di atas kertas. Formatnya penting karena layar selalu mengundang hal berikutnya.",
+        "ar": "خمس عشرة دقيقة في نافعٍ على ورق؛ والصيغةُ مهمّة لأن الشاشة تدعوك دائمًا إلى ما بعدها."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Ten minutes", "id": "Sepuluh menit", "ar": "عشر دقائق"}},
+        {"step": 2, "minutes": 15, "label": {"en": "Fifteen minutes", "id": "Lima belas menit", "ar": "خمس عشرة دقيقة"}},
+        {"step": 3, "minutes": 20, "level": 2, "label": {"en": "Twenty minutes, and take notes", "id": "Dua puluh menit, dan catat", "ar": "عشرون دقيقة مع تدوين"}}
+      ]
+    },
+    {
+      "key": "m_kindness",
+      "family": "character",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shawwal_six", "ashura"],
+      "title": {"en": "One Deliberate Kindness", "id": "Satu Kebaikan yang Disengaja", "ar": "إِحْسَانٌ وَاحِدٌ مَقْصُود"},
+      "desc": {
+        "en": "Something that costs you a little, done for someone who cannot repay it, and told to nobody.",
+        "id": "Sesuatu yang menuntut sedikit pengorbanan, dilakukan untuk seseorang yang tak bisa membalasnya, dan tidak diceritakan pada siapa pun.",
+        "ar": "شيءٌ يكلّفك قليلًا، تصنعه لمن لا يستطيع مكافأتك، ولا تخبر به أحدًا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "One act", "id": "Satu tindakan", "ar": "عملٌ واحد"}},
+        {"step": 2, "minutes": 12, "label": {"en": "One act, told to nobody", "id": "Satu tindakan, tanpa diceritakan", "ar": "عملٌ لا تخبر به أحدًا"}}
+      ]
+    },
+    {
+      "key": "m_no_complaint",
+      "family": "character",
+      "anchor": "anytime",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep"],
+      "title": {"en": "A Day Without Complaining", "id": "Sehari Tanpa Mengeluh", "ar": "يَوْمٌ بِلَا شَكْوَى"},
+      "desc": {
+        "en": "Not silence about problems - just no complaining to people who cannot solve them.",
+        "id": "Bukan diam soal masalah - hanya tidak mengeluh kepada orang yang tidak bisa menyelesaikannya.",
+        "ar": "ليس سكوتًا عن المشكلات، بل ترك الشكوى إلى من لا يملك حلّها."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "Half a day", "id": "Setengah hari", "ar": "نصف يوم"}},
+        {"step": 2, "minutes": 8, "label": {"en": "A full day", "id": "Sehari penuh", "ar": "يومٌ كامل"}}
+      ]
+    }
+  ]
+}

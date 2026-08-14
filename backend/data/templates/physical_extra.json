@@ -1,0 +1,177 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "physical",
+  "_README": "Second physical tranche. Added to close the measured gap: with body-first weighting the physical pillar is drawn ~1.07 times a day over a year, so a 60-day no-repeat floor needs ~63 presentations. Tranche 1 supplied 43.",
+
+  "families": [
+    {
+      "key": "p_carry",
+      "family": "strength",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_muscle_strength_mortality", "ev_resistance_mortality"],
+      "islamic_source_ids": ["is_strong_believer"],
+      "contraindications": ["vigorous_exercise", "high_impact"],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "Carry Something Heavy", "id": "Angkat Sesuatu yang Berat", "ar": "احْمِلْ ثَقِيلًا"},
+      "desc": {
+        "en": "Grip strength is one of the single best predictors of how long you live. Carry the shopping the whole way instead of driving to the door. Walk with a weight in each hand, back straight, and put it down before your form goes.",
+        "id": "Kekuatan genggaman adalah salah satu prediktor tunggal terbaik untuk usia Anda. Bawa belanjaan sepanjang jalan alih-alih menyetir sampai ke pintu. Berjalanlah dengan beban di tiap tangan, punggung lurus, dan letakkan sebelum posturnya rusak.",
+        "ar": "قوّةُ القبضة من أفضل مؤشّرات طول العمر مفردةً. احمل مشترياتك الطريق كلّه بدل أن تقود إلى الباب، وامشِ وفي كل يدٍ ثِقل، وظهرُك مستقيم، وضَعه قبل أن تفسد هيئتك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Carry the shopping home", "id": "Bawa belanjaan pulang", "ar": "احمل المشتريات إلى البيت"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Four walks of 20 metres", "id": "Empat kali jalan 20 meter", "ar": "أربع مشياتٍ ٢٠ مترًا"}},
+        {"step": 3, "minutes": 10, "label": {"en": "Heavier, 30 metres", "id": "Lebih berat, 30 meter", "ar": "أثقل، ٣٠ مترًا"}},
+        {"step": 4, "minutes": 12, "level": 3, "label": {"en": "Single-arm carries, both sides", "id": "Angkat satu tangan, kedua sisi", "ar": "حملٌ بيدٍ واحدة للجهتين"}}
+      ]
+    },
+    {
+      "key": "p_sunnah_sport",
+      "family": "conditioning",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_steps_7000_target", "ev_resistance_dose"],
+      "islamic_source_ids": ["is_strong_believer", "is_body_right_over_you"],
+      "contraindications": ["vigorous_exercise"],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six", "dhul_hijjah_ten"],
+      "title": {"en": "Swim, Ride, or Shoot", "id": "Berenang, Berkuda, atau Memanah", "ar": "اسْبَحْ أَوِ ارْكَبْ أَوِ ارْمِ"},
+      "desc": {
+        "en": "The three activities the tradition singles out by name. Pick whichever you can actually reach this week - a sport you enjoy is a sport you will still be doing in a year.",
+        "id": "Tiga aktivitas yang disebut secara khusus dalam tradisi. Pilih mana pun yang benar-benar bisa Anda jangkau minggu ini - olahraga yang Anda nikmati adalah olahraga yang masih Anda lakukan setahun kemudian.",
+        "ar": "ثلاثةٌ خصّتها السنّة بالذكر؛ فاختر ما تستطيع الوصول إليه هذا الأسبوع، فالرياضةُ التي تحبّها هي التي تبقى عليها بعد عام."
+      },
+      "progression": [
+        {"step": 1, "minutes": 20, "label": {"en": "Twenty minutes, once", "id": "Dua puluh menit, sekali", "ar": "عشرون دقيقة مرّة"}},
+        {"step": 2, "minutes": 30, "label": {"en": "Thirty minutes", "id": "Tiga puluh menit", "ar": "ثلاثون دقيقة"}},
+        {"step": 3, "minutes": 40, "level": 3, "label": {"en": "Forty minutes, twice this week", "id": "Empat puluh menit, dua kali minggu ini", "ar": "أربعون دقيقة مرّتين هذا الأسبوع"}}
+      ]
+    },
+    {
+      "key": "p_hip_hinge",
+      "family": "strength",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_resistance_dose", "ev_muscle_strength_mortality"],
+      "islamic_source_ids": ["is_body_right_over_you"],
+      "contraindications": ["vigorous_exercise", "high_impact"],
+      "block_affinity": ["ordinary", "shaban_prep"],
+      "title": {"en": "Learn to Hinge, Not Bend", "id": "Belajar Menekuk Pinggul, Bukan Punggung", "ar": "تَعَلَّمِ الثَّنْيَ مِنَ الوَرِك"},
+      "desc": {
+        "en": "Most back injuries come from lifting with a rounded spine. Push the hips back, keep the chest proud, let the knees soften. Groove it with no weight first - this is the movement you will use for the rest of your life.",
+        "id": "Kebanyakan cedera punggung berasal dari mengangkat dengan tulang belakang membungkuk. Dorong pinggul ke belakang, jaga dada tegak, biarkan lutut sedikit menekuk. Latih tanpa beban dulu - ini gerakan yang akan Anda pakai seumur hidup.",
+        "ar": "أكثرُ إصابات الظهر من الرفع بعمودٍ محدودب. ادفع الوركين للخلف، وارفع صدرك، وليَلِن الركبتان. أتقِنها بلا وزنٍ أوّلًا، فهذه حركةٌ ستستعملها بقيّة عمرك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "10 hinges, no weight", "id": "10 hinge, tanpa beban", "ar": "١٠ ثنياتٍ بلا وزن"}},
+        {"step": 2, "minutes": 9, "label": {"en": "3 rounds of 10, light weight", "id": "3 putaran 10, beban ringan", "ar": "٣ جولات × ١٠ بوزنٍ خفيف"}},
+        {"step": 3, "minutes": 12, "level": 3, "label": {"en": "Single-leg deadlift, 8 each side", "id": "Deadlift satu kaki, 8 tiap sisi", "ar": "رفعةٌ على قدمٍ واحدة، ٨ لكل جهة"}}
+      ]
+    },
+    {
+      "key": "p_hill",
+      "family": "conditioning",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": ["ev_steps_7000_target", "ev_sedentary_breaks"],
+      "islamic_source_ids": ["is_steps_masjid"],
+      "contraindications": ["vigorous_exercise", "prolonged_standing"],
+      "block_affinity": ["ordinary", "shaban_prep", "dhul_hijjah_ten"],
+      "title": {"en": "Find a Hill", "id": "Cari Tanjakan", "ar": "ابْحَثْ عَنْ مُرْتَفَع"},
+      "desc": {
+        "en": "Walking uphill costs far more than walking flat, without asking you to run. Up briskly, down slowly to recover.",
+        "id": "Berjalan menanjak jauh lebih berat daripada di jalan datar, tanpa menuntut Anda berlari. Naik dengan cepat, turun perlahan untuk pulih.",
+        "ar": "المشيُ صعودًا أشقُّ كثيرًا من المستوي دون أن يُلزمك الجري: اصعد بسرعة وانزل ببطءٍ للاستشفاء."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Three times up", "id": "Tiga kali naik", "ar": "ثلاث صعدات"}},
+        {"step": 2, "minutes": 15, "label": {"en": "Five times up", "id": "Lima kali naik", "ar": "خمس صعدات"}},
+        {"step": 3, "minutes": 20, "level": 3, "label": {"en": "Eight times, or a steeper hill", "id": "Delapan kali, atau tanjakan lebih curam", "ar": "ثماني صعدات أو مرتفعٌ أشدّ"}}
+      ]
+    },
+    {
+      "key": "p_stretch_evening",
+      "family": "mobility",
+      "anchor": "isha",
+      "level": 1,
+      "evidence_ids": ["ev_sleep_timing", "ev_habit_stacking"],
+      "islamic_source_ids": ["is_night_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six"],
+      "title": {"en": "Unwind the Day", "id": "Uraikan Hari", "ar": "فُكَّ تَعَبَ اليَوْم"},
+      "desc": {
+        "en": "Hip flexors, hamstrings, chest - the three things a day of sitting shortens. Hold each for thirty seconds and breathe out into it. Stack it onto the wind-down you already do before sleep.",
+        "id": "Fleksor pinggul, hamstring, dada - tiga hal yang memendek karena seharian duduk. Tahan tiga puluh detik dan buang napas ke dalamnya. Tempelkan pada rutinitas menjelang tidur yang sudah Anda lakukan.",
+        "ar": "مثنياتُ الورك وأوتار الركبة والصدر: ثلاثةٌ يقصّرها يومٌ من الجلوس. اثبت ثلاثين ثانية وأخرِج نفَسك فيها، واقرِنها بتهيئتك المعتادة قبل النوم."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Three stretches", "id": "Tiga peregangan", "ar": "ثلاثُ تمدّدات"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Six stretches", "id": "Enam peregangan", "ar": "ستُّ تمدّدات"}},
+        {"step": 3, "minutes": 12, "label": {"en": "Full routine, both sides twice", "id": "Rutinitas penuh, kedua sisi dua kali", "ar": "الروتين كاملًا، الجهتان مرّتين"}}
+      ]
+    },
+    {
+      "key": "p_daylight",
+      "family": "daily_movement",
+      "anchor": "morning",
+      "level": 1,
+      "evidence_ids": ["ev_sleep_timing", "ev_steps_mortality"],
+      "islamic_source_ids": ["is_barakah_morning", "is_night_rest"],
+      "contraindications": ["sun_exposure"],
+      "block_affinity": ["ordinary", "shaban_prep", "ashura", "shawwal_six"],
+      "title": {"en": "Get Outside Early", "id": "Keluarlah Pagi-Pagi", "ar": "اخْرُجْ بَاكِرًا"},
+      "desc": {
+        "en": "Daylight early in the day is the strongest signal your body clock has, and a steady body clock is what makes falling asleep at night easy. Step outside rather than looking through a window - glass filters most of the useful light.",
+        "id": "Cahaya siang di awal hari adalah sinyal terkuat bagi jam biologis Anda, dan jam biologis yang mantap membuat tidur malam menjadi mudah. Melangkahlah ke luar alih-alih melihat lewat jendela - kaca menyaring sebagian besar cahaya yang berguna.",
+        "ar": "ضوءُ النهار مبكّرًا أقوى إشارةٍ لساعتك البيولوجية، وثباتُ الساعة هو ما يُسهّل النوم ليلًا. واخرج فعلًا لا تنظر من نافذة، فالزجاج يحجب أكثر الضوء النافع."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Five minutes outside", "id": "Lima menit di luar", "ar": "خمس دقائق في الخارج"}},
+        {"step": 2, "minutes": 10, "label": {"en": "Ten minutes, within an hour of waking", "id": "Sepuluh menit, dalam sejam setelah bangun", "ar": "عشر دقائق خلال ساعةٍ من الاستيقاظ"}},
+        {"step": 3, "minutes": 15, "label": {"en": "Fifteen minutes, every morning", "id": "Lima belas menit, tiap pagi", "ar": "خمس عشرة دقيقة كل صباح"}}
+      ]
+    },
+    {
+      "key": "p_ramadan_training",
+      "family": "conditioning",
+      "anchor": "maghrib",
+      "level": 2,
+      "evidence_ids": ["ev_ramadan_training"],
+      "islamic_source_ids": ["is_fasting_prescribed", "is_body_right_over_you"],
+      "contraindications": ["vigorous_exercise"],
+      "block_affinity": ["ramadan"],
+      "title": {"en": "Train Near Iftar", "id": "Berlatih Menjelang Iftar", "ar": "تَدَرَّبْ قُرْبَ الإِفْطَار"},
+      "desc": {
+        "en": "You do not have to lose fitness in Ramadan. Fasting reduces short explosive power, but aerobic capacity and strength hold. Train in the hour before iftar so you can eat and drink straight after, and guard your sleep - most of the decline people blame on fasting is actually sleep loss.",
+        "id": "Anda tidak harus kehilangan kebugaran saat Ramadan. Puasa menurunkan daya ledak singkat, tetapi kapasitas aerobik dan kekuatan bertahan. Berlatihlah pada jam sebelum iftar agar bisa langsung makan dan minum setelahnya, dan jaga tidur Anda - sebagian besar penurunan yang disalahkan pada puasa sebenarnya karena kurang tidur.",
+        "ar": "لست مضطرًّا لفقد لياقتك في رمضان؛ فالصيام يقلّل القدرة الانفجارية القصيرة، أما السعة الهوائية والقوة فتثبتان. تدرّب في الساعة التي تسبق الإفطار لتأكل وتشرب بعدها مباشرة، واحفظ نومك، فأكثرُ التراجع الذي يُنسب للصيام سببه قلّة النوم."
+      },
+      "progression": [
+        {"step": 1, "minutes": 15, "label": {"en": "Light session before iftar", "id": "Sesi ringan sebelum iftar", "ar": "حصّةٌ خفيفة قبل الإفطار"}},
+        {"step": 2, "minutes": 25, "label": {"en": "Full session before iftar", "id": "Sesi penuh sebelum iftar", "ar": "حصّةٌ كاملة قبل الإفطار"}},
+        {"step": 3, "minutes": 30, "label": {"en": "Keep your usual load, three times a week", "id": "Pertahankan beban biasa, tiga kali seminggu", "ar": "احفظ حملك المعتاد ثلاث مرّاتٍ أسبوعيًا"}}
+      ]
+    },
+    {
+      "key": "p_recovery_walk",
+      "family": "recovery",
+      "anchor": "isha",
+      "level": 1,
+      "evidence_ids": ["ev_sedentary_breaks", "ev_steps_mortality"],
+      "islamic_source_ids": ["is_steps_masjid"],
+      "contraindications": ["prolonged_standing"],
+      "block_affinity": ["ramadan", "ordinary", "shawwal_six", "ashura"],
+      "title": {"en": "Walk After Eating", "id": "Berjalan Setelah Makan", "ar": "امْشِ بَعْدَ الطَّعَام"},
+      "desc": {
+        "en": "A slow walk after the evening meal, not a workout. Ten easy minutes on the way to or from Isha counts.",
+        "id": "Jalan pelan setelah makan malam, bukan latihan. Sepuluh menit santai saat pergi atau pulang dari Isya sudah cukup.",
+        "ar": "مشيةٌ هادئة بعد العَشاء لا تمرينًا؛ وعشرُ دقائق يسيرة ذهابًا إلى العشاء أو إيابًا تكفي."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "Eight minutes, easy", "id": "Delapan menit, santai", "ar": "ثماني دقائق برفق"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Twelve minutes", "id": "Dua belas menit", "ar": "اثنتا عشرة دقيقة"}},
+        {"step": 3, "minutes": 18, "label": {"en": "After every evening meal", "id": "Setelah tiap makan malam", "ar": "بعد كل عَشاء"}}
+      ]
+    }
+  ]
+}

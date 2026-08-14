@@ -1,0 +1,238 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "spiritual",
+  "_README": "Second spiritual tranche plus the mental families in `mental_families`. Both are secondary pillars drawn ~0.53 times a day, so a 60-day floor needs ~31 presentations each. Tranche 1 supplied 22 and 20. No clinical citations on acts of worship - see spiritual.json.",
+
+  "families": [
+    {
+      "key": "s_dua",
+      "family": "dua",
+      "anchor": "isha",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "dhul_hijjah_ten", "ashura", "shawwal_six"],
+      "title": {"en": "Keep a Written Du'a List", "id": "Simpan Daftar Doa Tertulis", "ar": "احْتَفِظْ بِقَائِمَةِ دُعَاءٍ مَكْتُوبَة"},
+      "desc": {
+        "en": "Write down what you actually want. Most people ask vaguely because they have never made themselves say it plainly. Read the list back in a month.",
+        "id": "Tuliskan apa yang benar-benar Anda inginkan. Kebanyakan orang berdoa samar karena tak pernah memaksa diri mengatakannya dengan jelas. Baca kembali daftarnya sebulan lagi.",
+        "ar": "اكتب ما تريده حقًّا؛ فأكثر الناس يسألون مبهَمًا لأنهم لم يُلزموا أنفسهم يومًا بقوله صريحًا. وعُد إلى القائمة بعد شهر."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "Write five", "id": "Tulis lima", "ar": "اكتب خمسًا"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Read it back after every salah", "id": "Baca ulang setelah tiap shalat", "ar": "راجعها بعد كل صلاة"}},
+        {"step": 3, "minutes": 10, "label": {"en": "Add someone else to every du'a", "id": "Tambahkan orang lain dalam tiap doa", "ar": "أضف غيرك إلى كل دعاء"}}
+      ]
+    },
+    {
+      "key": "s_salawat",
+      "family": "dhikr",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six"],
+      "title": {"en": "Salawat Through the Day", "id": "Shalawat Sepanjang Hari", "ar": "الصَّلَاةُ عَلَى النَّبِيِّ خِلَالَ اليَوْم"},
+      "desc": {
+        "en": "Attach it to something you already do many times a day - unlocking your phone, or every time you sit down.",
+        "id": "Tempelkan pada sesuatu yang sudah Anda lakukan berkali-kali sehari - membuka kunci ponsel, atau setiap kali duduk.",
+        "ar": "اقرِنها بشيءٍ تفعله مرارًا كل يوم: فتحِ هاتفك، أو كلّما جلست."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Whenever you unlock your phone", "id": "Tiap membuka kunci ponsel", "ar": "كلّما فتحت هاتفك"}},
+        {"step": 2, "minutes": 7, "label": {"en": "One hundred through the day", "id": "Seratus sepanjang hari", "ar": "مئةٌ خلال اليوم"}},
+        {"step": 3, "minutes": 10, "label": {"en": "Especially on Friday", "id": "Terutama pada hari Jumat", "ar": "وبخاصّةٍ يوم الجمعة"}}
+      ]
+    },
+    {
+      "key": "s_friday",
+      "family": "quran",
+      "anchor": "morning",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_prayer_times"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Make Friday Different", "id": "Jadikan Jumat Berbeda", "ar": "اجْعَلِ الجُمُعَةَ مُخْتَلِفَة"},
+      "desc": {
+        "en": "Surah al-Kahf, ghusl, going early, extra salawat. One day a week that does not look like the other six is what stops a year from blurring together.",
+        "id": "Surah Al-Kahfi, mandi, datang lebih awal, tambahan shalawat. Satu hari dalam seminggu yang tidak menyerupai enam hari lainnya adalah yang mencegah setahun menjadi kabur.",
+        "ar": "سورةُ الكهف، والغُسل، والتبكير، وزيادةُ الصلاة على النبي. فيومٌ في الأسبوع لا يشبه الستّة هو ما يمنع العام من أن يذوب في نفسه."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "Read Surah al-Kahf", "id": "Baca Surah Al-Kahfi", "ar": "اقرأ سورة الكهف"}},
+        {"step": 2, "minutes": 20, "label": {"en": "Ghusl and go early", "id": "Mandi dan datang lebih awal", "ar": "اغتسل وبكّر"}},
+        {"step": 3, "minutes": 25, "label": {"en": "The full Friday sunnah", "id": "Sunnah Jumat lengkap", "ar": "سننُ الجمعة كاملة"}}
+      ]
+    },
+    {
+      "key": "s_masjid",
+      "family": "prayer",
+      "anchor": "maghrib",
+      "level": 2,
+      "evidence_ids": ["ev_steps_mortality"],
+      "islamic_source_ids": ["is_steps_masjid"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "dhul_hijjah_ten", "ashura"],
+      "title": {"en": "Pray in Congregation", "id": "Shalat Berjamaah", "ar": "صَلِّ فِي جَمَاعَة"},
+      "desc": {
+        "en": "One prayer in the masjid today. The walk there is the single best-evidenced health habit in this whole app, and you were going to pray anyway.",
+        "id": "Satu shalat di masjid hari ini. Perjalanan ke sana adalah kebiasaan sehat dengan bukti terkuat di seluruh aplikasi ini, dan Anda memang akan shalat.",
+        "ar": "صلاةٌ واحدة في المسجد اليوم؛ فالمشيُ إليه أقوى عادةٍ صحّيةٍ دليلًا في هذا التطبيق كلّه، وأنت مصلٍّ على كل حال."
+      },
+      "progression": [
+        {"step": 1, "minutes": 20, "label": {"en": "One prayer", "id": "Satu shalat", "ar": "صلاةٌ واحدة"}},
+        {"step": 2, "minutes": 30, "label": {"en": "Two prayers", "id": "Dua shalat", "ar": "صلاتان"}},
+        {"step": 3, "minutes": 35, "level": 3, "label": {"en": "Fajr in congregation", "id": "Subuh berjamaah", "ar": "الفجر في جماعة"}}
+      ]
+    },
+    {
+      "key": "s_learn_deen",
+      "family": "learning",
+      "anchor": "isha",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura"],
+      "title": {"en": "Learn One Thing Properly", "id": "Pelajari Satu Hal dengan Benar", "ar": "تَعَلَّمْ مَسْأَلَةً وَاحِدَةً بِإِتْقَان"},
+      "desc": {
+        "en": "One hadith, or one ruling you actually need, studied with a teacher's explanation rather than a fifteen-second clip.",
+        "id": "Satu hadis, atau satu hukum yang benar-benar Anda butuhkan, dipelajari dengan penjelasan guru alih-alih klip lima belas detik.",
+        "ar": "حديثٌ واحد، أو مسألةٌ تحتاجها فعلًا، تدرسها بشرح عالِمٍ لا بمقطعٍ من خمس عشرة ثانية."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "One hadith with its explanation", "id": "Satu hadis dengan penjelasannya", "ar": "حديثٌ بشرحه"}},
+        {"step": 2, "minutes": 15, "label": {"en": "A short recorded lesson", "id": "Satu pelajaran rekaman singkat", "ar": "درسٌ مسجّل قصير"}},
+        {"step": 3, "minutes": 25, "level": 2, "label": {"en": "A weekly class, in person", "id": "Kelas mingguan, tatap muka", "ar": "حلقةٌ أسبوعية حضوريًّا"}}
+      ]
+    }
+  ],
+
+  "mental_families": [
+    {
+      "key": "m_niyyah",
+      "family": "attention",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": ["ev_habit_stacking"],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shaban_prep", "ashura", "dhul_hijjah_ten"],
+      "title": {"en": "Three Intentions Before the Phone", "id": "Tiga Niat Sebelum Ponsel", "ar": "ثَلَاثُ نِيَّاتٍ قَبْلَ الهَاتِف"},
+      "desc": {
+        "en": "Write what today is for before anyone else gets to tell you. The first thing you look at sets the direction of the whole day.",
+        "id": "Tuliskan untuk apa hari ini sebelum orang lain sempat memberitahu Anda. Hal pertama yang Anda lihat menentukan arah seluruh hari.",
+        "ar": "اكتب لماذا هذا اليوم قبل أن يخبرك أحدٌ بذلك؛ فأوّلُ ما تنظر إليه يحدّد وجهة يومك كلّه."
+      },
+      "progression": [
+        {"step": 1, "minutes": 3, "label": {"en": "Three lines", "id": "Tiga baris", "ar": "ثلاثة أسطر"}},
+        {"step": 2, "minutes": 5, "label": {"en": "Three lines, and one you will refuse", "id": "Tiga baris, dan satu yang akan Anda tolak", "ar": "ثلاثة أسطر وواحدٌ سترفضه"}}
+      ]
+    },
+    {
+      "key": "m_silence",
+      "family": "attention",
+      "anchor": "asr",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "dhul_hijjah_ten"],
+      "title": {"en": "Sit in Actual Silence", "id": "Duduk dalam Keheningan Sungguhan", "ar": "اجْلِسْ فِي صَمْتٍ حَقِيقِيّ"},
+      "desc": {
+        "en": "No podcast, no recitation playing, no scrolling. Just sitting. It will be uncomfortable for about four minutes and then it will not be.",
+        "id": "Tanpa podcast, tanpa murottal diputar, tanpa scrolling. Hanya duduk. Sekitar empat menit akan terasa tidak nyaman, setelah itu tidak lagi.",
+        "ar": "لا بودكاست ولا تلاوةً مشغّلة ولا تصفّحًا؛ جلوسٌ فقط. سيكون ثقيلًا نحو أربع دقائق ثم لا يكون."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Five minutes", "id": "Lima menit", "ar": "خمس دقائق"}},
+        {"step": 2, "minutes": 15, "label": {"en": "Fifteen minutes", "id": "Lima belas menit", "ar": "خمس عشرة دقيقة"}},
+        {"step": 3, "minutes": 30, "level": 3, "label": {"en": "Half an hour", "id": "Setengah jam", "ar": "نصف ساعة"}}
+      ]
+    },
+    {
+      "key": "m_learn_skill",
+      "family": "learning",
+      "anchor": "anytime",
+      "level": 2,
+      "evidence_ids": ["ev_habit_stacking"],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shaban_prep", "shawwal_six"],
+      "title": {"en": "Practise One Thing Deliberately", "id": "Latih Satu Hal dengan Sengaja", "ar": "تَمَرَّنْ عَلَى شَيْءٍ وَاحِدٍ بِقَصْد"},
+      "desc": {
+        "en": "Twenty minutes on the specific part you are worst at, not the part you enjoy. That distinction is the whole difference between practice and repetition.",
+        "id": "Dua puluh menit pada bagian yang paling Anda tidak kuasai, bukan bagian yang Anda nikmati. Perbedaan itulah seluruh beda antara latihan dan pengulangan.",
+        "ar": "عشرون دقيقة على الجزء الذي تُتقنه أقلّ لا الذي تستمتع به؛ وهذا الفرق وحده هو ما يفصل التمرين عن التكرار."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "Ten minutes", "id": "Sepuluh menit", "ar": "عشر دقائق"}},
+        {"step": 2, "minutes": 20, "label": {"en": "Twenty minutes on your weakest part", "id": "Dua puluh menit pada bagian terlemah", "ar": "عشرون دقيقة على أضعف جوانبك"}},
+        {"step": 3, "minutes": 30, "level": 3, "label": {"en": "Thirty minutes, and get it critiqued", "id": "Tiga puluh menit, dan minta dikritik", "ar": "ثلاثون دقيقة مع طلب النقد"}}
+      ]
+    },
+    {
+      "key": "m_forgive",
+      "family": "character",
+      "anchor": "isha",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shawwal_six", "ashura"],
+      "title": {"en": "Let One Thing Go", "id": "Lepaskan Satu Hal", "ar": "اتْرُكْ أَمْرًا وَاحِدًا"},
+      "desc": {
+        "en": "Forgive one person tonight, and make du'a for them by name. You do not have to tell them, and it does not mean they were right.",
+        "id": "Maafkan satu orang malam ini, dan doakan mereka dengan menyebut namanya. Anda tidak perlu memberitahu mereka, dan itu tidak berarti mereka benar.",
+        "ar": "اعفُ عن شخصٍ الليلة وادعُ له باسمه؛ ولستَ مضطرًّا لإخباره، وليس معنى ذلك أنه كان مُحقًّا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 6, "label": {"en": "One person", "id": "Satu orang", "ar": "شخصٌ واحد"}},
+        {"step": 2, "minutes": 10, "label": {"en": "Make du'a for them by name", "id": "Doakan dengan menyebut nama", "ar": "ادعُ له باسمه"}}
+      ]
+    },
+    {
+      "key": "m_akhirah",
+      "family": "reflection",
+      "anchor": "night",
+      "level": 3,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings", "is_night_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "dhul_hijjah_ten"],
+      "title": {"en": "Remember the End", "id": "Ingat Akhir", "ar": "تَذَكَّرِ المُنْتَهَى"},
+      "desc": {
+        "en": "Ten minutes considering that this will end. Not to frighten yourself, but because almost everything you are anxious about shrinks against it.",
+        "id": "Sepuluh menit merenungkan bahwa ini akan berakhir. Bukan untuk menakuti diri, tetapi karena hampir semua yang Anda cemaskan mengecil di hadapannya.",
+        "ar": "عشرُ دقائق تتأمّل أن هذا سينتهي؛ لا لتُخيف نفسك، بل لأن أكثر ما يقلقك يصغُر أمامه."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "Eight minutes", "id": "Delapan menit", "ar": "ثماني دقائق"}},
+        {"step": 2, "minutes": 12, "label": {"en": "Visit a graveyard this week", "id": "Ziarah kubur minggu ini", "ar": "زُر مقبرةً هذا الأسبوع"}}
+      ]
+    },
+    {
+      "key": "m_teach",
+      "family": "learning",
+      "anchor": "anytime",
+      "level": 3,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "shawwal_six", "shaban_prep"],
+      "title": {"en": "Teach What You Learned", "id": "Ajarkan yang Anda Pelajari", "ar": "عَلِّمْ مَا تَعَلَّمْت"},
+      "desc": {
+        "en": "Explain one thing you learned this week to someone else. You will discover immediately which parts you did not actually understand.",
+        "id": "Jelaskan satu hal yang Anda pelajari minggu ini kepada orang lain. Anda akan segera menemukan bagian mana yang sebenarnya belum Anda pahami.",
+        "ar": "اشرح لغيرك شيئًا تعلّمته هذا الأسبوع؛ فستكتشف فورًا أيّ أجزاءٍ لم تفهمها حقًّا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 10, "label": {"en": "To one person", "id": "Kepada satu orang", "ar": "لشخصٍ واحد"}},
+        {"step": 2, "minutes": 15, "label": {"en": "To your family, after Maghrib", "id": "Kepada keluarga, setelah Maghrib", "ar": "لأهلك بعد المغرب"}}
+      ]
+    }
+  ]
+}

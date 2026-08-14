@@ -1,0 +1,174 @@
+{
+  "$schema_version": "1.0",
+  "pillar": "spiritual",
+  "_README": "SECONDARY pillar under the body-first positioning (2026-08-13 decision). Deliberately carries NO clinical citations for acts of worship. A spiritual practice rests on its scriptural basis; bolting a study onto dhikr to make it look evidence-based is exactly the padding this app is trying not to be. `evidence_ids` stays empty here on purpose - the verifier permits a template sourced by scripture alone.",
+
+  "families": [
+    {
+      "key": "s_adhkar",
+      "family": "dhikr",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six", "dhul_hijjah_ten", "shaban_prep"],
+      "title": {"en": "Morning Adhkar", "id": "Dzikir Pagi", "ar": "أَذْكَارُ الصَّبَاح"},
+      "desc": {
+        "en": "After Fajr, before the day takes hold of you. Tasbih, tahmid, takbir - unhurried, and understood rather than counted.",
+        "id": "Setelah Subuh, sebelum hari menguasai Anda. Tasbih, tahmid, takbir - tanpa tergesa, dipahami bukan sekadar dihitung.",
+        "ar": "بعد الفجر قبل أن يستولي عليك النهار: تسبيحٌ وتحميدٌ وتكبير، بلا عجلة، وفهمًا لا عدًّا."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "A short set", "id": "Rangkaian singkat", "ar": "وِردٌ قصير"}},
+        {"step": 2, "minutes": 8, "label": {"en": "The full morning adhkar", "id": "Dzikir pagi lengkap", "ar": "أذكار الصباح كاملة"}},
+        {"step": 3, "minutes": 12, "label": {"en": "Morning and evening", "id": "Pagi dan petang", "ar": "الصباح والمساء"}}
+      ]
+    },
+    {
+      "key": "s_quran",
+      "family": "quran",
+      "anchor": "fajr",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_prayer_times"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "dhul_hijjah_ten", "shaban_prep"],
+      "title": {"en": "One Page, With Its Meaning", "id": "Satu Halaman, Dengan Maknanya", "ar": "صَفْحَةٌ وَاحِدَةٌ بِمَعْنَاهَا"},
+      "desc": {
+        "en": "Read a page and then read what it means. A page understood outweighs a juz recited past.",
+        "id": "Baca satu halaman lalu baca artinya. Satu halaman yang dipahami lebih berharga daripada satu juz yang dilewati.",
+        "ar": "اقرأ صفحةً ثم اقرأ معناها؛ فصفحةٌ تُفهم خيرٌ من جزءٍ يُمَرُّ عليه."
+      },
+      "progression": [
+        {"step": 1, "minutes": 8, "label": {"en": "One page with translation", "id": "Satu halaman dengan terjemahan", "ar": "صفحةٌ مع الترجمة"}},
+        {"step": 2, "minutes": 14, "label": {"en": "One page with a short tafsir", "id": "Satu halaman dengan tafsir singkat", "ar": "صفحةٌ مع تفسيرٍ موجز"}},
+        {"step": 3, "minutes": 20, "level": 2, "label": {"en": "Memorise three ayat, revise weekly", "id": "Hafalkan tiga ayat, ulangi mingguan", "ar": "احفظ ثلاث آيات وراجع أسبوعيًا"}}
+      ]
+    },
+    {
+      "key": "s_nawafil",
+      "family": "prayer",
+      "anchor": "dhuhr",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_guard_prayers"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "dhul_hijjah_ten", "shaban_prep"],
+      "title": {"en": "Add Two Rak'ah", "id": "Tambah Dua Rakaat", "ar": "زِدْ رَكْعَتَيْن"},
+      "desc": {
+        "en": "Two voluntary rak'ah attached to a prayer you already pray. The smallest possible addition, made where the habit already lives.",
+        "id": "Dua rakaat sunnah yang ditempelkan pada shalat yang sudah Anda kerjakan. Tambahan sekecil mungkin, di tempat kebiasaan itu sudah ada.",
+        "ar": "ركعتان نافلةً تُلحقان بصلاةٍ تصلّيها أصلًا؛ أصغرُ زيادةٍ ممكنة في موضعٍ استقرّت فيه العادة."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Two rak'ah, once", "id": "Dua rakaat, sekali", "ar": "ركعتان مرّةً"}},
+        {"step": 2, "minutes": 10, "label": {"en": "The regular sunnah prayers", "id": "Shalat sunnah rawatib", "ar": "السنن الرواتب"}},
+        {"step": 3, "minutes": 12, "level": 2, "label": {"en": "Salat ad-Duha", "id": "Shalat Dhuha", "ar": "صلاة الضحى"}},
+        {"step": 4, "minutes": 15, "level": 3, "label": {"en": "Witr before sleep", "id": "Witir sebelum tidur", "ar": "الوتر قبل النوم"}}
+      ]
+    },
+    {
+      "key": "s_night_prayer",
+      "family": "prayer",
+      "anchor": "night",
+      "level": 3,
+      "evidence_ids": ["ev_sleep_timing"],
+      "islamic_source_ids": ["is_night_rest", "is_prayer_times"],
+      "contraindications": [],
+      "block_affinity": ["ramadan", "dhul_hijjah_ten", "ordinary"],
+      "title": {"en": "Rise Before Fajr", "id": "Bangun Sebelum Subuh", "ar": "القِيَامُ قَبْلَ الفَجْر"},
+      "desc": {
+        "en": "Wake twenty minutes early and pray two rak'ah. Sleep timing is worth protecting for its own sake - go to bed earlier rather than borrowing the hours from your sleep.",
+        "id": "Bangun dua puluh menit lebih awal dan shalat dua rakaat. Waktu tidur layak dijaga demi dirinya sendiri - tidurlah lebih awal alih-alih meminjam jam dari tidur Anda.",
+        "ar": "استيقظ قبل الفجر بعشرين دقيقة وصلِّ ركعتين. وتوقيتُ النوم جديرٌ بالحفظ لذاته، فنَم أبكرَ ولا تقترض الساعات من نومك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "Two rak'ah", "id": "Dua rakaat", "ar": "ركعتان"}},
+        {"step": 2, "minutes": 20, "label": {"en": "Four rak'ah, unhurried", "id": "Empat rakaat, tanpa tergesa", "ar": "أربع ركعات بلا عجلة"}}
+      ]
+    },
+    {
+      "key": "s_istighfar",
+      "family": "dhikr",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_hearts_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shawwal_six"],
+      "title": {"en": "Istighfar Through the Day", "id": "Istighfar Sepanjang Hari", "ar": "الاسْتِغْفَارُ خِلَالَ اليَوْم"},
+      "desc": {
+        "en": "Scattered through the day rather than counted in one sitting - in queues, in traffic, between tasks.",
+        "id": "Tersebar sepanjang hari alih-alih dihitung dalam satu duduk - saat mengantre, di jalan, di antara pekerjaan.",
+        "ar": "موزَّعًا على اليوم لا معدودًا في جلسةٍ واحدة: في الصفوف، وفي الطريق، وبين الأعمال."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Whenever you remember", "id": "Kapan pun teringat", "ar": "كلّما تذكّرت"}},
+        {"step": 2, "minutes": 7, "label": {"en": "One hundred through the day", "id": "Seratus kali sepanjang hari", "ar": "مئةٌ خلال اليوم"}}
+      ]
+    },
+    {
+      "key": "s_sadaqah",
+      "family": "giving",
+      "anchor": "anytime",
+      "level": 1,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "dhul_hijjah_ten", "ashura"],
+      "title": {"en": "Give Something Today", "id": "Bersedekahlah Hari Ini", "ar": "تَصَدَّقْ بِشَيْءٍ اليَوْم"},
+      "desc": {
+        "en": "Any amount, any form - money, food, time, or simply a useful word. Give it where nobody will know it was you.",
+        "id": "Berapa pun, dalam bentuk apa pun - uang, makanan, waktu, atau sekadar kata yang berguna. Berikan di tempat yang tak seorang pun tahu itu Anda.",
+        "ar": "أيّ قدرٍ وأيّ صورة: مالًا أو طعامًا أو وقتًا أو كلمةً نافعة، وأعطِها حيث لا يعلم أحدٌ أنّك أنت."
+      },
+      "progression": [
+        {"step": 1, "minutes": 4, "label": {"en": "Anything at all", "id": "Apa pun", "ar": "أيُّ شيء"}},
+        {"step": 2, "minutes": 6, "label": {"en": "Quietly, so nobody knows", "id": "Diam-diam, tanpa diketahui", "ar": "سرًّا لا يعلمه أحد"}},
+        {"step": 3, "minutes": 10, "level": 2, "label": {"en": "Set a standing weekly amount", "id": "Tetapkan jumlah mingguan tetap", "ar": "اجعل مقدارًا أسبوعيًا ثابتًا"}}
+      ]
+    },
+    {
+      "key": "s_sleep_adhkar",
+      "family": "dhikr",
+      "anchor": "night",
+      "level": 1,
+      "evidence_ids": ["ev_sleep_timing"],
+      "islamic_source_ids": ["is_night_rest"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "ashura", "shaban_prep"],
+      "title": {"en": "Close the Day Properly", "id": "Tutup Hari dengan Baik", "ar": "أَغْلِقْ يَوْمَكَ بِإِحْسَان"},
+      "desc": {
+        "en": "Wudu, Ayat al-Kursi, the three surahs - and the phone left in another room. A consistent closing ritual is also what protects your sleep timing.",
+        "id": "Wudhu, Ayat Kursi, tiga surah - dan ponsel ditinggal di ruangan lain. Ritual penutup yang konsisten juga yang menjaga waktu tidur Anda.",
+        "ar": "وضوءٌ وآيةُ الكرسي والسور الثلاث، والهاتف يُترك في غرفةٍ أخرى؛ فطقسُ الختام الثابت هو أيضًا ما يحفظ توقيت نومك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 5, "label": {"en": "Ayat al-Kursi and the three surahs", "id": "Ayat Kursi dan tiga surah", "ar": "آية الكرسي والسور الثلاث"}},
+        {"step": 2, "minutes": 8, "label": {"en": "Add wudu before sleeping", "id": "Tambahkan wudhu sebelum tidur", "ar": "أضف الوضوء قبل النوم"}},
+        {"step": 3, "minutes": 12, "label": {"en": "Add Surah al-Mulk", "id": "Tambahkan Surah Al-Mulk", "ar": "أضف سورة الملك"}}
+      ]
+    },
+    {
+      "key": "s_silat_rahm",
+      "family": "giving",
+      "anchor": "maghrib",
+      "level": 2,
+      "evidence_ids": [],
+      "islamic_source_ids": ["is_two_blessings"],
+      "contraindications": [],
+      "block_affinity": ["ordinary", "ramadan", "shawwal_six", "ashura"],
+      "title": {"en": "Call the Relative You Have Not Called", "id": "Hubungi Kerabat yang Belum Anda Hubungi", "ar": "صِلْ رَحِمًا قَطَعْتَهَا"},
+      "desc": {
+        "en": "You already know who it is. Call them, and do not wait for them to call first.",
+        "id": "Anda sudah tahu siapa orangnya. Hubungi mereka, dan jangan menunggu mereka menghubungi lebih dulu.",
+        "ar": "أنت تعرف مَن هو؛ فاتّصل به ولا تنتظر أن يبدأك."
+      },
+      "progression": [
+        {"step": 1, "minutes": 12, "label": {"en": "One call", "id": "Satu panggilan", "ar": "اتّصالٌ واحد"}},
+        {"step": 2, "minutes": 20, "label": {"en": "Visit in person", "id": "Kunjungi langsung", "ar": "زيارةٌ بنفسك"}}
+      ]
+    }
+  ]
+}

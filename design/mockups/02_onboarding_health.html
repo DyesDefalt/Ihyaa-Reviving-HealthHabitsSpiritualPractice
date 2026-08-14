@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ihyaa — Onboarding health screening</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+  :root {
+    --bg:#F7F5F0; --surface:#FFFFFF; --surface-alt:#F0EBE1;
+    --primary:#1B3B36; --on-primary:#FFFFFF; --secondary:#B5653E;
+    --text-primary:#1A1A1A; --text-secondary:#5C5F5E; --border:#E8E4DB;
+    --r-sm:8px; --r-md:16px; --r-lg:24px; --r-full:999px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; }
+  body { background:#DDD8CC; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:40px 0; }
+  .frame {
+    width:390px; height:844px; background:var(--bg); border-radius:44px; overflow:hidden;
+    position:relative; box-shadow:0 30px 60px -20px rgba(27,59,54,0.35), 0 0 0 10px #111;
+    display:flex; flex-direction:column;
+  }
+  .status { height:48px; display:flex; align-items:center; justify-content:space-between; padding:0 28px; font-size:14px; font-weight:600; }
+  .topbar { padding:4px 24px 0; display:flex; align-items:center; gap:12px; }
+  .back { width:36px; height:36px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.06); font-size:16px; }
+  .steps { flex:1; display:flex; gap:6px; }
+  .step { flex:1; height:5px; border-radius:var(--r-full); background:var(--border); }
+  .step.done { background:var(--primary); }
+  .step.current { background:var(--secondary); }
+
+  .content { flex:1; padding:32px 28px 0; overflow-y:auto; }
+  .icon-badge {
+    width:64px; height:64px; border-radius:var(--r-lg);
+    background:var(--surface-alt); display:flex; align-items:center; justify-content:center;
+    font-size:30px; margin-bottom:20px;
+  }
+  h1 { font-size:24px; font-weight:700; color:var(--text-primary); letter-spacing:-0.3px; line-height:1.25; margin-bottom:10px; }
+  .sub { font-size:14px; color:var(--text-secondary); line-height:1.5; margin-bottom:8px; }
+  .privacy-note {
+    display:flex; gap:8px; align-items:flex-start;
+    background:var(--surface-alt); border-radius:var(--r-md); padding:12px 14px; margin:16px 0 24px;
+    font-size:12px; color:var(--text-secondary); line-height:1.5;
+  }
+
+  .field { margin-bottom:18px; }
+  .field label { display:block; font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:8px; }
+  .age-input {
+    width:120px; padding:14px 16px; border-radius:var(--r-md); border:1px solid var(--border);
+    background:var(--surface); font-size:16px; font-weight:600; color:var(--text-primary);
+  }
+
+  .chip-grid { display:flex; flex-wrap:wrap; gap:10px; }
+  .chip {
+    display:flex; align-items:center; gap:8px;
+    padding:11px 16px; border-radius:var(--r-full); border:1.5px solid var(--border);
+    background:var(--surface); font-size:13px; font-weight:500; color:var(--text-primary);
+  }
+  .chip.selected { border-color:var(--primary); background:color-mix(in srgb, var(--primary) 8%, white); color:var(--primary); font-weight:600; }
+  .chip .box { width:16px; height:16px; border-radius:4px; border:1.5px solid var(--border); }
+  .chip.selected .box { background:var(--primary); border-color:var(--primary); }
+
+  .footer { padding:20px 28px 36px; }
+  .cta {
+    width:100%; padding:17px; border-radius:var(--r-full); background:var(--primary); color:var(--on-primary);
+    border:none; font-size:16px; font-weight:600; text-align:center; box-shadow:0 10px 24px rgba(27,59,54,0.3);
+  }
+  .skip { text-align:center; margin-top:14px; font-size:13px; color:var(--text-secondary); font-weight:500; text-decoration:underline; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="status"><span>9:41</span><span>●●● ▮▮▮ 100%</span></div>
+    <div class="topbar">
+      <div class="back">←</div>
+      <div class="steps">
+        <div class="step done"></div><div class="step done"></div><div class="step done"></div>
+        <div class="step current"></div><div class="step"></div><div class="step"></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="icon-badge">🛡️</div>
+      <h1>A couple of safety questions</h1>
+      <p class="sub">Some habits — like fasting, training and black seed — aren't right for everyone. This helps us skip anything that isn't safe for you. Entirely optional.</p>
+
+      <div class="privacy-note">🔒&nbsp; Only used to filter your plan. Never shared, never sold. You can skip this and add it later in Settings.</div>
+
+      <div class="field">
+        <label>Your age (optional)</label>
+        <input class="age-input" value="34" readonly />
+      </div>
+
+      <div class="field">
+        <label>Do any of these apply to you?</label>
+        <div class="chip-grid">
+          <div class="chip"><div class="box"></div>Diabetes</div>
+          <div class="chip selected"><div class="box"></div>Pregnancy</div>
+          <div class="chip"><div class="box"></div>Kidney condition</div>
+          <div class="chip"><div class="box"></div>Blood thinners</div>
+          <div class="chip"><div class="box"></div>Heart condition</div>
+          <div class="chip"><div class="box"></div>None of these</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="cta">Continue</div>
+      <div class="skip">Skip for now</div>
+    </div>
+  </div>
+</body>
+</html>

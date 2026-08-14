@@ -101,7 +101,7 @@ class User(BaseDocument):
     auth_provider: str = "password"           # password | google
     picture: str | None = None
     role: str = "user"
-    language: str = "en"                      # en | ar | id
+    language: str = "en"                      # en | id (ar data/infra kept, not offered in UI for now)
     theme: str = "light"
     timezone: str = "UTC"
     onboarding_completed: bool = False

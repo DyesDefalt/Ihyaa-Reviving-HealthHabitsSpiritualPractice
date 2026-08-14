@@ -23,7 +23,14 @@ PILLARS = ["spiritual", "physical", "nutrition", "mental"]
 LEVELS = {"beginner": 1, "practicing": 2, "devoted": 3,
           "intermediate": 2, "advanced": 3}
 
-def T(en: str, idn: str, ar: str) -> dict:
+def T(en: str, idn: str, ar: str = "") -> dict:
+    """`ar` defaults to empty - the app is English/Indonesian only for now.
+
+    Existing data files already carry real Arabic text; this only changes the
+    contract for content authored from here on, so new templates/evidence/
+    sources never have to invent Arabic. `localize()` and `evidence.py`'s
+    `_pick()` already fall back to English when a language field is falsy.
+    """
     return {"en": en, "id": idn, "ar": ar}
 
 

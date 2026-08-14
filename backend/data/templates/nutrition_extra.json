@@ -31,7 +31,7 @@
       "family": "food_quality",
       "anchor": "dhuhr",
       "level": 1,
-      "evidence_ids": ["ev_blackseed_bp", "ev_evoo_cvd"],
+      "evidence_ids": ["ev_sodium_reduction"],
       "islamic_source_ids": ["is_eat_not_excess"],
       "contraindications": [],
       "block_affinity": ["ordinary", "shaban_prep", "ashura"],

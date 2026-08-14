@@ -284,7 +284,7 @@
       "family": "recovery",
       "anchor": "dhuhr",
       "level": 1,
-      "evidence_ids": ["ev_nap_dose_cap"],
+      "evidence_ids": ["ev_nap_dose_cap", "ev_nap_genetics_mr"],
       "islamic_source_ids": [],
       "contraindications": [],
       "block_affinity": ["ramadan", "dhul_hijjah_ten", "ordinary"],

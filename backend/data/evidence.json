@@ -360,6 +360,30 @@
       "verified_at": "2026-08-13"
     },
     {
+      "id": "ev_blackseed_dose_response",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "The largest synthesis of black seed trials to date (82 RCTs, n=5,026) confirmed significant, dose-related improvements in both systolic and diastolic blood pressure alongside cholesterol, blood sugar and inflammation markers.",
+        "id": "Sintesis terbesar uji habbatussauda hingga kini (82 RCT, n=5.026) mengonfirmasi perbaikan bermakna dan berkaitan-dosis pada tekanan darah sistolik dan diastolik, disertai kolesterol, gula darah, dan penanda peradangan.",
+        "ar": ""
+      },
+      "authors": "Jafari A, Mardani H, Faghfouri AH, et al.",
+      "year": 2025,
+      "journal": "Pharmacological Research",
+      "volume_pages": "219:107882",
+      "doi": "10.1016/j.phrs.2025.107882",
+      "study_type": "GRADE-assessed systematic review and dose-response meta-analysis, 82 RCTs (79 quantitative, 3 qualitative), 2008-2024",
+      "sample_size": 5026,
+      "effect_size": "Significant improvement in SBP, DBP, MAP plus an extensive lipid/glycaemic/inflammatory panel; some effects dose-dependent across 200-4600 mg/day, 1-48 week interventions. Exact pooled point estimates sit behind a paywall beyond the open abstract, so no specific mmHg figure is stated here - see ev_blackseed_bp (Sahebkar 2016) for a citable point estimate.",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "GRADE certainty is rated low to moderate for most outcomes per the authors' own assessment. This record corroborates ev_blackseed_bp with a much larger and more recent evidence base; it does not replace it, since this record's own numeric BP effect size could not be independently verified from open-access text.",
+        "id": "Kepastian GRADE dinilai rendah hingga sedang untuk sebagian besar luaran menurut penilaian penulis sendiri. Catatan ini memperkuat ev_blackseed_bp dengan basis bukti yang jauh lebih besar dan baru; tidak menggantikannya, karena besar efek tekanan darah numerik pada catatan ini sendiri belum dapat diverifikasi independen dari teks akses terbuka.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
       "id": "ev_dates_gi",
       "pillar": "nutrition",
       "claim": {
@@ -382,6 +406,30 @@
         "ar": "تصميم جيّد لكن العيّنة صغيرة جدًا. ووجدت تجربة أخرى مدتها ١٢ أسبوعًا أن ٦٠ غرامًا يوميًا لم تحسّن التراكمي ولا الدهون ولا الضغط؛ فالتمر آمن لا علاجي. وأما دعوى أن العجوة تقي القلب أو تُبطل السمّ فلا تجربة تسندها."
       },
       "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_sodium_reduction",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "Reducing dietary sodium lowers blood pressure in a clear dose-response way - every 50 mmol cut in daily sodium lowered systolic pressure by about 1.1 mmHg, with a bigger effect in older adults and those with higher starting blood pressure.",
+        "id": "Mengurangi natrium makanan menurunkan tekanan darah secara berkaitan-dosis yang jelas - setiap pengurangan 50 mmol natrium harian menurunkan tekanan sistolik sekitar 1,1 mmHg, dengan efek lebih besar pada usia lanjut dan tekanan darah awal yang lebih tinggi.",
+        "ar": ""
+      },
+      "authors": "Huang L, Trieu K, Yoshimura S, et al.",
+      "year": 2020,
+      "journal": "The BMJ",
+      "volume_pages": "368:m315",
+      "doi": "10.1136/bmj.m315",
+      "study_type": "systematic review and dose-response meta-analysis of randomised trials, PROSPERO CRD42019140812",
+      "sample_size": 12197,
+      "effect_size": "133 trials: reduced vs usual sodium gave SBP -4.26 mmHg (3.62-4.89), DBP -2.07 mmHg (1.67-2.48). Each 50 mmol/day reduction in 24h urinary sodium: SBP -1.10 mmHg (0.66-1.54), DBP -0.33 mmHg (0.04-0.63). Effect present in both hypertensive and non-hypertensive people.",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Blood pressure is a surrogate marker, not a direct measurement of heart attacks or strokes. Trials under 15 days understated the effect by about half - the benefit of a habit like this compounds over weeks, not overnight.",
+        "id": "Tekanan darah adalah penanda pengganti, bukan pengukuran langsung serangan jantung atau stroke. Uji di bawah 15 hari meremehkan efek sekitar separuhnya - manfaat kebiasaan seperti ini terakumulasi selama berminggu-minggu, bukan seketika.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
     },
     {
       "id": "ev_barley_ldl",
@@ -651,6 +699,30 @@
       "verified_at": "2026-08-13"
     },
     {
+      "id": "ev_nap_genetics_mr",
+      "pillar": "physical",
+      "claim": {
+        "en": "Genetic analysis designed to test cause and effect (Mendelian randomization) found that a genetic tendency toward more frequent daytime napping causally raised blood pressure and waist circumference - napping frequency is not just a marker of poor health, it may contribute to it.",
+        "id": "Analisis genetik yang dirancang untuk menguji sebab-akibat (randomisasi Mendel) menemukan bahwa kecenderungan genetik untuk lebih sering tidur siang secara kausal meningkatkan tekanan darah dan lingkar pinggang - frekuensi tidur siang bukan sekadar penanda kesehatan buruk, tetapi bisa turut menyebabkannya.",
+        "ar": ""
+      },
+      "authors": "Dashti HS, Daghlas I, Lane JM, et al.",
+      "year": 2021,
+      "journal": "Nature Communications",
+      "volume_pages": "12:900",
+      "doi": "10.1038/s41467-020-20585-3",
+      "study_type": "genome-wide association study plus Mendelian randomization, UK Biobank discovery with 23andMe replication",
+      "sample_size": 452633,
+      "effect_size": "123 napping-associated loci identified, 61 replicated in an independent 23andMe cohort (n=541,333); Mendelian randomization supported a causal effect of more frequent napping on higher blood pressure and larger waist circumference",
+      "grade": "MODERATE",
+      "caveat": {
+        "en": "This is genetic evidence for napping FREQUENCY, not duration, so it corroborates but does not replace ev_nap_dose_cap's cohort finding that naps under 60 minutes carry no measurable added risk - the two designs answer related but distinct questions. Single study, though very large and independently replicated.",
+        "id": "Ini bukti genetik untuk FREKUENSI tidur siang, bukan durasi, sehingga memperkuat namun tidak menggantikan temuan kohort ev_nap_dose_cap bahwa tidur siang di bawah 60 menit tidak menambah risiko terukur - kedua desain menjawab pertanyaan yang terkait tetapi berbeda. Studi tunggal, meski sangat besar dan direplikasi independen.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
+    },
+    {
       "id": "ev_sleep_timing",
       "pillar": "mental",
       "claim": {
@@ -697,6 +769,30 @@
         "ar": "لم تجد دراسة بنغلاديشية أثرًا معتدًّا به للّباس الساتر، فليس الأمر مطّردًا في كل المجتمعات. وجرعة المكمّل قرار طبي، فأحِل المستخدم إلى طبيب ولا تصف جرعة."
       },
       "verified_at": "2026-08-13"
+    },
+    {
+      "id": "ev_vitamin_d_veiled_replication",
+      "pillar": "nutrition",
+      "claim": {
+        "en": "A 2025 national survey of 2,803 women in Lebanon independently replicated the hijab-vitamin D link: covering dress was the strongest risk factor for deficiency, in a different country and population than the original finding.",
+        "id": "Survei nasional 2025 pada 2.803 perempuan di Lebanon secara independen mereplikasi kaitan hijab-vitamin D: busana tertutup adalah faktor risiko terkuat untuk defisiensi, di negara dan populasi yang berbeda dari temuan aslinya.",
+        "ar": ""
+      },
+      "authors": "El-Mallah C, Yarparvar A, Galetti V, et al.",
+      "year": 2025,
+      "journal": "Nutrients",
+      "volume_pages": "17(5):804",
+      "doi": "10.3390/nu17050804",
+      "study_type": "national cross-sectional survey, LC-MS/MS-class serum assay",
+      "sample_size": 2803,
+      "effect_size": "Deficiency (<30 nmol/L) 37.9%; hypovitaminosis D (<50 nmol/L) 69.2%. Hijab was the strongest independent risk factor: adjusted prevalence ratio 3.76 for deficiency, 1.47 for hypovitaminosis D. Daily sun exposure >1 hour and supplementation were protective (aPR 0.83-0.91 and 0.30-0.55).",
+      "grade": "STRONG",
+      "caveat": {
+        "en": "Uses a different deficiency cutoff (<30 nmol/L) than Nichols 2012 (<12 ng/mL, roughly equivalent), and a different country (Lebanon vs Jordan) - this is an independent replication in a new population, not a re-analysis of the same data. Supplementation dosing remains a medical decision; point users to a clinician rather than prescribing a dose.",
+        "id": "Menggunakan ambang defisiensi berbeda (<30 nmol/L) dari Nichols 2012 (<12 ng/mL, kurang lebih setara), dan negara berbeda (Lebanon vs Yordania) - ini replikasi independen pada populasi baru, bukan analisis ulang data yang sama. Dosis suplementasi tetap keputusan medis; arahkan pengguna ke dokter, bukan meresepkan dosis.",
+        "ar": ""
+      },
+      "verified_at": "2026-08-14"
     },
     {
       "id": "ev_habit_stacking",

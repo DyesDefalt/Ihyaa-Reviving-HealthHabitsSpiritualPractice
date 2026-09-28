@@ -19,12 +19,16 @@ from content import KNOWLEDGE_CARDS, STORE_ITEMS, localize_card, localize_item
 from curriculum import (TEMPLATES_BY_KEY, generate_plan, localize,
                         phase_summary)
 from db import ensure_indexes, get_db
+from health import health_profile
+from library import (EXERCISES, MIND_WINDOWS, RECIPES, SUPPLEMENTS,
+                     localize_entry, rank)
 from milestones import MILESTONE_TRACKS, build_milestones, localize_milestone
 from models import (Challenge, Checkin, CheckinBody, CoachBody, CoachMessage,
-                    CompleteTaskBody, DailyTask, ForgotBody, LocationUpdate,
-                    LoginBody, Milestone, OnboardingBody, PointTransaction,
-                    Preferences, ProfileUpdate, PublicUser, RegisterBody,
-                    ResetBody, StartChallengeBody, TaskTimeBody, User, utcnow)
+                    CompleteTaskBody, DailyTask, ForgotBody, HydrationBody,
+                    LocationUpdate, LoginBody, Milestone, OnboardingBody,
+                    PointTransaction, Preferences, ProfileUpdate, PublicUser,
+                    RegisterBody, ResetBody, StartChallengeBody, TaskTimeBody,
+                    User, utcnow)
 
 app = FastAPI(title="Ihyaa API")
 
@@ -61,13 +65,23 @@ def today_str() -> str:
     return date.today().isoformat()
 
 
+LANGS = ("en", "id")
+HYDRATION_POINTS = 10
+
+
 def lang_of(user: User, override: str | None) -> str:
-    return override if override in ("en", "ar", "id") else user.language
+    if override in LANGS:
+        return override
+    return user.language if user.language in LANGS else "en"
 
 
 def loc_dict(user: User) -> dict | None:
     loc = user.prefs.location
     return loc.model_dump() if loc else None
+
+
+def profile_of(user: User) -> dict:
+    return health_profile(user.prefs.model_dump())
 
 
 def serialize_task(task: DailyTask, lang: str, timings: dict | None = None,
@@ -179,7 +193,7 @@ async def register(body: RegisterBody, response: Response) -> dict:
     if await db.users.find_one({"email": email}):
         raise HTTPException(status_code=400, detail="An account with this email already exists")
     user = User(email=email, name=body.name.strip() or email.split("@")[0],
-                language=body.language if body.language in ("en", "ar", "id") else "en",
+                language=body.language if body.language in LANGS else "en",
                 password_hash=A.hash_password(body.password))
     result = await db.users.insert_one(user.to_mongo())
     user.id = str(result.inserted_id)
@@ -306,7 +320,7 @@ async def update_profile(body: ProfileUpdate, user: User = Depends(current_user)
     updates: dict = {}
     if body.name is not None:
         updates["name"] = body.name.strip()
-    if body.language in ("en", "ar", "id"):
+    if body.language in LANGS:
         updates["language"] = body.language
     if body.theme in ("light", "dark"):
         updates["theme"] = body.theme
@@ -332,7 +346,7 @@ async def complete_onboarding(body: OnboardingBody, user: User = Depends(current
     updates: dict = {"prefs": prefs.model_dump(), "onboarding_completed": True}
     if body.name:
         updates["name"] = body.name.strip()
-    if body.language in ("en", "ar", "id"):
+    if body.language in LANGS:
         updates["language"] = body.language
     if body.timezone:
         updates["timezone"] = body.timezone
@@ -366,7 +380,8 @@ async def _create_challenge(user: User, challenge_type: str, start_date: str | N
     result = await db.challenges.insert_one(challenge.to_mongo())
     challenge.id = str(result.inserted_id)
 
-    plan = generate_plan(user.prefs.model_dump(), total, start, challenge_type)
+    plan = generate_plan(user.prefs.model_dump(), total, start, challenge_type,
+                         flags=profile_of(user)["flags"], seed=str(user.id))
     docs = [DailyTask(user_id=str(user.id), challenge_id=str(challenge.id), **row).to_mongo()
             for row in plan]
     if docs:
@@ -421,7 +436,8 @@ async def regenerate(user: User = Depends(current_user)) -> dict:
     await db.daily_tasks.delete_many({"challenge_id": str(c.id), "scheduled_date": {"$gte": today},
                                       "completed": False})
     start = date.fromisoformat(c.start_date)
-    plan = generate_plan(user.prefs.model_dump(), c.total_days, start, c.challenge_type)
+    plan = generate_plan(user.prefs.model_dump(), c.total_days, start, c.challenge_type,
+                         flags=profile_of(user)["flags"], seed=str(user.id))
     kept = {(t["scheduled_date"], t["template_key"]) async for t in
             db.daily_tasks.find({"challenge_id": str(c.id)}, {"scheduled_date": 1, "template_key": 1})}
     docs = [DailyTask(user_id=str(user.id), challenge_id=str(c.id), **row).to_mongo()
@@ -457,7 +473,79 @@ async def tasks_today(lang: str | None = Query(None), user: User = Depends(curre
         stones.append(localize_milestone(d, language))
 
     return {"challenge": _serialize_challenge(c, language), "tasks": tasks, "date": today,
-            "prayer_times": timings, "milestones": stones}
+            "prayer_times": timings, "milestones": stones,
+            "hydration": await _hydration_state(user, today),
+            "recipe": _daily_pick(user, RECIPES, language, today),
+            "mind_window": _daily_pick(user, MIND_WINDOWS, language, today)}
+
+
+# ------------------------------------------------------------------ library & health
+
+def _user_rank(user: User, entries: list[dict]) -> list[dict]:
+    prof = profile_of(user)
+    from curriculum import LEVELS
+    return rank(entries, prof["flags"], user.prefs.health_goals,
+                user.prefs.dietary_preferences,
+                LEVELS.get(user.prefs.fitness_level, 1))
+
+
+def _daily_pick(user: User, entries: list[dict], lang: str, day: str) -> dict | None:
+    ranked = _user_rank(user, entries)
+    if not ranked:
+        return None
+    # rotate through the best-fitting half so the pick changes daily but stays relevant
+    top = ranked[:max(3, len(ranked) // 2)]
+    idx = (date.fromisoformat(day).toordinal() + int(str(user.id)[-4:], 16)) % len(top)
+    return localize_entry(top[idx], lang)
+
+
+@app.get("/api/health/profile")
+async def get_health_profile(user: User = Depends(current_user)) -> dict:
+    return profile_of(user)
+
+
+LIBRARY = {"recipes": RECIPES, "supplements": SUPPLEMENTS,
+           "exercises": EXERCISES, "mind": MIND_WINDOWS}
+
+
+@app.get("/api/library/{kind}")
+async def library_list(kind: str, lang: str | None = Query(None),
+                       user: User = Depends(current_user)) -> list[dict]:
+    if kind not in LIBRARY:
+        raise HTTPException(status_code=404, detail="Unknown library")
+    language = lang_of(user, lang)
+    return [localize_entry(e, language) for e in _user_rank(user, LIBRARY[kind])]
+
+
+async def _hydration_state(user: User, day: str) -> dict:
+    doc = await get_db().hydration.find_one({"user_id": str(user.id), "day": day})
+    target = profile_of(user)["water_glasses"]
+    glasses = doc["glasses"] if doc else 0
+    return {"glasses": glasses, "target": target, "reached": glasses >= target}
+
+
+@app.get("/api/hydration/today")
+async def hydration_today(user: User = Depends(current_user)) -> dict:
+    return await _hydration_state(user, today_str())
+
+
+@app.post("/api/hydration")
+async def hydration_add(body: HydrationBody, user: User = Depends(current_user)) -> dict:
+    db = get_db()
+    today = today_str()
+    await db.hydration.update_one(
+        {"user_id": str(user.id), "day": today},
+        {"$inc": {"glasses": body.glasses}, "$setOnInsert": {"created_at": utcnow()}},
+        upsert=True)
+    await db.hydration.update_one({"user_id": str(user.id), "day": today, "glasses": {"$lt": 0}},
+                                  {"$set": {"glasses": 0}})
+    state = await _hydration_state(user, today)
+    awarded = 0
+    if state["reached"] and await claim_daily_bonus(str(user.id), today, "hydration"):
+        awarded = HYDRATION_POINTS
+        await award_points(user, awarded, "hydration", f"Water target reached {today}")
+    fresh = User.from_mongo(await db.users.find_one({"_id": oid(str(user.id))}))
+    return {**state, "awarded": awarded, "user": PublicUser.of(fresh).model_dump()}
 
 
 @app.get("/api/tasks")
@@ -903,7 +991,10 @@ Rules you never break:
 - Keep answers SHORT and warm: at most 3 short paragraphs, under 120 words total.
 - Write in PLAIN TEXT only. Never use markdown, asterisks, bullet characters or emoji.
 - Honour the "1% better" method: always give the SMALLEST next step, not a full program.
-- Reply in the SAME language the user writes in (English, Bahasa Indonesia, or Arabic).
+- Reply in the SAME language the user writes in (English or Bahasa Indonesia).
+- Ihyaa is a healthy-lifestyle app first: food, drinks, recipes, halal supplements,
+  movement, sleep and clear-mind windows — all grounded in Quran, Sunnah and clinical
+  research. Prefer concrete lifestyle steps over generic religious reminders.
 - Open with a brief Islamic greeting only on the first message of a conversation.
 """
 
@@ -922,9 +1013,16 @@ def _coach_chat(session_id: str, context: str):
 async def _coach_context(user: User) -> str:
     db = get_db()
     c = await active_challenge(str(user.id))
+    prof = profile_of(user)
     parts = [
         f"User name: {user.name or 'friend'}",
         f"Preferred language: {user.language}",
+        f"Age/sex: {user.prefs.age or 'unknown'} / {user.prefs.sex or 'unknown'}",
+        f"BMI: {prof['bmi'] or 'unknown'} ({prof['bmi_band'] or 'unknown'}); "
+        f"calorie target ~{prof['calorie_target'] or '?'} kcal, protein ~{prof['protein_g'] or '?'} g, "
+        f"water {prof['water_glasses']} glasses, steps {prof['step_target']}",
+        f"Health conditions: {', '.join(user.prefs.conditions) or 'none reported'}",
+        f"Work pattern: {user.prefs.work_pattern}",
         f"Fitness level: {user.prefs.fitness_level}",
         f"Spiritual level: {user.prefs.spiritual_level}",
         f"Sleep pattern: {user.prefs.sleep_habit}",

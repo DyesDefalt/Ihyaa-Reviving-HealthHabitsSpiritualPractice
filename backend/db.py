@@ -29,3 +29,4 @@ async def ensure_indexes():
          ("year", 1), ("month", 1)], unique=True)
     await db.point_transactions.create_index([("user_id", 1), ("created_at", -1)])
     await db.coach_messages.create_index([("user_id", 1), ("created_at", 1)])
+    await db.hydration.create_index([("user_id", 1), ("day", 1)], unique=True)

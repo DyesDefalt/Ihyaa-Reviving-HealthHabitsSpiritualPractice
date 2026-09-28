@@ -5,8 +5,10 @@ Content is trilingual (en / id / ar). Nothing here involves haram substances,
 riba, or practices outside mainstream Sunni fiqh.
 """
 from datetime import date, timedelta
+import hashlib
 
 from templates_advanced import ADVANCED_TEMPLATES
+from templates_lifestyle import LIFESTYLE_TEMPLATES
 
 PILLARS = ["spiritual", "physical", "nutrition", "mental"]
 
@@ -687,8 +689,37 @@ TEMPLATES: list[dict] = [
 ]
 
 TEMPLATES += ADVANCED_TEMPLATES
+TEMPLATES += LIFESTYLE_TEMPLATES
+
+# Personal-fit metadata for the original pools (lifestyle templates carry their own).
+BOOST_PATCH = {
+    "n_water_sips": ["bp_focus", "more_energy"], "n_third_rule": ["weight_focus", "glucose_focus"],
+    "n_olive": ["lipid_focus", "bp_focus"], "n_blackseed": ["glucose_focus", "lipid_focus", "bp_focus"],
+    "n_veg": ["bp_focus", "healthy_eating", "weight_focus"], "n_nosugar": ["weight_focus", "glucose_focus", "low_sugar"],
+    "n_honey": ["gut_focus"], "n_mindful": ["weight_focus", "gut_focus"], "n_dates": ["low_sugar", "more_energy"],
+    "n_talbina": ["lipid_focus", "gut_focus"], "n_protein": ["build_strength", "gain_focus"],
+    "n_cook_home": ["weight_focus", "healthy_eating"], "n_no_processed": ["bp_focus", "weight_focus"],
+    "n_labels": ["low_sugar", "glucose_focus"],
+    "p_walk_fajr": ["sleep_focus", "weight_focus", "joint_friendly"], "p_stretch": ["joint_friendly", "desk_worker"],
+    "p_wudu_mobility": ["desk_worker", "joint_friendly"], "p_walk_mosque": ["weight_focus", "bp_focus", "joint_friendly"],
+    "p_bodyweight": ["build_strength"], "p_core": ["joint_friendly", "desk_worker"],
+    "p_breath": ["calm_focus", "bp_focus"], "p_balance": ["balance_focus", "joint_friendly"],
+    "p_stairs": ["desk_worker", "weight_focus"], "p_steps_target": ["weight_focus", "glucose_focus"],
+    "p_mobility_flow": ["joint_friendly"], "p_posture": ["desk_worker"], "p_long_walk": ["weight_focus"],
+    "m_gratitude": ["calm_focus"], "m_muraqaba": ["calm_focus", "mental_clarity"],
+    "m_digital": ["sleep_focus", "insomnia"], "m_tafakkur": ["calm_focus"], "m_worry": ["calm_focus"],
+    "m_read": ["mental_clarity"], "m_muhasabah": ["mental_clarity"], "m_silence": ["calm_focus"],
+    "s_sleep_adhkar": ["sleep_focus"], "s_mulk": ["sleep_focus", "insomnia"],
+}
+CONTRA_PATCH = {
+    "p_interval": ["no_hiit"], "p_pushup_ladder": ["joint_friendly"],
+    "n_sunnah_fast": ["no_fasting"], "n_ayyam_bid": ["no_fasting"], "n_eating_window": ["no_fasting"],
+    "s_tahajjud": ["insomnia", "shift_worker"],
+}
 for _t in TEMPLATES:
     _t.setdefault("min_phase", 1)
+    _t.setdefault("boost", BOOST_PATCH.get(_t["key"], []))
+    _t.setdefault("contra", CONTRA_PATCH.get(_t["key"], []))
 
 TEMPLATES_BY_KEY = {t["key"]: t for t in TEMPLATES}
 TEMPLATES_BY_PILLAR: dict[str, list[dict]] = {p: [] for p in PILLARS}
@@ -888,16 +919,30 @@ def anchor_time(anchor: str, sleep_habit: str) -> str:
 
 
 def generate_plan(prefs: dict, total_days: int, start: date,
-                  challenge_type: str = "30_days") -> list[dict]:
-    """Deterministic, personalised 1%-better plan with phase-gated depth."""
+                  challenge_type: str = "30_days", flags: list[str] | None = None,
+                  seed: str = "") -> list[dict]:
+    """Deterministic, personalised 1%-better plan.
+
+    Templates are *scored* for this person (goals, health flags, level fit,
+    dietary focus) and contraindicated ones are excluded. A per-user seed
+    breaks ties so two users with similar answers still get different plans.
+    """
     goals = prefs.get("health_goals") or []
     order = pillar_priority(goals)
     fit_level = LEVELS.get(prefs.get("fitness_level", "beginner"), 1)
     spi_level = LEVELS.get(prefs.get("spiritual_level", "beginner"), 1)
     sleep_habit = prefs.get("sleep_habit", "moderate")
     dietary = prefs.get("dietary_preferences") or []
+    flagset = set(flags or [])
+    wanted = flagset | set(goals) | set(dietary)
+
+    def salt(key: str) -> float:
+        digest = hashlib.sha256(f"{seed}:{key}".encode()).hexdigest()
+        return int(digest[:8], 16) / 0xFFFFFFFF
 
     def allowed(t: dict) -> bool:
+        if set(t["contra"]) & flagset:
+            return False
         if t["pillar"] == "spiritual":
             return t["level"] <= spi_level
         if t["pillar"] == "nutrition":
@@ -905,6 +950,13 @@ def generate_plan(prefs: dict, total_days: int, start: date,
                 return False
             return t["level"] <= max(fit_level, 2 if "sunnah_diet" in dietary else 1)
         return t["level"] <= fit_level
+
+    def score(t: dict) -> float:
+        s = len(wanted & set(t["boost"])) * 3.0
+        if "joint_friendly" in flagset and t["pillar"] == "physical" and "joint_friendly" in t["boost"]:
+            s += 2
+        s -= abs(t["level"] - (spi_level if t["pillar"] == "spiritual" else fit_level)) * 0.5
+        return s + salt(t["key"])
 
     # Longer tracks are allowed to reach deeper practices as they progress.
     def level_cap(phase: int) -> int:
@@ -918,7 +970,11 @@ def generate_plan(prefs: dict, total_days: int, start: date,
             cap = level_cap(phase)
             pool = [t for t in TEMPLATES_BY_PILLAR[pillar]
                     if t["min_phase"] <= phase and allowed(t) and t["level"] <= cap]
-            pool_cache[key] = pool or TEMPLATES_BY_PILLAR[pillar][:3]
+            pool = pool or [t for t in TEMPLATES_BY_PILLAR[pillar] if t["min_phase"] <= phase][:4]
+            # Best-fit first, then the long tail — the whole pool still rotates
+            # so no habit repeats until every fitting one has had its turn.
+            pool.sort(key=lambda t: -score(t))
+            pool_cache[key] = pool
         return pool_cache[key]
 
     counters = {p: 0 for p in PILLARS}
@@ -931,8 +987,8 @@ def generate_plan(prefs: dict, total_days: int, start: date,
             # Jump straight to whatever this phase just unlocked, so a new phase
             # genuinely feels new instead of replaying the same rotation.
             for p in PILLARS:
-                unlocked_before = len([t for t in pool_for(p, phase) if t["min_phase"] < phase])
-                counters[p] = unlocked_before
+                fresh = [i for i, t in enumerate(pool_for(p, phase)) if t["min_phase"] == phase]
+                counters[p] = fresh[0] if fresh else 0
             last_phase = phase
 
         n = tasks_for_day(day)
@@ -942,10 +998,15 @@ def generate_plan(prefs: dict, total_days: int, start: date,
         base_points = 8 + round(day / total_days * 14)
         mult = ramp(day, total_days)
 
+        used_today: set[str] = set()
         for pillar in day_pillars:
             pool = pool_for(pillar, phase)
             tpl = pool[counters[pillar] % len(pool)]
             counters[pillar] += 1
+            if tpl["key"] in used_today and len(pool) > 1:
+                tpl = pool[counters[pillar] % len(pool)]
+                counters[pillar] += 1
+            used_today.add(tpl["key"])
             minutes = max(2, round(tpl["minutes"] * mult))
             out.append({
                 "template_key": tpl["key"],

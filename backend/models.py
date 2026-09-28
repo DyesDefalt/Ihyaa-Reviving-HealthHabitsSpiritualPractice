@@ -61,6 +61,14 @@ class Preferences(BaseModel):
     prayer_method: int = 3                    # AlAdhan calculation method id
     prayer_school: int = 0                    # 0 = Shafi'i, 1 = Hanafi
     location: GeoLocation | None = None
+    # basic info that makes the plan personal
+    age: int | None = Field(default=None, ge=10, le=100)
+    sex: str | None = None                    # male | female
+    height_cm: float | None = Field(default=None, ge=100, le=250)
+    weight_kg: float | None = Field(default=None, ge=25, le=300)
+    conditions: list[str] = Field(default_factory=list)
+    work_pattern: str = "desk"                # desk | on_feet | shift | home
+    wake_time: str | None = None              # HH:MM
 
 
 class User(BaseDocument):
@@ -277,3 +285,7 @@ class CheckinBody(BaseModel):
 
 class CoachBody(BaseModel):
     message: str
+
+
+class HydrationBody(BaseModel):
+    glasses: int = Field(default=1, ge=-1, le=5)

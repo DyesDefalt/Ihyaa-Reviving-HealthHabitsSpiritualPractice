@@ -64,7 +64,7 @@ AI coach cost at scale (GPT-6 Luna $0.10/$0.50 per 1M; fallback DeepSeek $0.15�
 - 1K DAU × 10 msg/user/mo ≈ $4–5/mo
 - 10K DAU ≈ $15–30/mo
 - 50K DAU ≈ $60–120/mo (Luna mostly; DeepSeek off-peak batching for nightly jobs halves it)
-Per paying user: cents per month. Real unit-cost risks are hosting, push infra, and (if adopted) Qdrant — not LLM spend. Budget Gemini 3.8 Flash out of any cost plan: real price is $0.75/$3.75 per 1M, not the $0.10/$0.40 previously assumed.
+Per paying user: cents per month. Real unit-cost risks are hosting, push infra, and (if adopted) Qdrant — not LLM spend. Gemini 3.8 Flash is off the plan entirely (real price $0.75/$3.75 per 1M — the earlier $0.10/$0.40 budget assumption was wrong, and it never matched the cheap+reliable priority anyway).
 
 ## 8. Risk register (updated)
 

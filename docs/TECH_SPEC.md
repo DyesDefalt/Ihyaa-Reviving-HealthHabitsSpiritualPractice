@@ -47,11 +47,11 @@ Current: Claude Sonnet 4.6 via Emergent. Target after decoupling — provider ab
 
 | Role | Model | In / out per 1M | Note |
 |---|---|---|---|
-| Primary coach | **GPT-6 Luna** (`gpt-6-luna`) | $0.10 / $0.50 | Cheapest current-gen OpenAI, good Bahasa Indonesia. Batch $0.05/$0.25 |
-| Fallback | **DeepSeek V4.1-Flash** (`deepseek-flash`) | $0.15–0.30 / $0.60–1.20 | Off-peak (all hours except Mon–Fri 01:00–04:00, 06:00–10:00 UTC) is 50% off. Different infra = failover |
-| Alternative | Claude Sonnet 5 | $2.00 / $10.00 | If OpenAI quality dips; cheaper than Sonnet 4.6 |
-| Not recommended | Gemini 3.8 Flash | $0.75 / $3.75 | Previously budgeted at $0.10/$0.40 — that was wrong. Not a budget model |
-| Not recommended | GPT-5.6 Luna | $0.20 / $1.20 | Superseded by GPT-6 Luna at half the price |
+| Primary coach | **GPT-6 Luna** (`gpt-6-luna`) | $0.10 / $0.50 | **Chosen.** Cheapest current-gen OpenAI, reliable infra, good Bahasa Indonesia. Batch $0.05/$0.25. Prioritizes cheap + reliable on the most current model |
+| Fallback | **DeepSeek V4.1-Flash** (`deepseek-flash`) | $0.15–0.30 / $0.60–1.20 | **Chosen.** Off-peak (all hours except Mon–Fri 01:00–04:00, 06:00–10:00 UTC) is 50% off. Different infra = genuine failover |
+| Alternative | Claude Sonnet 5 | $2.00 / $10.00 | Only if OpenAI quality dips; cheaper than the current Sonnet 4.6 |
+| Rejected | Gemini 3.8 Flash | $0.75 / $3.75 | Not a budget model — earlier $0.10/$0.40 assumption was wrong. Off the plan |
+| Rejected | GPT-5.6 Luna | $0.20 / $1.20 | Superseded by GPT-6 Luna at half the price |
 | Intent/scoring (Phase 3) | Jev (TypeSafe AI) | $0.042 direct / $0.42 hosted per 1M in, output free | Decision layer only — no text generation |
 
 Cost at 10K DAU × 10 msgs/user/mo ≈ 100K conversations × 2K in + 300 out: **~$15–30/month on GPT-6 Luna**. Negligible vs Rp49k/mo subscription. Embeddings: `text-embedding-3-small` $0.02/1M confirmed.

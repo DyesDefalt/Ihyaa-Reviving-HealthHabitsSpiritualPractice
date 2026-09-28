@@ -53,6 +53,7 @@ Current: Claude Sonnet 4.6 via Emergent. Target after decoupling — provider ab
 | Rejected | Gemini 3.8 Flash | $0.75 / $3.75 | Not a budget model — earlier $0.10/$0.40 assumption was wrong. Off the plan |
 | Rejected | GPT-5.6 Luna | $0.20 / $1.20 | Superseded by GPT-6 Luna at half the price |
 | Intent/scoring (Phase 3) | Jev (TypeSafe AI) | $0.042 direct / $0.42 hosted per 1M in, output free | Decision layer only — no text generation |
+| Intent/scoring fallback (Phase 3) | **Laya** (`laya`, Apache 2.0, self-hosted) | Free (compute only) | Open-source System-1 decision engine, same request format as Jev (choice/score/noul), 33 ms. Zero-shot accuracy is near chance — **fine-tune on Ihyaa decision sets before routing real traffic** (fine-tuned benchmark 0.766 > Jev's 0.727; zero-shot 0.36). ~4–5 h on free Kaggle T4s |
 
 Cost at 10K DAU × 10 msgs/user/mo ≈ 100K conversations × 2K in + 300 out: **~$15–30/month on GPT-6 Luna**. Negligible vs Rp49k/mo subscription. Embeddings: `text-embedding-3-small` $0.02/1M confirmed.
 

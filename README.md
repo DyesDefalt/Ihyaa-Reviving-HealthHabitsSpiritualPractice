@@ -35,6 +35,7 @@ Ihyaa is a mobile health companion for Muslims that unifies habit tracking, food
 - GPT-6 Luna: $0.10 / $0.50 per 1M tokens — cheapest current-gen OpenAI, strong Bahasa Indonesia, no peak-hour pricing
 - DeepSeek V4.1-Flash: $0.15–0.30 / $0.60–1.20 per 1M, 50% off-peak discount, different infrastructure for genuine failover
 - At 10K DAU the coach costs ~$15–30/month total — cents per paying user
+- Decision layer (Phase 3): Jev (TypeSafe AI) with **Laya** (Apache 2.0, self-hosted, Jev-compatible request format) as fallback — free, but only after fine-tuning on Ihyaa's own decision sets (zero-shot accuracy is near chance; fine-tuned it outperforms Jev on the public benchmark)
 
 ## Getting started
 

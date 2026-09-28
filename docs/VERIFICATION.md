@@ -35,6 +35,7 @@ The four planning docs (PRD, Tech Specs, Content & Evidence Strategy, Monetizati
 | Claude Sonnet 5 | $2.00 | $10.00 | same | Current Sonnet flagship; cheaper than 4.6 |
 | text-embedding-3-small | $0.02 (batch) | — | developers.openai.com | Confirmed |
 | Jev (TypeSafe AI) | $0.042 direct / $0.42 hosted metered | output free | jevtypesafeai.com/pricing | Specify tier before budgeting |
+| Laya (github.com/NandhaKishorM/laya) | Free, Apache 2.0, self-hosted (compute only) | 33 ms forward pass | github.com/NandhaKishorM/laya | Jev-compatible decision-engine fallback. Fine-tuned: 0.766 accuracy vs Jev's 0.727. Zero-shot: 0.36 — must fine-tune before production use |
 
 **Platform requirements:**
 

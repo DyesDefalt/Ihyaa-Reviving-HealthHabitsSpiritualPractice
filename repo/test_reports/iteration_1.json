@@ -1,0 +1,90 @@
+{
+  "summary": "Iteration 1 tested the public API and Expo Web app end to end. Backend: 18/24 pytest cases passed; core registration/login/me, normal refresh, secure cookies, bcrypt, onboarding, 30-day generation/localization, Pro gating/fallback, task/check-in points, progress, store, knowledge, ICS, regeneration, and Indonesian AI persistence passed. Frontend critical flows passed except store catalogue localization after an unsaved profile language switch.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/auth/login",
+        "issue": "Brute-force lockout is ineffective through the public ingress. Five wrong attempts were followed by a successful valid login (200), not 429. Attempts are split across alternating proxy client hosts.",
+        "priority": "CRITICAL"
+      },
+      {
+        "endpoint": "/api/auth/refresh",
+        "issue": "When an X-Refresh-Token for user A and a refresh_token cookie for user B are both present, the cookie wins and the endpoint issues user B tokens. Normal header-only refresh passes, but the precedence creates cross-account session confusion.",
+        "priority": "CRITICAL"
+      },
+      {
+        "endpoint": "/api/tasks/{id}/complete",
+        "issue": "The +50 all-tasks daily bonus can be farmed repeatedly by completing all tasks, un-completing the final task, and completing it again. The second completion awarded another 50.",
+        "priority": "HIGH"
+      },
+      {
+        "endpoint": "/api/challenges",
+        "issue": "Malformed start_date='not-a-date' returns 500 Internal Server Error instead of a validated 400/422.",
+        "priority": "HIGH"
+      },
+      {
+        "endpoint": "/api/* CORS preflight",
+        "issue": "Public preflight responds Access-Control-Allow-Origin: * and omits Access-Control-Allow-Credentials, contrary to the required credentialed explicit-origin policy. Backend also configures allow_origins=['*'] with credentials.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "/api/tasks/{id}/time",
+        "issue": "scheduled_time has no HH:MM validation; 'not-a-time' is accepted with 200. Such data later makes calendar.ics parsing fail. Test restored the valid value."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "AI Coach reply bubble",
+        "issue": "Assistant Markdown such as **bold** is rendered literally, and the tested Indonesian reply was 1020 characters in one large bubble despite the backend instruction to keep replies to 2-4 short paragraphs.",
+        "selector": "[data-testid='coach-msg-assistant']",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Profile language switch -> Rewards",
+        "issue": "After switching the UI from Indonesian to Arabic using prof-lang-ar and immediately opening Rewards, headings become Arabic but item names/descriptions remain Indonesian. Store fetch uses user.language instead of the current i18n language unless profile is separately saved.",
+        "affected_selectors": [
+          "[data-testid='prof-lang-ar']",
+          "[data-testid='tab-store']",
+          "[data-testid='store-item-pro_1_month']"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Key lockout by normalized email and a trusted forwarded client IP (or email alone), not request.client.host behind alternating ingress proxies; retest five failures then 429.",
+    "Make X-Refresh-Token take precedence when explicitly supplied, or reject requests containing conflicting cookie/header refresh identities.",
+    "Persist a once-per-user/date all-tasks bonus marker and make task completion/point award atomic to prevent toggle and concurrent farming.",
+    "Validate challenge start_date and task scheduled_time with typed Pydantic date/time fields and return 400/422.",
+    "Configure explicit allowed origins with credential support at both app and ingress CORS layers.",
+    "Fetch store catalogue using current i18n lang, or persist language immediately when its profile chip is pressed."
+  ],
+  "critical_code_review_comments": [
+    "/app/backend/server.py is 851 lines and should be split into auth, challenges/tasks, check-ins/progress, store/content, and coach routers.",
+    "Point mutations are read-then-write across separate operations; task completion and redemption are vulnerable to concurrent duplicate awards/overspending without conditional atomic updates or transactions.",
+    "Several frontend API loaders use try/finally without a user-visible catch/error state, so backend failures can leave empty screens with no explanation.",
+    "The requested task-count rules mathematically total 107 (3x2 + 7x3 + 20x4), not 111. The API returned 107 and all per-day count rules passed; product requirements should correct the stated total."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py"
+  ],
+  "success_rate": {
+    "backend": "75% (18/24)",
+    "frontend": "95%"
+  },
+  "seed_data_creation": "Created multiple TEST_ihyaa_*, TEST_lockout_*, TEST_fallback_*, TEST_lockdiag_*, and TEST_ui_* throwaway users/challenges through public endpoints. No user-delete endpoint exists, so these records remain; coach API history was cleared.",
+  "should_call_test_agent_after_fix": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Retest the six failing pytest cases after fixes. Frontend registration/onboarding, task toggle/evidence, check-in, all five tabs, calendar day selection/download/reminder notice, progress visuals, disabled rewards, profile edit/theme, knowledge expansion, Google redirect, and AI reply rendering were exercised successfully. Use fresh throwaway accounts for lockout/onboarding.",
+  "rca_of_the_issue": "Lockout diagnostics showed one email's attempts split between identifiers 10.79.142.66:<email> and 10.79.142.69:<email>, proving request.client.host is an ingress hop rather than a stable caller. Refresh uses token = cookie or header, so cookie incorrectly overrides the explicit header. Bonus logic only checks whether remaining tasks equal zero and stores no daily-awarded marker. Invalid date/time strings reach date.fromisoformat/split parsing because request models use unconstrained str. Store localization reads user.language while the profile chip only changes local i18n state until a later save."
+}

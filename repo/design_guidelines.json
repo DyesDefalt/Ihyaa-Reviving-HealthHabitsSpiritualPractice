@@ -1,0 +1,147 @@
+{
+  "app_name": "Ihyaa (إحياء)",
+  "theme_strategy": "Warm Premium Minimalism with Subtle Geometric Accents (RTL-ready)",
+  "colors": {
+    "light": {
+      "background": "#F7F5F0",
+      "surface": "#FFFFFF",
+      "surface_alt": "#F0EBE1",
+      "primary": "#1B3B36",
+      "on_primary": "#FFFFFF",
+      "secondary": "#B5653E",
+      "text_primary": "#1A1A1A",
+      "text_secondary": "#5C5F5E",
+      "border": "#E8E4DB",
+      "success": "#2A9D8F",
+      "error": "#E76F51",
+      "warning": "#E9C46A"
+    },
+    "dark": {
+      "background": "#121413",
+      "surface": "#1A201E",
+      "surface_alt": "#242A28",
+      "primary": "#2D6058",
+      "on_primary": "#FFFFFF",
+      "secondary": "#CF8460",
+      "text_primary": "#F2F2F2",
+      "text_secondary": "#A0A4A3",
+      "border": "#2C3331",
+      "success": "#45B6A8",
+      "error": "#F28C74",
+      "warning": "#F4D58D"
+    },
+    "pillars": {
+      "physical": "#B5653E",
+      "nutrition": "#D99B29",
+      "mental": "#4A6FA5",
+      "spiritual": "#2A9D8F"
+    }
+  },
+  "typography": {
+    "font_families": {
+      "english_indonesian": {
+        "primary": "Outfit",
+        "weights": ["Outfit_400Regular", "Outfit_500Medium", "Outfit_600SemiBold", "Outfit_700Bold"]
+      },
+      "arabic_ui": {
+        "primary": "Tajawal",
+        "weights": ["Tajawal_400Regular", "Tajawal_500Medium", "Tajawal_700Bold"]
+      },
+      "arabic_scripture": {
+        "primary": "Amiri",
+        "weights": ["Amiri_400Regular", "Amiri_700Bold"]
+      }
+    },
+    "scales": {
+      "h1": { "fontSize": 32, "lineHeight": 40, "letterSpacing": -0.5 },
+      "h2": { "fontSize": 24, "lineHeight": 32, "letterSpacing": -0.3 },
+      "h3": { "fontSize": 20, "lineHeight": 28, "letterSpacing": -0.2 },
+      "body_large": { "fontSize": 18, "lineHeight": 26, "letterSpacing": 0 },
+      "body": { "fontSize": 16, "lineHeight": 24, "letterSpacing": 0 },
+      "body_small": { "fontSize": 14, "lineHeight": 20, "letterSpacing": 0.1 },
+      "caption": { "fontSize": 12, "lineHeight": 16, "letterSpacing": 0.2 },
+      "scripture": { "fontSize": 28, "lineHeight": 46, "letterSpacing": 0 }
+    }
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "xl": 32,
+    "xxl": 48,
+    "xxxl": 64
+  },
+  "radii": {
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "full": 9999
+  },
+  "shadows": {
+    "light": {
+      "sm": {
+        "shadowColor": "#1A1A1A",
+        "shadowOffset": { "width": 0, "height": 2 },
+        "shadowOpacity": 0.05,
+        "shadowRadius": 4,
+        "elevation": 2
+      },
+      "md": {
+        "shadowColor": "#1A1A1A",
+        "shadowOffset": { "width": 0, "height": 8 },
+        "shadowOpacity": 0.08,
+        "shadowRadius": 16,
+        "elevation": 4
+      }
+    },
+    "dark": {
+      "sm": {
+        "shadowColor": "#000000",
+        "shadowOffset": { "width": 0, "height": 2 },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 4,
+        "elevation": 2
+      },
+      "md": {
+        "shadowColor": "#000000",
+        "shadowOffset": { "width": 0, "height": 8 },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 16,
+        "elevation": 4
+      }
+    }
+  },
+  "rtl_guidelines": {
+    "layout": "Use React Native's I18nManager.allowRTL(true) and I18nManager.forceRTL(isArabic).",
+    "flexbox": "Rely on flex-start/flex-end and margin/paddingStart/End rather than left/right. React Native automatically flips start/end based on RTL direction.",
+    "icons": "Flip directional icons (like back arrows or next chevrons) when in RTL mode using transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }]."
+  },
+  "visual_enhancers": {
+    "geometric_patterns": "Use react-native-svg to draw an 8-point star (Khatam) or Girih pattern. Apply it as an absolute position background with opacity 0.03 in light mode and 0.05 in dark mode to avoid distraction while providing cultural grounding.",
+    "glass_morphism": "Use expo-blur <BlurView> for the bottom tab bar, sticky headers, and modal overlays to give a premium feel.",
+    "gradients": "Use expo-linear-gradient. For progress rings or primary buttons, apply a subtle gradient e.g., from #1B3B36 to #2D6058."
+  },
+  "components": {
+    "cards": "Use radii.md (16px), background surface color, shadows.sm. Never purely flat unless it's a secondary list item.",
+    "buttons": "Pill-shaped (radii.full) for primary CTAs to feel approachable and modern. Minimalist outline buttons for secondary actions.",
+    "progress_rings": "Use react-native-svg to draw circular progress indicators. The stroke color matches the specific pillar color to instantly communicate the type of habit being tracked.",
+    "bottom_tabs": "Floating bottom tab bar with expo-blur, rather than a flat solid bar attached to the bottom, giving a lightweight, modern feel.",
+    "typography_rules": "No centered text for long paragraphs. Headers can be centered in splash/onboarding, but body text should be aligned to 'flex-start'."
+  },
+  "charts": {
+    "guidelines": "Use react-native-chart-kit or react-native-svg for 7-day progress. Use the pillar_colors for bar/line charts to visualize breakdown.",
+    "bar_chart": "Rounded top corners on bars, no background grid lines (keep it minimal), labels in caption typography.",
+    "progress_ring": "Concentric rings for the 4 pillars (Apple Fitness style, but with earthy/calm colors) on the Home/Progress screen."
+  },
+  "testing": {
+    "guidelines": "All interactive and key informational elements MUST include a testID attribute (React Native equivalent of data-testid). Example: testID=\"login-submit-button\"."
+  },
+  "instructions_to_main_agent": [
+    "Use standard React Native StyleSheet or styled-components depending on your setup. Do not use Tailwind/HTML class names since this is a React Native project.",
+    "Remember to utilize paddingStart/paddingEnd and marginStart/marginEnd instead of Left/Right to ensure automatic RTL support for Arabic.",
+    "Load fonts asynchronously using expo-font. Display a splash or loading screen until Outfit, Tajawal, and Amiri are loaded.",
+    "Ensure dark mode is supported by deriving colors from a theme context rather than hardcoding hex values in stylesheets.",
+    "Apply testID to all TouchableOpacity, TextInput, and essential Text nodes."
+  ]
+}

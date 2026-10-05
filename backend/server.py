@@ -21,6 +21,8 @@ from curriculum import (TEMPLATES_BY_KEY, generate_plan, localize,
 from db import ensure_indexes, get_db
 from health import health_profile
 from coach import migrate_legacy_chats, router as coach_router
+from habit_decisions import router as habit_decisions_router
+from jev import close_jev
 from library import (EXERCISES, MIND_WINDOWS, RECIPES, SUPPLEMENTS,
                      localize_entry, rank)
 from milestones import MILESTONE_TRACKS, build_milestones, localize_milestone
@@ -33,6 +35,7 @@ from models import (Challenge, Checkin, CheckinBody, Language,
 
 app = FastAPI(title="Ihyaa API")
 app.include_router(coach_router)
+app.include_router(habit_decisions_router)
 
 _origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
 
@@ -174,6 +177,11 @@ async def startup() -> None:
 @app.get("/api/health")
 async def health() -> dict:
     return {"status": "ok", "app": "Ihyaa", "time": utcnow().isoformat()}
+
+
+@app.on_event("shutdown")
+async def shutdown() -> None:
+    await close_jev()
 
 
 # ------------------------------------------------------------------ auth

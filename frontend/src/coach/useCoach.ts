@@ -3,7 +3,7 @@ import { api } from '../api';
 import type { Lang } from '../i18n';
 import { streamCoach } from './stream';
 
-export type CoachMessage = { id: string; role: 'user' | 'assistant'; content: string; model?: string; safety?: string };
+export type CoachMessage = { id: string; role: 'user' | 'assistant'; content: string; model?: string; safety?: string; decision?: { intent: string; source: string; ai_classified: boolean; reason?: string } };
 export type CoachSession = { session_id: string; title: string; updated_at: string };
 type Config = { model: string; provider: string; consent_required: boolean; consent_version: string; max_message_length: number };
 
@@ -96,7 +96,7 @@ export function useCoach(userId: string | undefined, lang: Lang) {
         if (!mounted.current) return;
         if (type === 'delta') setMessages((old) => old.map((m) => m.id === assistantMsg ? { ...m, content: m.content + data.text } : m));
         if (type === 'done') setMessages((old) => old.map((m) => m.id === userMsg ? { ...m, id: data.user_message_id }
-          : m.id === assistantMsg ? { ...m, id: data.assistant_message_id, content: data.reply, model: data.model, safety: data.safety } : m));
+          : m.id === assistantMsg ? { ...m, id: data.assistant_message_id, content: data.reply, model: data.model, safety: data.safety, decision: data.decision } : m));
       });
       const list = await api('/coach/sessions');
       if (mounted.current) setSessions(list);

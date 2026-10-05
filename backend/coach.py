@@ -14,7 +14,8 @@ from pymongo import ReturnDocument
 
 from ai_provider import model_info, stream_reply
 from auth import get_current_user
-from coach_safety import CONSENT_VERSION, REPLIES, redact, safe_context, safety_route
+from coach_safety import CONSENT_VERSION, REPLIES, redact, safe_context
+from coach_decisions import RouteDecision, classify_message
 from db import get_db
 from models import CoachBody, User, utcnow
 
@@ -37,6 +38,7 @@ class MessageView(BaseModel):
     created_at: datetime
     model: str | None = None
     safety: str | None = None
+    decision: RouteDecision | None = None
 
 
 class ConsentBody(BaseModel):
@@ -106,7 +108,7 @@ async def history(session_id: str = Query(...), user: User = Depends(get_current
     rows = await get_db().coach_messages.find(
         {"user_id": str(user.id), "session_id": session_id},
         {"_id": 0, "id": {"$toString": "$_id"}, "session_id": 1, "role": 1,
-         "content": 1, "created_at": 1, "model": 1, "safety": 1},
+         "content": 1, "created_at": 1, "model": 1, "safety": 1, "decision": 1},
     ).sort([("created_at", -1), ("_id", -1)]).limit(200).to_list(200)
     return list(reversed(rows))
 
@@ -156,11 +158,14 @@ async def generate(body: CoachBody, user: User, lock: str):
     db = get_db()
     scope = {"user_id": str(user.id), "session_id": body.session_id}
     language = body.language or user.language
-    intent = safety_route(body.message, user)
+    intent = None
     reply = ""
     try:
         yield sse("meta", {"session_id": body.session_id, **model_info()})
         async with asyncio.timeout(60):
+            decision = await classify_message(body.message, user)
+            intent = decision.intent if decision.intent in REPLIES else None
+            yield sse("decision", decision.model_dump())
             if intent:
                 reply = REPLIES[intent][language]
                 yield sse("delta", {"text": reply})
@@ -182,7 +187,8 @@ async def generate(body: CoachBody, user: User, lock: str):
             {"_id": user_id, **scope, "role": "user", "content": body.message,
              "created_at": at, "safety": intent},
             {"_id": assistant_id, **scope, "role": "assistant", "content": reply.strip(),
-             "created_at": at + timedelta(microseconds=1), "safety": intent, "model": model},
+             "created_at": at + timedelta(microseconds=1), "safety": intent, "model": model,
+             "decision": decision.model_dump()},
         ])
         count = await db.coach_messages.count_documents(scope)
         updates = {"updated_at": utcnow()}
@@ -192,7 +198,7 @@ async def generate(body: CoachBody, user: User, lock: str):
         await db.coach_sessions.update_one(scope, {"$set": updates})
         yield sse("done", {"session_id": body.session_id, "reply": reply.strip(),
                            "user_message_id": str(user_id), "assistant_message_id": str(assistant_id),
-                           "model": model, "safety": intent})
+                           "model": model, "safety": intent, "decision": decision.model_dump()})
     except asyncio.CancelledError:
         raise
     except Exception as exc:

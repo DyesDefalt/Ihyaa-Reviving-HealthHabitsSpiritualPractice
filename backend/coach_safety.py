@@ -4,7 +4,7 @@ import re
 
 from models import User
 
-CONSENT_VERSION = "2026-10-coach-v1"
+CONSENT_VERSION = "2026-10-ai-v2"
 
 SYSTEM = """You are Ihyaa Coach, an AI healthy-lifestyle companion, not a doctor or scholar.
 Prioritise practical halal food, gentle movement, sleep, and mental wellbeing, not
@@ -33,6 +33,10 @@ PATTERNS = {
 }
 
 REPLIES = {
+    "unclassified": {
+        "en": "I couldn’t confidently route that request. Please try again with a simple question about food, gentle movement, sleep, or everyday motivation. For symptoms or treatment, contact a qualified clinician; for religious rulings, consult a qualified scholar. If you may be in immediate danger, seek local emergency help now.",
+        "id": "Saya belum dapat menentukan jenis pertanyaan ini dengan yakin. Coba lagi dengan pertanyaan sederhana tentang makanan, gerak ringan, tidur, atau motivasi sehari-hari. Untuk gejala atau pengobatan, hubungi tenaga medis; untuk fatwa, konsultasikan dengan ulama. Jika ada bahaya langsung, segera cari pertolongan darurat setempat.",
+    },
     "emergency": {
         "en": "Your safety comes first. Please contact local emergency services now or go to the nearest emergency department. If you may hurt yourself, move away from anything you could use to harm yourself and ask a trusted person to stay with you. This chat cannot provide emergency care.",
         "id": "Keselamatan Anda yang utama. Segera hubungi layanan darurat setempat atau pergi ke IGD terdekat. Jika ada dorongan menyakiti diri, jauhkan benda yang dapat digunakan untuk melukai diri dan minta orang tepercaya menemani Anda. Chat ini tidak dapat memberikan pertolongan darurat.",
@@ -73,13 +77,16 @@ def redact(text: str, user: User) -> str:
     return text
 
 
-def safe_context(user: User, language: str) -> str:
+def basic_preferences(user: User, language: str) -> dict:
     # Explicit allowlists prevent arbitrary profile fields becoming prompt instructions.
     goals = {"better_sleep", "reduce_stress", "healthy_eating", "mental_clarity", "more_energy", "build_strength"}
-    context = {
+    return {
         "response_language": "Bahasa Indonesia" if language == "id" else "English",
         "goals": [g for g in user.prefs.health_goals if g in goals],
         "fitness_level": user.prefs.fitness_level if user.prefs.fitness_level in {"beginner", "intermediate", "advanced"} else "beginner",
         "sleep_pattern": user.prefs.sleep_habit if user.prefs.sleep_habit in {"early_bird", "moderate", "night_owl"} else "moderate",
     }
-    return SYSTEM + "\nBasic preferences (not clinical records): " + json.dumps(context)
+
+
+def safe_context(user: User, language: str) -> str:
+    return SYSTEM + "\nBasic preferences (not clinical records): " + json.dumps(basic_preferences(user, language))

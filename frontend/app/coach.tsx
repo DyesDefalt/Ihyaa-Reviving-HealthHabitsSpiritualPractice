@@ -11,6 +11,7 @@ import { useCoach } from '../src/coach/useCoach';
 import { useI18n } from '../src/i18n';
 import { space, useTheme } from '../src/theme';
 import { SessionGate } from '../src/components/SessionGate';
+import { DecisionLabel } from '../src/coach/DecisionLabel';
 
 export default function Coach() {
   return <SessionGate><CoachContent /></SessionGate>;
@@ -102,6 +103,7 @@ function CoachContent() {
           </Txt> : null}
           <Txt testID={`coach-content-${m.id}`} variant="small" color={m.role === 'user' ? '#fff' : c.text}
             style={{ lineHeight: 22, ...(Platform.OS === 'web' ? { overflowWrap: 'anywhere' } as any : {}) }}>{m.content.replace(/\*\*/g, '')}</Txt>
+          {m.role === 'assistant' ? <DecisionLabel message={m} /> : null}
         </View> : null)}
         {chat.busy ? <View testID="coach-thinking" style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
           <ActivityIndicator size="small" color={c.primary} /><Txt variant="caption" color={c.textDim}>{chat.messages.at(-1)?.content ? copy.replying : copy.thinking}</Txt>

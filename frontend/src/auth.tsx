@@ -34,6 +34,8 @@ export type Me = {
 type AuthCtx = {
   user: Me | null;
   booting: boolean;
+  bootError: boolean;
+  retryBootstrap: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, name: string, language: string) => Promise<void>;
   signInGoogle: (sessionId: string) => Promise<void>;
@@ -47,28 +49,38 @@ const Ctx = createContext<AuthCtx | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Me | null>(null);
   const [booting, setBooting] = useState(true);
+  const [bootError, setBootError] = useState(false);
 
   const refresh = useCallback(async () => {
     try {
       const me = await api('/auth/me');
       setUser(me);
-    } catch {
-      setUser(null);
+      setBootError(false);
+    } catch (error: any) {
+      if (error.status === 401) { setUser(null); setBootError(false); }
+      else setBootError(true);
     }
   }, []);
 
-  useEffect(() => {
-    (async () => {
+  const retryBootstrap = useCallback(async () => {
+    setBooting(true);
+    setBootError(false);
+    try {
       const token = await loadTokens();
       if (token) await refresh();
-      setBooting(false);
-    })();
+    } catch { setBootError(true); }
+    finally { setBooting(false); }
   }, [refresh]);
+
+  useEffect(() => {
+    retryBootstrap();
+  }, [retryBootstrap]);
 
   const signIn = async (email: string, password: string) => {
     const data = await api('/auth/login', { method: 'POST', auth: false, body: { email, password } });
     await setTokens(data.access_token, data.refresh_token);
     setUser(data.user);
+    setBootError(false);
   };
 
   const signUp = async (email: string, password: string, name: string, language: string) => {
@@ -79,6 +91,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
     await setTokens(data.access_token, data.refresh_token);
     setUser(data.user);
+    setBootError(false);
   };
 
   const signInGoogle = async (sessionId: string) => {
@@ -89,6 +102,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
     await setTokens(data.access_token, data.refresh_token);
     setUser(data.user);
+    setBootError(false);
   };
 
   const signOut = async () => {
@@ -99,11 +113,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     await clearTokens();
     setUser(null);
+    setBootError(false);
   };
 
   return (
     <Ctx.Provider
-      value={{ user, booting, signIn, signUp, signInGoogle, signOut, refresh, patchUser: setUser }}
+      value={{ user, booting, bootError, retryBootstrap, signIn, signUp, signInGoogle, signOut, refresh, patchUser: setUser }}
     >
       {children}
     </Ctx.Provider>

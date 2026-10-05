@@ -6,9 +6,10 @@ import { GeoPattern } from '../src/components/GeoPattern';
 import { useI18n } from '../src/i18n';
 import { fontsFor } from '../src/theme';
 import { Text } from 'react-native';
+import { SessionGate } from '../src/components/SessionGate';
 
 export default function Index() {
-  const { user, booting } = useAuth();
+  const { user, booting, bootError } = useAuth();
   const { lang, t } = useI18n();
 
   if (booting) {
@@ -28,6 +29,7 @@ export default function Index() {
     );
   }
 
+  if (bootError) return <SessionGate><View /></SessionGate>;
   if (!user) return <Redirect href="/sign-in" />;
   if (!user.onboarding_completed) return <Redirect href="/onboarding" />;
   return <Redirect href="/(tabs)" />;

@@ -3,13 +3,11 @@ import type { Lang } from './i18n';
 const MONTHS: Record<Lang, string[]> = {
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   id: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-  ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
 };
 
 const DAYS: Record<Lang, string[]> = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   id: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
-  ar: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
 };
 
 export const todayISO = () => new Date().toLocaleDateString('en-CA');
@@ -40,7 +38,7 @@ export function shortMonth(iso: string, lang: Lang) {
 }
 
 export function dayLetter(weekday: number, lang: Lang) {
-  return DAYS[lang][weekday].slice(0, lang === 'ar' ? 3 : 1);
+  return DAYS[lang][weekday].slice(0, 1);
 }
 
 export function weekdayShort(iso: string, lang: Lang) {

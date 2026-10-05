@@ -88,22 +88,14 @@ export type Fonts = {
   scripture: string;
 };
 
-export const fontsFor = (lang: string): Fonts =>
-  lang === 'ar'
-    ? {
-        regular: 'Tajawal_400Regular',
-        medium: 'Tajawal_500Medium',
-        semibold: 'Tajawal_500Medium',
-        bold: 'Tajawal_700Bold',
-        scripture: 'Amiri_400Regular',
-      }
-    : {
+export const fontsFor = (_lang: string): Fonts =>
+    ({
         regular: 'Outfit_400Regular',
         medium: 'Outfit_500Medium',
         semibold: 'Outfit_600SemiBold',
         bold: 'Outfit_700Bold',
         scripture: 'Amiri_400Regular',
-      };
+      });
 
 type ThemeCtx = {
   mode: 'light' | 'dark';

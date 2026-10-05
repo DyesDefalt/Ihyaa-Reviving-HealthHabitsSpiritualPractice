@@ -1,6 +1,8 @@
 import { storeDel, storeGet, storeSet } from './storage';
+import { fetch as expoFetch } from 'expo/fetch';
 
-const BASE = process.env.EXPO_PUBLIC_BACKEND_URL;
+const BASE = process.env.REACT_APP_BACKEND_URL;
+if (!BASE) throw new Error('REACT_APP_BACKEND_URL is required');
 export const API = `${BASE}/api`;
 
 const ACCESS = 'ihyaa_access';
@@ -66,22 +68,26 @@ async function tryRefresh(): Promise<boolean> {
   return true;
 }
 
-type Opts = { method?: string; body?: any; auth?: boolean; raw?: boolean; retry?: boolean };
+type Opts = { method?: string; body?: any; auth?: boolean; raw?: boolean; retry?: boolean; stream?: boolean; signal?: AbortSignal };
 
 export async function api(path: string, opts: Opts = {}): Promise<any> {
   const { method = 'GET', body, auth = true, raw = false, retry = true } = opts;
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (auth && accessToken) headers.Authorization = `Bearer ${accessToken}`;
 
-  const res = await fetch(`${API}${path}`, {
+  const request = opts.stream ? expoFetch : fetch;
+  const res = await request(`${API}${path}`, {
     method,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
+    signal: opts.signal,
   });
 
   if (res.status === 401 && auth && retry && (await tryRefresh())) {
     return api(path, { ...opts, retry: false });
   }
+
+  if (opts.stream && res.ok) return res;
 
   if (raw) {
     if (!res.ok) throw new ApiError(res.status, await res.text());

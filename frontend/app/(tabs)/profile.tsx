@@ -1,12 +1,12 @@
 import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { api, errText } from '../../src/api';
 import { useAuth } from '../../src/auth';
 import { Banner, Btn, Card, Chip, Field, SelectRow, Txt, useFonts } from '../../src/components/ui';
-import { LANGS, useI18n } from '../../src/i18n';
+import { LANGS, Lang, useI18n } from '../../src/i18n';
 import { radii, space, useTheme } from '../../src/theme';
 
 const FITNESS = ['beginner', 'intermediate', 'advanced'];
@@ -28,6 +28,13 @@ export default function Profile() {
   const [prefs, setPrefs] = useState(user?.prefs);
   const [busy, setBusy] = useState('');
   const [msg, setMsg] = useState<{ text: string; tone: 'ok' | 'error' } | null>(null);
+
+  useEffect(() => {
+    if (user && !editing) {
+      setName(user.name);
+      setPrefs(user.prefs);
+    }
+  }, [user, editing]);
 
   if (!user || !prefs) return null;
 
@@ -55,6 +62,21 @@ export default function Profile() {
     try {
       await api('/challenges/regenerate', { method: 'POST' });
       setMsg({ text: t('prof.replan.ok'), tone: 'ok' });
+    } catch (e: any) {
+      setMsg({ text: errText(e?.detail ?? e?.message), tone: 'error' });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function changeLanguage(next: Lang) {
+    if (busy || next === lang) return;
+    setBusy('language');
+    setMsg(null);
+    try {
+      const res = await api('/profile', { method: 'PUT', body: { language: next } });
+      patchUser(res);
+      setLang(next);
     } catch (e: any) {
       setMsg({ text: errText(e?.detail ?? e?.message), tone: 'error' });
     } finally {
@@ -107,7 +129,7 @@ export default function Profile() {
           <Txt variant="small" weight="semibold" color={c.textDim}>{t('prof.language')}</Txt>
           <View style={{ flexDirection: 'row', gap: space.sm, flexWrap: 'wrap' }}>
             {LANGS.map((l) => (
-              <Chip key={l.code} testID={`prof-lang-${l.code}`} label={l.native} active={lang === l.code} onPress={() => setLang(l.code)} />
+              <Chip key={l.code} testID={`prof-lang-${l.code}`} label={l.native} active={lang === l.code} onPress={() => changeLanguage(l.code)} />
             ))}
           </View>
 

@@ -91,7 +91,7 @@ export default function SignIn() {
               }}
             >
               <Text style={{ fontFamily: f.medium, fontSize: 12, color: '#fff' }}>
-                {l.code === 'ar' ? 'ع' : l.code.toUpperCase()}
+                {l.code.toUpperCase()}
               </Text>
             </Pressable>
           ))}

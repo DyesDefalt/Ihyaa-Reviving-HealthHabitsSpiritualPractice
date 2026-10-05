@@ -222,7 +222,7 @@ MILESTONE_TRACKS = {"100_days", "1_year"}
 
 
 def localize_milestone(doc: dict, lang: str) -> dict:
-    lang = lang if lang in ("en", "id", "ar") else "en"
+    lang = lang if lang in ("en", "id") else "en"
     tpl = BY_KEY.get(doc["template_key"])
 
     def pick(field: str):

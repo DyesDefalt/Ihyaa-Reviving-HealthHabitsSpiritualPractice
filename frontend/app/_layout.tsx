@@ -8,11 +8,6 @@ import {
   Outfit_600SemiBold,
   Outfit_700Bold,
 } from '@expo-google-fonts/outfit';
-import {
-  Tajawal_400Regular,
-  Tajawal_500Medium,
-  Tajawal_700Bold,
-} from '@expo-google-fonts/tajawal';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -20,7 +15,7 @@ import React, { useEffect, useRef } from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider, useAuth } from '../src/auth';
-import { I18nProvider } from '../src/i18n';
+import { I18nProvider, normalizeLanguage, useI18n } from '../src/i18n';
 import { ThemeProvider, useTheme } from '../src/theme';
 
 function GoogleCallbackHandler() {
@@ -44,6 +39,11 @@ function GoogleCallbackHandler() {
 
 function Shell() {
   const { c, mode } = useTheme();
+  const { user } = useAuth();
+  const { setLang } = useI18n();
+  useEffect(() => {
+    if (user) setLang(normalizeLanguage(user.language));
+  }, [user?.id, user?.language, setLang]);
   return (
     <>
       <StatusBar style={mode === 'light' ? 'dark' : 'light'} />
@@ -86,9 +86,6 @@ export default function RootLayout() {
     Outfit_500Medium,
     Outfit_600SemiBold,
     Outfit_700Bold,
-    Tajawal_400Regular,
-    Tajawal_500Medium,
-    Tajawal_700Bold,
     Amiri_400Regular,
     Amiri_700Bold,
   });

@@ -826,7 +826,7 @@ def phase_of(day: int, challenge_type: str) -> tuple[int, dict, int, int]:
 
 
 def phase_summary(day: int, challenge_type: str, lang: str) -> dict:
-    lang = lang if lang in ("en", "id", "ar") else "en"
+    lang = lang if lang in ("en", "id") else "en"
     defs = PHASE_DEFS.get(challenge_type) or PHASE_DEFS["30_days"]
     index, ph, start, end = phase_of(day, challenge_type)
     return {
@@ -856,7 +856,7 @@ GOAL_PILLAR_WEIGHT = {
 
 
 def localize(template: dict, lang: str) -> dict:
-    lang = lang if lang in ("en", "id", "ar") else "en"
+    lang = lang if lang in ("en", "id") else "en"
 
     def pick(field: str):
         val = template.get(field)

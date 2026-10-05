@@ -1,0 +1,57 @@
+{
+  "summary": "Executed backend+frontend regression for coach OpenAI streaming, session ownership, safety/privacy routing, language constraints (EN/ID only), auth gating, and tab/coach UI smoke. Backend targeted suite passed 15/15. Frontend found a reproducible post-language-reload blank-content bug on desktop.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Tabs content area after profile language change + reload",
+        "issue": "After switching profile language to Indonesian and reloading, main tab content becomes blank (white panel) while bottom tab bar remains visible. profile-screen and other screen testIDs are not rendered post-reload.",
+        "selector": "[data-testid=\"prof-lang-id\"] -> page reload -> [data-testid=\"profile-screen\"]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Profile language persistence reload path",
+        "issue": "Language toggle write appears to persist, but reload enters a broken UI state where authenticated tab content fails to mount/render.",
+        "affected_selectors": [
+          "[data-testid=\"prof-lang-id\"]",
+          "[data-testid=\"tab-profile\"]",
+          "[data-testid=\"profile-screen\"]"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_coach_integration.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix post-reload rendering/state hydration after profile language switch (EN/ID) so tab screens mount consistently.",
+    "Add frontend error-state fallback when authenticated screen data/bootstrap fails (current behavior can show blank white content region).",
+    "Retest language-switch reload on desktop viewport 1920x800 and mobile 390x844.",
+    "Optionally harden coach delete interaction while streaming/busy transitions to avoid intermittent dialog-open race conditions."
+  ],
+  "critical_code_review_comments": [
+    "/app/backend/server.py remains a very large monolith (>900 lines) and should be split into focused routers/modules for maintainability and safer regressions.",
+    "Coach API guardrails are implemented defensively (allowlisted safe_context, safety-routed local replies, ownership and lock checks) and should be preserved during refactors.",
+    "Frontend should include explicit resilient mounted-state/error UX after reload/auth bootstrap to avoid silent blank panes."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_coach_integration.py",
+    "/app/test_reports/iteration_2.json"
+  ],
+  "success_rate": {
+    "backend": "100% (15/15)",
+    "frontend": "75%"
+  },
+  "seed_data_creation": "Created TEST coach users via /api/auth/register during pytest only; no credentials file changes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Key reproducible UI bug: login as demo -> Profile tab -> tap prof-lang-id -> reload page -> tabs visible but main content blank; profile-screen never appears (reproduced 3 times). Mobile coach stream smoke passed and no horizontal overflow detected at 390x844. Desktop coach flow passed for direct /coach load, consent, history/privacy/delete modal close buttons, and streaming reply. Stopped further selector retries for profile-screen per loop-prevention guidance.",
+  "rca of the issue": "Likely frontend state/bootstrap race after language persistence + full reload in authenticated tabs. Evidence: no backend/API errors surfaced in console, bottom tabs render but screen containers do not mount with expected testIDs. This points to client-side hydration/navigation state mismatch rather than API availability."
+}

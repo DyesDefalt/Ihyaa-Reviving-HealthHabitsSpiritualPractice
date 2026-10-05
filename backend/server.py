@@ -10,7 +10,7 @@ from bson import ObjectId
 from bson.errors import InvalidId
 from fastapi import Body, Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import PlainTextResponse, StreamingResponse
+from fastapi.responses import PlainTextResponse
 from pymongo.errors import DuplicateKeyError
 
 import auth as A
@@ -20,17 +20,19 @@ from curriculum import (TEMPLATES_BY_KEY, generate_plan, localize,
                         phase_summary)
 from db import ensure_indexes, get_db
 from health import health_profile
+from coach import migrate_legacy_chats, router as coach_router
 from library import (EXERCISES, MIND_WINDOWS, RECIPES, SUPPLEMENTS,
                      localize_entry, rank)
 from milestones import MILESTONE_TRACKS, build_milestones, localize_milestone
-from models import (Challenge, Checkin, CheckinBody, CoachBody, CoachMessage,
+from models import (Challenge, Checkin, CheckinBody, Language,
                     CompleteTaskBody, DailyTask, ForgotBody, HydrationBody,
                     LocationUpdate, LoginBody, Milestone, OnboardingBody,
-                    PointTransaction, Preferences, ProfileUpdate, PublicUser,
+                    PointTransaction, ProfileUpdate, PublicUser,
                     RegisterBody, ResetBody, StartChallengeBody, TaskTimeBody,
                     User, utcnow)
 
 app = FastAPI(title="Ihyaa API")
+app.include_router(coach_router)
 
 _origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
 
@@ -149,6 +151,7 @@ async def current_user(request: Request) -> User:
 @app.on_event("startup")
 async def startup() -> None:
     await ensure_indexes()
+    await migrate_legacy_chats()
     db = get_db()
     for email_key, pass_key, name, role in (
         ("ADMIN_EMAIL", "ADMIN_PASSWORD", "Ihyaa Admin", "admin"),
@@ -416,7 +419,7 @@ async def start_challenge(body: StartChallengeBody, user: User = Depends(current
 
 
 @app.get("/api/challenges/active")
-async def get_active_challenge(lang: str | None = Query(None),
+async def get_active_challenge(lang: Language | None = Query(None),
                                user: User = Depends(current_user)) -> dict | None:
     c = await active_challenge(str(user.id))
     return _serialize_challenge(c, lang_of(user, lang)) if c else None
@@ -452,7 +455,7 @@ async def regenerate(user: User = Depends(current_user)) -> dict:
 # ------------------------------------------------------------------ tasks
 
 @app.get("/api/tasks/today")
-async def tasks_today(lang: str | None = Query(None), user: User = Depends(current_user)) -> dict:
+async def tasks_today(lang: Language | None = Query(None), user: User = Depends(current_user)) -> dict:
     db = get_db()
     language = lang_of(user, lang)
     c = await active_challenge(str(user.id))
@@ -509,7 +512,7 @@ LIBRARY = {"recipes": RECIPES, "supplements": SUPPLEMENTS,
 
 
 @app.get("/api/library/{kind}")
-async def library_list(kind: str, lang: str | None = Query(None),
+async def library_list(kind: str, lang: Language | None = Query(None),
                        user: User = Depends(current_user)) -> list[dict]:
     if kind not in LIBRARY:
         raise HTTPException(status_code=404, detail="Unknown library")
@@ -550,7 +553,7 @@ async def hydration_add(body: HydrationBody, user: User = Depends(current_user))
 
 @app.get("/api/tasks")
 async def tasks_range(date_from: str = Query(..., alias="from"), date_to: str = Query(..., alias="to"),
-                      lang: str | None = Query(None), user: User = Depends(current_user)) -> list[dict]:
+                      lang: Language | None = Query(None), user: User = Depends(current_user)) -> list[dict]:
     db = get_db()
     c = await active_challenge(str(user.id))
     if not c:
@@ -680,7 +683,7 @@ async def set_location(body: LocationUpdate, user: User = Depends(current_user))
 # ------------------------------------------------------------------ milestones
 
 @app.get("/api/milestones")
-async def list_milestones(lang: str | None = Query(None),
+async def list_milestones(lang: Language | None = Query(None),
                           user: User = Depends(current_user)) -> dict:
     db = get_db()
     c = await active_challenge(str(user.id))
@@ -726,7 +729,7 @@ async def complete_milestone(milestone_id: str, body: CompleteTaskBody,
 
 
 @app.get("/api/tasks/calendar.ics")
-async def calendar_ics(days: int = Query(30, ge=1, le=365), lang: str | None = Query(None),
+async def calendar_ics(days: int = Query(30, ge=1, le=365), lang: Language | None = Query(None),
                        user: User = Depends(current_user)) -> PlainTextResponse:
     db = get_db()
     c = await active_challenge(str(user.id))
@@ -922,7 +925,7 @@ async def point_history(user: User = Depends(current_user)) -> list[dict]:
 # ------------------------------------------------------------------ store
 
 @app.get("/api/store/items")
-async def store_items(lang: str | None = Query(None), user: User = Depends(current_user)) -> list[dict]:
+async def store_items(lang: Language | None = Query(None), user: User = Depends(current_user)) -> list[dict]:
     language = lang_of(user, lang)
     return [localize_item(i, language) for i in STORE_ITEMS]
 
@@ -965,7 +968,7 @@ async def redeem(item_id: str, user: User = Depends(current_user)) -> dict:
 # ------------------------------------------------------------------ knowledge
 
 @app.get("/api/knowledge")
-async def knowledge(lang: str | None = Query(None), pillar: str | None = Query(None),
+async def knowledge(lang: Language | None = Query(None), pillar: str | None = Query(None),
                     user: User = Depends(current_user)) -> list[dict]:
     language = lang_of(user, lang)
     cards = KNOWLEDGE_CARDS if not pillar or pillar == "all" else [
@@ -973,192 +976,3 @@ async def knowledge(lang: str | None = Query(None), pillar: str | None = Query(N
     return [localize_card(c, language) for c in cards]
 
 
-# ------------------------------------------------------------------ AI coach
-
-COACH_SYSTEM = """You are Ustadh Ihyaa, the AI wellness coach inside the Ihyaa app.
-
-Ihyaa helps Muslims become healthier in body, mind and soul through short daily
-habits grounded in the Quran, authentic Sunnah, and peer-reviewed clinical science.
-
-Rules you never break:
-- Everything you suggest must be 100% halal and within mainstream Sunni fiqh. Never
-  suggest alcohol, non-halal gelatin/collagen, riba-based products, or practices with
-  shirk associations (yoga mantras, chakra work, etc.). Neutral movement is fine.
-- When you cite the Quran, give surah:ayah. When you cite hadith, name the collection.
-  Never invent a hadith. If unsure of a hadith's authenticity, say so plainly.
-- You are not a doctor. For medication, pregnancy, chronic illness, eating disorders or
-  mental-health crises, advise the user to see a qualified physician. Say this clearly.
-- Keep answers SHORT and warm: at most 3 short paragraphs, under 120 words total.
-- Write in PLAIN TEXT only. Never use markdown, asterisks, bullet characters or emoji.
-- Honour the "1% better" method: always give the SMALLEST next step, not a full program.
-- Reply in the SAME language the user writes in (English or Bahasa Indonesia).
-- Ihyaa is a healthy-lifestyle app first: food, drinks, recipes, halal supplements,
-  movement, sleep and clear-mind windows — all grounded in Quran, Sunnah and clinical
-  research. Prefer concrete lifestyle steps over generic religious reminders.
-- Open with a brief Islamic greeting only on the first message of a conversation.
-"""
-
-
-def _coach_chat(session_id: str, context: str):
-    from emergentintegrations.llm.chat import LlmChat
-    provider = os.environ.get("COACH_PROVIDER", "anthropic")
-    model = os.environ.get("COACH_MODEL", "claude-sonnet-4-6")
-    return LlmChat(
-        api_key=os.environ["EMERGENT_LLM_KEY"],
-        session_id=session_id,
-        system_message=COACH_SYSTEM + "\n\n" + context,
-    ).with_model(provider, model)
-
-
-async def _coach_context(user: User) -> str:
-    db = get_db()
-    c = await active_challenge(str(user.id))
-    prof = profile_of(user)
-    parts = [
-        f"User name: {user.name or 'friend'}",
-        f"Preferred language: {user.language}",
-        f"Age/sex: {user.prefs.age or 'unknown'} / {user.prefs.sex or 'unknown'}",
-        f"BMI: {prof['bmi'] or 'unknown'} ({prof['bmi_band'] or 'unknown'}); "
-        f"calorie target ~{prof['calorie_target'] or '?'} kcal, protein ~{prof['protein_g'] or '?'} g, "
-        f"water {prof['water_glasses']} glasses, steps {prof['step_target']}",
-        f"Health conditions: {', '.join(user.prefs.conditions) or 'none reported'}",
-        f"Work pattern: {user.prefs.work_pattern}",
-        f"Fitness level: {user.prefs.fitness_level}",
-        f"Spiritual level: {user.prefs.spiritual_level}",
-        f"Sleep pattern: {user.prefs.sleep_habit}",
-        f"Goals: {', '.join(user.prefs.health_goals) or 'not set'}",
-        f"Dietary focus: {', '.join(user.prefs.dietary_preferences) or 'standard halal'}",
-        f"Current streak: {user.current_streak} days",
-        f"Points: {user.points_balance}",
-    ]
-    if c:
-        s = _serialize_challenge(c, "en")
-        parts.append(f"Challenge: {s['challenge_type']}, on day {s['current_day']} of {s['total_days']}")
-        parts.append(f"Current phase: {s['phase']['name']} (phase {s['phase']['index']} of {s['phase']['total']})")
-        timings = await P.timings_for_day(loc_dict(user), user.prefs.prayer_method,
-                                         user.prefs.prayer_school)
-        if timings:
-            city = (user.prefs.location.city if user.prefs.location else "") or "their city"
-            parts.append(f"Today's prayer times in {city}: " +
-                         ", ".join(f"{k} {v}" for k, v in timings.items()))
-        cursor = db.daily_tasks.find({"challenge_id": str(c.id), "scheduled_date": today_str()})
-        todays = []
-        async for d in cursor:
-            t = DailyTask.from_mongo(d)
-            tpl = TEMPLATES_BY_KEY.get(t.template_key)
-            todays.append(f"{tpl['title']['en'] if tpl else t.template_key} "
-                          f"({t.pillar}, {t.duration_minutes}min, "
-                          f"{'done' if t.completed else 'not done'})")
-        if todays:
-            parts.append("Today's tasks: " + "; ".join(todays))
-    else:
-        parts.append("The user has not started a challenge yet.")
-    return "USER CONTEXT (do not repeat verbatim):\n" + "\n".join(parts)
-
-
-@app.get("/api/coach/history")
-async def coach_history(user: User = Depends(current_user)) -> list[dict]:
-    cursor = get_db().coach_messages.find({"user_id": str(user.id)}).sort("created_at", 1).limit(200)
-    out = []
-    async for d in cursor:
-        m = CoachMessage.from_mongo(d)
-        out.append({"id": str(m.id), "role": m.role, "content": m.content,
-                    "created_at": m.created_at.isoformat()})
-    return out
-
-
-@app.delete("/api/coach/history")
-async def clear_coach_history(user: User = Depends(current_user)) -> dict:
-    await get_db().coach_messages.delete_many({"user_id": str(user.id)})
-    return {"ok": True}
-
-
-@app.post("/api/coach/chat")
-async def coach_chat(body: CoachBody, user: User = Depends(current_user)) -> StreamingResponse:
-    from emergentintegrations.llm.chat import StreamDone, TextDelta, UserMessage
-
-    db = get_db()
-    text = body.message.strip()
-    if not text:
-        raise HTTPException(status_code=400, detail="Message cannot be empty")
-
-    await db.coach_messages.insert_one(
-        CoachMessage(user_id=str(user.id), role="user", content=text).to_mongo())
-
-    history = []
-    cursor = db.coach_messages.find({"user_id": str(user.id)}).sort("created_at", 1).limit(40)
-    async for d in cursor:
-        history.append({"role": d["role"], "content": d["content"]})
-
-    context = await _coach_context(user)
-    chat = _coach_chat(f"coach_{user.id}", context)
-
-    prior = history[:-1][-12:]
-    if prior:
-        transcript = "\n".join(
-            f"{'User' if m['role'] == 'user' else 'You'}: {m['content']}" for m in prior)
-        prompt = f"Recent conversation so far:\n{transcript}\n\nUser's new message: {text}"
-    else:
-        prompt = text
-
-    async def gen():
-        collected: list[str] = []
-        try:
-            async for event in chat.stream_message(UserMessage(text=prompt)):
-                if isinstance(event, TextDelta):
-                    collected.append(event.content)
-                    yield f"data: {event.content}\n\n".replace("\n\n\n", "\n\n")
-                elif isinstance(event, StreamDone):
-                    break
-        except Exception as exc:  # surface the failure to the client
-            yield f"event: error\ndata: {exc}\n\n"
-        finally:
-            reply = "".join(collected)
-            if reply:
-                await db.coach_messages.insert_one(
-                    CoachMessage(user_id=str(user.id), role="assistant", content=reply).to_mongo())
-            yield "event: done\ndata: end\n\n"
-
-    return StreamingResponse(gen(), media_type="text/event-stream",
-                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
-
-
-@app.post("/api/coach/chat-sync")
-async def coach_chat_sync(body: CoachBody, user: User = Depends(current_user)) -> dict:
-    """Non-streaming fallback used by the mobile client when SSE is unavailable."""
-    from emergentintegrations.llm.chat import StreamDone, TextDelta, UserMessage
-
-    db = get_db()
-    text = body.message.strip()
-    if not text:
-        raise HTTPException(status_code=400, detail="Message cannot be empty")
-
-    await db.coach_messages.insert_one(
-        CoachMessage(user_id=str(user.id), role="user", content=text).to_mongo())
-
-    history = []
-    cursor = db.coach_messages.find({"user_id": str(user.id)}).sort("created_at", 1).limit(40)
-    async for d in cursor:
-        history.append({"role": d["role"], "content": d["content"]})
-
-    context = await _coach_context(user)
-    chat = _coach_chat(f"coach_{user.id}", context)
-    prior = history[:-1][-12:]
-    if prior:
-        transcript = "\n".join(
-            f"{'User' if m['role'] == 'user' else 'You'}: {m['content']}" for m in prior)
-        prompt = f"Recent conversation so far:\n{transcript}\n\nUser's new message: {text}"
-    else:
-        prompt = text
-
-    collected: list[str] = []
-    async for event in chat.stream_message(UserMessage(text=prompt)):
-        if isinstance(event, TextDelta):
-            collected.append(event.content)
-        elif isinstance(event, StreamDone):
-            break
-    reply = "".join(collected).strip()
-    if reply:
-        await db.coach_messages.insert_one(
-            CoachMessage(user_id=str(user.id), role="assistant", content=reply).to_mongo())
-    return {"reply": reply}

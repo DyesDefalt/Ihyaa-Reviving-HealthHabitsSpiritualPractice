@@ -21,9 +21,9 @@ function Evidence({ label, text, tint }: { label: string; text: string; tint: st
       </Text>
       <Text
         style={{
-          fontFamily: lang === 'ar' ? 'Amiri_400Regular' : f.regular,
-          fontSize: lang === 'ar' ? 16 : 13,
-          lineHeight: lang === 'ar' ? 27 : 20,
+          fontFamily: f.regular,
+          fontSize: 13,
+          lineHeight: 20,
           color: c.textDim,
           textAlign: align,
         }}

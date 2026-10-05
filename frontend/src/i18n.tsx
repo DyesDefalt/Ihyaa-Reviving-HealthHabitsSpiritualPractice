@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { storeGet, storeSet } from './storage';
 
-export type Lang = 'en' | 'id' | 'ar';
+export type Lang = 'en' | 'id';
+export const normalizeLanguage = (value: unknown): Lang => value === 'id' ? 'id' : 'en';
 export const LANGS: { code: Lang; label: string; native: string }[] = [
   { code: 'en', label: 'English', native: 'English' },
   { code: 'id', label: 'Indonesian', native: 'Bahasa Indonesia' },
-  { code: 'ar', label: 'Arabic', native: 'العربية' },
 ];
 
 const KEY = 'ihyaa_lang';
@@ -146,8 +146,8 @@ const en: Record<string, string> = {
   'home.checkin': 'Daily check-in',
   'home.checkin.d': 'Reflect, log your mood, earn 15 pts',
   'home.checkin.done': 'Checked in today — jazakAllahu khairan',
-  'home.coach': 'Ask Ustadh Ihyaa',
-  'home.coach.d': 'Your AI coach for questions and plan tweaks',
+  'home.coach': 'Ask Ihyaa Coach',
+  'home.coach.d': 'Small steps for food, movement, sleep and a clearer mind',
   'home.wisdom': 'Knowledge',
   'home.seeall': 'See all',
   'home.evidence': 'Evidence',
@@ -230,13 +230,13 @@ const en: Record<string, string> = {
   'know.all': 'All',
   'know.none': 'Nothing here yet',
 
-  'coach.title': 'Ustadh Ihyaa',
-  'coach.subtitle': 'Your AI coach — halal guidance only',
+  'coach.title': 'Ihyaa Coach',
+  'coach.subtitle': 'Your AI wellness companion',
   'coach.ph': 'Ask anything about your plan...',
-  'coach.empty': 'Ask about a habit, request an easier day, or check whether something is halal.',
-  'coach.s1': 'Make today easier for me',
-  'coach.s2': 'Is creatine halal?',
-  'coach.s3': 'I keep missing Fajr',
+  'coach.empty': 'What would make today feel a little healthier?',
+  'coach.s1': 'A simple balanced breakfast',
+  'coach.s2': 'A gentle movement break',
+  'coach.s3': 'Help me wind down tonight',
   'coach.disclaimer': 'AI guidance, not medical advice. See a doctor for medical concerns.',
   'coach.clear': 'Clear conversation',
   'coach.thinking': 'Thinking',
@@ -392,8 +392,8 @@ const id: Record<string, string> = {
   'home.checkin': 'Check-in harian',
   'home.checkin.d': 'Refleksi, catat suasana hati, dapat 15 poin',
   'home.checkin.done': 'Sudah check-in hari ini — jazakallahu khairan',
-  'home.coach': 'Tanya Ustadz Ihyaa',
-  'home.coach.d': 'Pelatih AI untuk pertanyaan dan penyesuaian rencana',
+  'home.coach': 'Tanya Pelatih Ihyaa',
+  'home.coach.d': 'Langkah kecil untuk makan, bergerak, tidur, dan pikiran jernih',
   'home.wisdom': 'Ilmu',
   'home.seeall': 'Lihat semua',
   'home.evidence': 'Bukti',
@@ -476,13 +476,13 @@ const id: Record<string, string> = {
   'know.all': 'Semua',
   'know.none': 'Belum ada apa pun',
 
-  'coach.title': 'Ustadz Ihyaa',
-  'coach.subtitle': 'Pelatih AI Anda — hanya panduan halal',
+  'coach.title': 'Pelatih Ihyaa',
+  'coach.subtitle': 'Pendamping kebugaran AI Anda',
   'coach.ph': 'Tanyakan apa pun tentang rencana Anda...',
-  'coach.empty': 'Tanyakan sebuah kebiasaan, minta hari yang lebih ringan, atau cek kehalalan sesuatu.',
-  'coach.s1': 'Ringankan hari saya',
-  'coach.s2': 'Apakah kreatin halal?',
-  'coach.s3': 'Saya sering telat Subuh',
+  'coach.empty': 'Apa yang bisa membuat hari ini sedikit lebih sehat?',
+  'coach.s1': 'Sarapan sederhana dan seimbang',
+  'coach.s2': 'Jeda untuk bergerak ringan',
+  'coach.s3': 'Bantu saya bersantai malam ini',
   'coach.disclaimer': 'Panduan AI, bukan nasihat medis. Konsultasi dokter untuk masalah kesehatan.',
   'coach.clear': 'Hapus percakapan',
   'coach.thinking': 'Berpikir',
@@ -504,6 +504,7 @@ const id: Record<string, string> = {
   'prof.coach': 'Pelatih AI',
 };
 
+/* Archived Arabic translations: disabled, not included in the runtime dictionary.
 const ar: Record<string, string> = {
   ...en,
   'app.tagline': 'أَحْيِ الجسد والعقل والروح',
@@ -750,7 +751,8 @@ const ar: Record<string, string> = {
   'prof.coach': 'المدرّب الذكي',
 };
 
-const dict: Record<Lang, Record<string, string>> = { en, id, ar };
+*/
+const dict: Record<Lang, Record<string, string>> = { en, id };
 
 type I18n = {
   lang: Lang;
@@ -765,20 +767,27 @@ const Ctx = createContext<I18n | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>('en');
+  const languageChosen = useRef(false);
 
   useEffect(() => {
     storeGet(KEY).then((v) => {
-      if (v === 'en' || v === 'id' || v === 'ar') setLangState(v);
+      if (!languageChosen.current) {
+        const next = normalizeLanguage(v);
+        setLangState(next);
+        if (v !== next) storeSet(KEY, next);
+      }
     });
   }, []);
 
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    storeSet(KEY, l);
-  };
+  const setLang = useCallback((l: Lang) => {
+    languageChosen.current = true;
+    const next = normalizeLanguage(l);
+    setLangState(next);
+    storeSet(KEY, next);
+  }, []);
 
   const value = useMemo<I18n>(() => {
-    const isRTL = lang === 'ar';
+    const isRTL = false;
     return {
       lang,
       setLang,

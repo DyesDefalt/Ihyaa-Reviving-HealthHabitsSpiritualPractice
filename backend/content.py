@@ -179,7 +179,7 @@ STORE_ITEMS = [
 
 
 def localize_card(card: dict, lang: str) -> dict:
-    lang = lang if lang in ("en", "id", "ar") else "en"
+    lang = lang if lang in ("en", "id") else "en"
 
     def pick(f):
         v = card.get(f)
@@ -198,7 +198,7 @@ def localize_card(card: dict, lang: str) -> dict:
 
 
 def localize_item(item: dict, lang: str) -> dict:
-    lang = lang if lang in ("en", "id", "ar") else "en"
+    lang = lang if lang in ("en", "id") else "en"
 
     def pick(f):
         v = item.get(f)

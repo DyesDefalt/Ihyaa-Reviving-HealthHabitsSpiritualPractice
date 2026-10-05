@@ -1,5 +1,5 @@
 from datetime import date, datetime, timezone
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from bson import ObjectId
 from pydantic import (BaseModel, BeforeValidator, ConfigDict, EmailStr, Field,
@@ -13,6 +13,7 @@ def _to_str_id(v: Any) -> Any:
 
 
 PyObjectId = Annotated[str, BeforeValidator(_to_str_id)]
+Language = Literal["en", "id"]
 
 
 def utcnow() -> datetime:
@@ -78,7 +79,8 @@ class User(BaseDocument):
     auth_provider: str = "password"           # password | google
     picture: str | None = None
     role: str = "user"
-    language: str = "en"                      # en | ar | id
+    language: Language = "en"
+    coach_consent_version: str | None = None
     theme: str = "light"
     timezone: str = "UTC"
     onboarding_completed: bool = False
@@ -93,6 +95,11 @@ class User(BaseDocument):
     prefs: Preferences = Field(default_factory=Preferences)
     created_at: datetime = Field(default_factory=utcnow)
 
+    @field_validator("language", mode="before")
+    @classmethod
+    def normalize_legacy_language(cls, value):
+        return value if value in ("en", "id") else "en"
+
 
 class PublicUser(BaseModel):
     id: str
@@ -100,7 +107,7 @@ class PublicUser(BaseModel):
     name: str
     picture: str | None = None
     role: str
-    language: str
+    language: Language
     theme: str
     timezone: str
     onboarding_completed: bool
@@ -216,7 +223,7 @@ class RegisterBody(BaseModel):
     email: EmailStr
     password: str = Field(min_length=6)
     name: str = ""
-    language: str = "en"
+    language: Language = "en"
 
 
 class LoginBody(BaseModel):
@@ -235,7 +242,7 @@ class ResetBody(BaseModel):
 
 class ProfileUpdate(BaseModel):
     name: str | None = None
-    language: str | None = None
+    language: Language | None = None
     theme: str | None = None
     timezone: str | None = None
     prefs: Preferences | None = None
@@ -249,7 +256,7 @@ class LocationUpdate(BaseModel):
 
 class OnboardingBody(BaseModel):
     name: str | None = None
-    language: str | None = None
+    language: Language | None = None
     timezone: str | None = None
     prefs: Preferences
     start_challenge: bool = True
@@ -284,7 +291,16 @@ class CheckinBody(BaseModel):
 
 
 class CoachBody(BaseModel):
-    message: str
+    session_id: str = Field(pattern=r"^[a-f0-9-]{36}$")
+    message: str = Field(min_length=1, max_length=2000)
+    language: Language | None = None
+
+    @field_validator("message")
+    @classmethod
+    def nonempty_message(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Message cannot be empty")
+        return value.strip()
 
 
 class HydrationBody(BaseModel):

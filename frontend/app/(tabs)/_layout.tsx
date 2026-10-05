@@ -5,6 +5,7 @@ import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { useI18n } from '../../src/i18n';
 import { fontsFor, radii, useTheme } from '../../src/theme';
+import { SessionGate } from '../../src/components/SessionGate';
 
 export default function TabsLayout() {
   const { c, mode } = useTheme();
@@ -20,6 +21,7 @@ export default function TabsLayout() {
   ];
 
   return (
+    <SessionGate>
     <Tabs
       screenOptions={{
         headerShown: false,
@@ -78,5 +80,6 @@ export default function TabsLayout() {
         />
       ))}
     </Tabs>
+    </SessionGate>
   );
 }
